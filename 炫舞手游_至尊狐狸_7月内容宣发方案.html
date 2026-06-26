@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>QQ炫舞手游 · 至尊系列「狐神」7月内容宣发方案</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;700;900&family=Noto+Sans+SC:wght@400;500;700;900&family=Cinzel:wght@600;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#0c0b10;          /* 墨黑底 */
+  --ink2:#15131c;         /* 卡片底 */
+  --ink3:#1d1a26;         /* 浅卡片 */
+  --gold:#e7c878;         /* 金箔 */
+  --gold-bright:#f6dd9a;
+  --moon:#f3eee4;         /* 月白 */
+  --fox:#ff6a3d;          /* 狐火橙 */
+  --fox2:#ff3d6e;         /* 彼岸花红 */
+  --cyber:#9b7bff;        /* 赛博紫 */
+  --jade:#3fcf8e;         /* 上扬绿(目标达成) */
+  --line:rgba(231,200,120,.18);
+  --txt:#d8d2c4;
+  --txt-dim:#8a8478;
+  --serif:"Noto Serif SC",serif;
+  --sans:"Noto Sans SC",sans-serif;
+  --cinzel:"Cinzel",serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--sans);background:var(--ink);color:var(--txt);
+  line-height:1.7;-webkit-font-smoothing:antialiased;overflow-x:hidden;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(231,200,120,.10), transparent 60%),
+    radial-gradient(ellipse 60% 40% at 100% 20%, rgba(255,61,110,.06), transparent 55%),
+    radial-gradient(ellipse 50% 40% at 0% 60%, rgba(155,123,255,.05), transparent 55%);
+}
+/* 颗粒噪点 */
+body::before{
+  content:"";position:fixed;inset:0;pointer-events:none;z-index:1;opacity:.35;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+  mix-blend-mode:overlay;
+}
+.wrap{max-width:1180px;margin:0 auto;padding:0 26px 120px;position:relative;z-index:2}
+
+/* ===== HERO ===== */
+.hero{padding:90px 0 50px;text-align:center;position:relative}
+.fox-mark{
+  font-size:64px;line-height:1;filter:drop-shadow(0 0 24px rgba(255,106,61,.55));
+  animation:floaty 5s ease-in-out infinite;
+}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.kicker{
+  font-family:var(--cinzel);letter-spacing:6px;font-size:13px;color:var(--gold);
+  margin:22px 0 10px;text-transform:uppercase;opacity:0;animation:up .8s .1s forwards;
+}
+.hero h1{
+  font-family:var(--serif);font-weight:900;font-size:clamp(34px,6vw,62px);
+  color:var(--moon);line-height:1.15;letter-spacing:2px;
+  text-shadow:0 0 40px rgba(231,200,120,.25);opacity:0;animation:up .8s .25s forwards;
+}
+.hero h1 .grad{
+  background:linear-gradient(100deg,var(--gold-bright),var(--fox) 55%,var(--fox2));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.hero .lead{
+  max-width:760px;margin:22px auto 0;color:var(--txt);font-size:16px;
+  opacity:0;animation:up .8s .4s forwards;
+}
+.hero .meta{
+  display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:26px;
+  opacity:0;animation:up .8s .55s forwards;
+}
+.chip{
+  font-size:12.5px;padding:7px 16px;border-radius:30px;border:1px solid var(--line);
+  background:rgba(231,200,120,.05);color:var(--gold);font-weight:500;letter-spacing:.5px;
+}
+.chip.hot{border-color:rgba(255,106,61,.4);background:rgba(255,106,61,.08);color:var(--fox)}
+@keyframes up{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+
+/* 上线倒计时条 */
+.launchbar{
+  margin:46px auto 0;max-width:880px;display:flex;align-items:center;gap:20px;
+  padding:20px 28px;border-radius:18px;position:relative;overflow:hidden;
+  background:linear-gradient(100deg,rgba(255,106,61,.12),rgba(255,61,110,.08));
+  border:1px solid rgba(255,106,61,.28);opacity:0;animation:up .8s .7s forwards;
+}
+.launchbar::after{content:"";position:absolute;right:-30px;top:-40px;width:160px;height:160px;
+  background:radial-gradient(circle,rgba(255,106,61,.35),transparent 70%)}
+.launchbar .big{font-family:var(--cinzel);font-size:40px;color:var(--fox);font-weight:800;line-height:1}
+.launchbar .lbtxt b{color:var(--moon);font-size:16px;display:block;font-family:var(--serif)}
+.launchbar .lbtxt span{font-size:13px;color:var(--txt-dim)}
+
+/* ===== SECTION 通用 ===== */
+section{margin-top:84px;scroll-margin-top:24px}
+.sec-head{display:flex;align-items:baseline;gap:16px;margin-bottom:8px;flex-wrap:wrap}
+.sec-no{font-family:var(--cinzel);font-size:15px;color:var(--gold);letter-spacing:3px;opacity:.8}
+.sec-head h2{font-family:var(--serif);font-weight:900;font-size:clamp(24px,3.4vw,34px);color:var(--moon);letter-spacing:1px}
+.sec-sub{color:var(--txt-dim);font-size:14px;margin-bottom:30px;max-width:880px}
+.rule{height:1px;background:linear-gradient(90deg,var(--gold),transparent);margin:14px 0 0;opacity:.5}
+
+/* ===== 大方向卡 ===== */
+.bighero{
+  border-radius:22px;padding:34px 36px;margin-bottom:26px;position:relative;overflow:hidden;
+  background:linear-gradient(135deg,var(--ink3),var(--ink2));border:1px solid var(--line);
+}
+.bighero::before{content:"";position:absolute;top:-60px;right:-40px;width:240px;height:240px;
+  background:radial-gradient(circle,rgba(231,200,120,.16),transparent 65%)}
+.bighero .ttl{font-family:var(--serif);font-size:22px;color:var(--gold-bright);font-weight:700;margin-bottom:14px;position:relative}
+.bighero p{position:relative;color:var(--txt);font-size:14.5px}
+.bighero p b{color:var(--moon)}
+.bighero .msg{margin-top:16px;padding:14px 18px;border-left:3px solid var(--fox);background:rgba(255,106,61,.06);border-radius:0 10px 10px 0;font-size:14px;color:var(--gold-bright);font-style:italic}
+
+/* 三梯队 */
+.tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.tier{
+  border-radius:18px;padding:24px 22px;background:var(--ink2);position:relative;overflow:hidden;
+  border:1px solid var(--line);transition:.3s;
+}
+.tier:hover{transform:translateY(-6px);box-shadow:0 18px 40px rgba(0,0,0,.5)}
+.tier .tline{position:absolute;top:0;left:0;right:0;height:4px}
+.tier .tbadge{font-family:var(--cinzel);font-weight:800;font-size:13px;letter-spacing:2px;padding:4px 12px;border-radius:20px;display:inline-block;color:var(--ink);margin-bottom:14px}
+.tier h3{font-family:var(--serif);font-size:18px;color:var(--moon);margin-bottom:4px}
+.tier .who{font-size:13px;color:var(--txt-dim);margin-bottom:14px}
+.tier .hook{font-size:13.5px;color:var(--txt);margin-bottom:14px;min-height:42px}
+.tier .hook b{color:var(--gold-bright)}
+.tier .kpi{font-size:12px;color:var(--txt-dim);padding-top:12px;border-top:1px dashed var(--line)}
+.tier .cnt{font-family:var(--cinzel);font-size:26px;font-weight:800;margin-top:8px}
+
+/* 奖池 */
+.pools{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:24px}
+.pool{border-radius:16px;padding:22px;background:var(--ink2);border:1px solid var(--line);position:relative}
+.pool .lvl{font-family:var(--cinzel);font-size:12px;letter-spacing:2px;color:var(--txt-dim)}
+.pool h4{font-family:var(--serif);font-size:19px;margin:6px 0 12px}
+.pool ul{list-style:none;font-size:13px;color:var(--txt);display:flex;flex-direction:column;gap:8px}
+.pool li{padding-left:18px;position:relative}
+.pool li::before{content:"❖";position:absolute;left:0;font-size:10px}
+.pool.p1 li::before{color:var(--gold)}
+.pool.p2 li::before{color:var(--cyber)}
+.pool.p3 li::before{color:var(--fox)}
+
+/* ===== 作者方向 ===== */
+.lanes{display:grid;grid-template-columns:repeat(2,1fr);gap:18px}
+.lane{border-radius:16px;background:var(--ink2);border:1px solid var(--line);padding:22px 24px;transition:.25s;position:relative;overflow:hidden}
+.lane:hover{border-color:rgba(231,200,120,.4)}
+.lane .lh{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}
+.lane .lname{font-family:var(--serif);font-size:17px;color:var(--moon);font-weight:700}
+.lane .lcnt{font-size:11.5px;color:var(--ink);font-weight:700;padding:3px 11px;border-radius:20px}
+.lane .ldesc{font-size:13px;color:var(--txt-dim);margin-bottom:12px}
+.lane .ltask{font-size:13px;color:var(--txt);display:flex;flex-direction:column;gap:7px}
+.lane .ltask div{padding-left:20px;position:relative}
+.lane .ltask div::before{content:"▸";position:absolute;left:2px;color:var(--fox)}
+
+.topic-pill{display:inline-block;font-size:13px;font-weight:700;padding:5px 14px;border-radius:8px;font-family:var(--sans);margin-bottom:4px}
+
+/* 爆款公式 */
+.formulas{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:8px}
+.fm{border-radius:14px;background:var(--ink2);border:1px solid var(--line);border-left:3px solid var(--fox);padding:18px 20px}
+.fm .ft{font-family:var(--serif);font-size:15px;color:var(--gold-bright);font-weight:700;margin-bottom:8px}
+.fm .fd{font-size:12.5px;color:var(--txt-dim);line-height:1.6}
+.fm .fc{font-size:11.5px;color:var(--txt);margin-top:9px;padding:8px 10px;background:rgba(255,106,61,.05);border-radius:8px;border:1px dashed var(--line)}
+
+/* ===== 主播方向 ===== */
+.anchor-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:18px}
+.acard{border-radius:16px;background:var(--ink2);border:1px solid var(--line);padding:24px}
+.acard h4{font-family:var(--serif);font-size:18px;color:var(--moon);margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.astat{display:flex;gap:14px;flex-wrap:wrap;margin-bottom:16px}
+.astat .s{flex:1;min-width:90px;background:var(--ink3);border-radius:12px;padding:14px;text-align:center}
+.astat .s b{font-family:var(--cinzel);font-size:24px;color:var(--gold);display:block}
+.astat .s span{font-size:11px;color:var(--txt-dim)}
+.atype{display:flex;flex-direction:column;gap:10px}
+.atype .row{display:flex;align-items:center;gap:12px;font-size:13px}
+.atype .tg{font-size:11px;font-weight:700;padding:3px 10px;border-radius:6px;color:var(--ink);white-space:nowrap}
+.atype .rx{color:var(--txt)}
+
+/* ===== 作者逐人策略卡 ===== */
+.styleblock{margin-bottom:30px}
+.styleblock .sbhead{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin:0 0 4px}
+.styleblock .sbname{font-family:var(--serif);font-size:19px;color:var(--moon);font-weight:700}
+.styleblock .sbpill{font-size:11px;font-weight:700;padding:3px 11px;border-radius:20px;color:var(--ink)}
+.styleblock .sbcount{font-size:12px;color:var(--txt-dim)}
+.styleblock .sbdesc{font-size:13px;color:var(--txt-dim);margin:6px 0 16px;line-height:1.6}
+.styleblock .sbdesc b{color:var(--gold-bright)}
+.acards{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.acrd{border-radius:14px;background:var(--ink2);border:1px solid var(--line);border-top:3px solid var(--gold);padding:15px 16px 14px;transition:.2s;display:flex;flex-direction:column}
+.acrd:hover{transform:translateY(-3px);border-color:rgba(231,200,120,.45);box-shadow:0 10px 26px rgba(0,0,0,.3)}
+.acrd .anh{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:8px}
+.acrd .annm{font-size:14.5px;font-weight:700;color:var(--moon);line-height:1.3;word-break:break-all}
+.acrd .anpf{font-size:10px;font-weight:700;padding:2px 8px;border-radius:5px;white-space:nowrap;flex-shrink:0}
+.pf-dy{background:rgba(255,106,61,.16);color:var(--fox)}
+.pf-ks{background:rgba(255,159,64,.16);color:#ffb056}
+.pf-rb{background:rgba(231,72,124,.16);color:#ff6f9c}
+.acrd .anmx{font-family:var(--cinzel);font-size:12px;color:var(--gold);margin-bottom:9px;letter-spacing:.5px}
+.acrd .anlane{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:9px}
+.acrd .anlane span{font-size:10px;padding:2px 8px;border-radius:5px;font-weight:600}
+.acrd .anact{font-size:12px;color:var(--txt);line-height:1.55;flex:1}
+.acrd .anact em{color:var(--fox);font-style:normal;font-weight:700}
+.acrd .anrhy{font-size:11px;color:var(--txt-dim);margin-top:10px;padding-top:9px;border-top:1px dashed var(--line);line-height:1.5}
+.acrd .anrhy b{color:var(--gold-bright);font-weight:700}
+.morewrap{text-align:center;margin-top:14px}
+.morebtn{font-size:12px;color:var(--txt-dim);background:var(--ink2);border:1px solid var(--line);border-radius:20px;padding:7px 20px;cursor:pointer;transition:.2s}
+.morebtn:hover{color:var(--gold);border-color:rgba(231,200,120,.5)}
+
+/* ===== 主播分级卡 ===== */
+.anchor-tiers{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:6px 0 26px}
+.atier{border-radius:16px;background:var(--ink2);border:1px solid var(--line);padding:18px 20px;position:relative;overflow:hidden}
+.atier::after{content:"";position:absolute;top:0;left:0;right:0;height:3px}
+.atier.s::after{background:linear-gradient(90deg,var(--gold),var(--gold-bright))}
+.atier.a::after{background:linear-gradient(90deg,var(--cyber),#b9a6ff)}
+.atier.b::after{background:linear-gradient(90deg,var(--jade),#7fe0b4)}
+.atier .ath{display:flex;align-items:baseline;gap:10px;margin-bottom:4px}
+.atier .atlv{font-family:var(--cinzel);font-size:26px;font-weight:700}
+.atier.s .atlv{color:var(--gold)}.atier.a .atlv{color:var(--cyber)}.atier.b .atlv{color:var(--jade)}
+.atier .attl{font-family:var(--serif);font-size:16px;color:var(--moon);font-weight:700}
+.atier .atnum{margin-left:auto;font-size:12px;color:var(--txt-dim)}
+.atier .atdesc{font-size:12.5px;color:var(--txt-dim);line-height:1.6;margin-bottom:10px}
+.atier .atnames{font-size:11.5px;color:var(--txt);line-height:1.9}
+.atier .atnames b{color:var(--gold-bright)}
+
+/* 主播主题×节奏表 */
+.atheme{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:8px}
+.athcard{border-radius:14px;background:var(--ink2);border:1px solid var(--line);border-left:3px solid var(--fox);padding:16px 18px}
+.athcard .tht{font-family:var(--serif);font-size:15.5px;color:var(--gold-bright);font-weight:700;margin-bottom:3px;display:flex;align-items:center;gap:8px}
+.athcard .thmeta{font-size:11px;color:var(--txt-dim);margin-bottom:9px}
+.athcard .thd{font-size:12.5px;color:var(--txt);line-height:1.6}
+.athcard .thd b{color:var(--moon)}
+.athcard .thr{font-size:11.5px;color:var(--txt-dim);margin-top:9px;padding-top:8px;border-top:1px dashed var(--line)}
+.athcard .thr b{color:var(--fox)}
+
+/* ===== 潜力标杆定制卡（来自周报真实数据） ===== */
+.potbanner{display:flex;align-items:center;gap:14px;flex-wrap:wrap;background:linear-gradient(100deg,rgba(231,200,120,.08),rgba(255,106,61,.06));border:1px solid rgba(231,200,120,.28);border-radius:14px;padding:14px 20px;margin:6px 0 18px}
+.potbanner .pbt{font-family:var(--serif);font-size:15px;color:var(--gold-bright);font-weight:700}
+.potbanner .pbsrc{font-size:11.5px;color:var(--txt-dim);margin-left:auto}
+.potbanner .pbsrc b{color:var(--moon)}
+.potgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px}
+.potcard{border-radius:16px;background:var(--ink2);border:1px solid var(--line);border-top:3px solid var(--gold-bright);padding:20px 22px;position:relative;overflow:hidden;transition:.22s}
+.potcard:hover{border-color:rgba(231,200,120,.45);box-shadow:0 12px 30px rgba(0,0,0,.32)}
+.potcard.anchorp{border-top-color:var(--fox)}
+.potcard .pch{display:flex;align-items:center;gap:10px;margin-bottom:3px;flex-wrap:wrap}
+.potcard .pcnm{font-family:var(--serif);font-size:18px;color:var(--moon);font-weight:700}
+.potcard .pcbadge{font-size:10px;font-weight:700;padding:2px 9px;border-radius:5px;background:rgba(231,200,120,.16);color:var(--gold-bright)}
+.potcard .pcbadge.dy{background:rgba(255,106,61,.16);color:var(--fox)}
+.potcard .pcbadge.ks{background:rgba(255,159,64,.16);color:#ffb056}
+.potcard .pcpersona{font-size:12px;color:var(--cyber);margin-bottom:12px;font-style:italic}
+.potcard .pcstats{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:13px}
+.potcard .pcstats .st{flex:1;min-width:64px;background:var(--ink3);border-radius:9px;padding:8px 6px;text-align:center}
+.potcard .pcstats .st b{font-family:var(--cinzel);font-size:16px;color:var(--gold);display:block;line-height:1.2}
+.potcard .pcstats .st.warn b{color:var(--fox2,#ff8a5c)}
+.potcard .pcstats .st.good b{color:#3fcf8e}
+.potcard .pcstats .st span{font-size:9.5px;color:var(--txt-dim);display:block;margin-top:2px}
+.potcard .pcrow{font-size:12.5px;color:var(--txt);line-height:1.62;margin-bottom:9px;padding-left:18px;position:relative}
+.potcard .pcrow::before{position:absolute;left:0;top:0;font-size:12px}
+.potcard .pcrow.pr-do::before{content:"🎬"}
+.potcard .pcrow.pr-fix::before{content:"⚠️"}
+.potcard .pcrow.pr-rhy::before{content:"📅"}
+.potcard .pcrow b{color:var(--gold-bright)}
+.potcard .pcrow .hl{color:var(--fox);font-weight:700}
+.potcard .pcrow.pr-fix b{color:var(--fox2,#ff8a5c)}
+
+/* ===== 周节奏 时间轴 ===== */
+.timeline{position:relative;margin-top:10px;padding-left:8px}
+.timeline::before{content:"";position:absolute;left:22px;top:10px;bottom:10px;width:2px;background:linear-gradient(var(--gold),var(--fox),var(--cyber))}
+.tnode{position:relative;padding:0 0 30px 64px;margin-bottom:4px}
+.tnode .dot{position:absolute;left:13px;top:2px;width:20px;height:20px;border-radius:50%;background:var(--ink);border:3px solid var(--gold);box-shadow:0 0 0 4px var(--ink),0 0 16px rgba(231,200,120,.5);z-index:2}
+.tnode.fire .dot{border-color:var(--fox);box-shadow:0 0 0 4px var(--ink),0 0 22px rgba(255,106,61,.8)}
+.tnode .wk{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:4px}
+.tnode .wk .w{font-family:var(--cinzel);font-size:15px;color:var(--gold);letter-spacing:1px}
+.tnode .wk .dt{font-size:12px;color:var(--txt-dim)}
+.tnode .wk .phase{font-family:var(--serif);font-size:18px;color:var(--moon);font-weight:700}
+.tnode .wbox{background:var(--ink2);border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin-top:8px}
+.tnode.fire .wbox{border-color:rgba(255,106,61,.4);background:linear-gradient(120deg,rgba(255,106,61,.08),var(--ink2))}
+.tgoal{font-size:13.5px;color:var(--gold-bright);margin-bottom:12px;font-weight:500}
+.tgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.tcol b{font-size:12px;color:var(--fox);display:block;margin-bottom:6px;letter-spacing:.5px}
+.tcol ul{list-style:none;font-size:12.5px;color:var(--txt);display:flex;flex-direction:column;gap:5px}
+.tcol li{padding-left:15px;position:relative}
+.tcol li::before{content:"·";position:absolute;left:4px;color:var(--gold);font-weight:900}
+
+/* ===== KPI 看板 ===== */
+.kpi-note{background:rgba(63,207,142,.07);border:1px solid rgba(63,207,142,.3);border-radius:14px;padding:14px 18px;font-size:13px;color:var(--jade);margin-bottom:24px}
+.kpi-note b{color:#86e9bd}
+.kpi-block{margin-bottom:30px}
+.kpi-block .bt{font-family:var(--serif);font-size:18px;color:var(--moon);margin-bottom:4px;display:flex;align-items:center;gap:10px}
+.kpi-block .bt .tag{font-size:11px;padding:3px 12px;border-radius:20px;font-weight:700}
+.kpi-block .bsub{font-size:12.5px;color:var(--txt-dim);margin-bottom:16px}
+.ktable{width:100%;border-collapse:collapse;font-size:13px;background:var(--ink2);border-radius:14px;overflow:hidden;border:1px solid var(--line)}
+.ktable th{background:var(--ink3);color:var(--gold);font-weight:700;font-size:12px;padding:13px 14px;text-align:left;letter-spacing:.5px}
+.ktable td{padding:13px 14px;border-top:1px solid var(--line);color:var(--txt)}
+.ktable tr:hover td{background:rgba(231,200,120,.03)}
+.ktable .plat{font-weight:700;color:var(--moon)}
+.ktable .base{color:var(--txt-dim)}
+.ktable .goal{color:var(--gold-bright);font-weight:700;font-family:var(--cinzel)}
+.ktable .up{color:var(--jade);font-weight:700;font-size:12px}
+.ktable .total td{background:rgba(231,200,120,.06);font-weight:700;border-top:2px solid var(--gold)}
+.ktable .total .plat{color:var(--gold)}
+.na{color:#5a554a;font-size:11px;font-style:italic}
+
+.pdot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:7px;vertical-align:middle}
+
+/* footer */
+.foot{text-align:center;margin-top:90px;padding-top:30px;border-top:1px solid var(--line);color:var(--txt-dim);font-size:12.5px}
+.foot .fl{font-family:var(--serif);color:var(--gold);font-size:14px;margin-bottom:6px}
+
+@media(max-width:820px){
+  .tiers,.pools,.lanes,.formulas,.anchor-grid,.tgrid{grid-template-columns:1fr}
+  .launchbar{flex-direction:column;text-align:center}
+  .ktable{font-size:12px}
+  .ktable th,.ktable td{padding:9px 8px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="fox-mark">🦊</div>
+    <div class="kicker">QQ X5 · SUPREME FOX SERIES · JULY</div>
+    <h1>至尊系列「<span class="grad">九尾狐神</span>」<br>7月内容宣发方案</h1>
+    <p class="lead">围绕至尊系列顶级商业化资产「<b style="color:var(--gold-bright)">做高收入</b>」核心目标，以内容生态分层触达、梯次转化，把"狐神 · 名利场 · 全场最贵"打成暑期声量峰值事件。</p>
+    <div class="meta">
+      <span class="chip hot">🔥 7.10 至尊系列正式上线</span>
+      <span class="chip">商业化主话题 #炫舞狐神白白我</span>
+      <span class="chip">活跃主话题 #QQ炫舞旅拍季</span>
+      <span class="chip">声量目标 同比去年7月 +30%</span>
+    </div>
+    <div class="launchbar">
+      <div class="big">7.10</div>
+      <div class="lbtxt" style="text-align:left">
+        <b>至尊系列正式上线 · 全节奏锚点</b>
+        <span>预热(7.1–7.9) → 上线引爆(7.10–7.13) → 持续渗透(7.14–7.24) → 长尾收口(7.25–7.31)</span>
+      </div>
+    </div>
+  </header>
+
+  <!-- 01 大方向 -->
+  <section id="strategy">
+    <div class="sec-head"><span class="sec-no">01</span><h2>大方向 · 整体策略</h2></div>
+    <div class="sec-sub">一个目的（做高收入）、三级人群（高活大R / 中活渗透 / 低活带量）、三级奖池（超凡→稀世→至尊），用内容把"贵气炫耀"与"人人皆抽"两条心智同时打透。</div>
+
+    <div class="bighero">
+      <div class="ttl">🎯 核心策略：分层触达，梯次转化</div>
+      <p>至尊系列是今年特效最顶、最贵奢的顶级商业化资产。内容侧的任务不是"铺量"，而是<b>把不同人群推向各自的付费动机</b>——高活大R为"全服唯一焦点"的炫耀场景买单；中活用户为"今年最顶特效、人人皆抽"的内容消费氛围卷入；低活用户用网红向 UGC 把声量带出圈，反哺前两层。</p>
+      <div class="msg">「不仅好看，更显贵气，全场最贵」 × 「今年最顶特效服饰，人人皆抽，捞到就是赚」</div>
+    </div>
+
+    <div class="tiers">
+      <div class="tier">
+        <div class="tline" style="background:var(--gold)"></div>
+        <span class="tbadge" style="background:var(--gold)">TIER 1</span>
+        <h3>锚定大R · 炫耀场景</h3>
+        <div class="who">目标人群：高活高付费大R</div>
+        <div class="hook">主打<b>至尊九尾狐套装的贵气彰显与名利场炫耀</b>——"成为全服唯一焦点的可能性"，做高客单转化。</div>
+        <div class="kpi">考核重心：高客单转化 / 名利场炫耀曝光 / 大R口碑<div class="cnt" style="color:var(--gold)">审美头部作者</div></div>
+      </div>
+      <div class="tier">
+        <div class="tline" style="background:var(--cyber)"></div>
+        <span class="tbadge" style="background:var(--cyber)">TIER 2</span>
+        <h3>付费渗透 · 内容消费</h3>
+        <div class="who">目标人群：中活中付费人群</div>
+        <div class="hook">强调<b>奖池本身划算、欧皇晒货、人人皆抽</b>——"不抽就落伍，总能捞到稀世/超凡"，美术效果＞社交炫耀。</div>
+        <div class="kpi">考核重心：付费渗透率 / 抽奖参与 / 内容消费深度<div class="cnt" style="color:var(--cyber)">攻略·抽奖·捏脸</div></div>
+      </div>
+      <div class="tier">
+        <div class="tline" style="background:var(--fox)"></div>
+        <span class="tbadge" style="background:var(--fox)">TIER 3</span>
+        <h3>UGC 带量 · 网红出圈</h3>
+        <div class="who">目标人群：低活低付费人群</div>
+        <div class="hook">用<b>话题钩子+小狐狸图鉴+整活短剧</b>做短平快网红向内容，产生 UGC 话题，把外部声量带给炫舞。</div>
+        <div class="kpi">考核重心：内容产出量 / 话题声量 / 扩列关注<div class="cnt" style="color:var(--fox)">尾部·泛玩家</div></div>
+      </div>
+    </div>
+
+    <!-- 奖池 -->
+    <h3 style="font-family:var(--serif);color:var(--moon);font-size:18px;margin:32px 0 4px">🎁 奖池构成 · 内容卖点拆解</h3>
+    <p class="sec-sub" style="margin-bottom:14px">解锁链路：抽完①超凡 → 解锁②稀世 → 抽完稀世 → 解锁③至尊。每抽附赠不同颜色小狐狸图鉴（黑/异色狐狸可单独做内容）。</p>
+    <div class="pools">
+      <div class="pool p3">
+        <div class="lvl">LV.1 一级奖池 · 超凡</div>
+        <h4 style="color:var(--fox)">三套超凡服饰</h4>
+        <ul>
+          <li>巴宝莉棕 · 成熟知性，高贵典雅</li>
+          <li>古风白 · 红色彼岸花，魅惑神秘</li>
+          <li>都市赛博紫 · 紫色迷情，野性出没</li>
+        </ul>
+      </div>
+      <div class="pool p2">
+        <div class="lvl">LV.2 二级奖池 · 稀世</div>
+        <h4 style="color:var(--cyber)">三套稀世服饰</h4>
+        <ul>
+          <li>与超凡同风格，升级华丽外观质感</li>
+          <li>"奖池划算，欧不中也总能捞到"</li>
+          <li>面向中活：内容消费＞炫耀</li>
+        </ul>
+      </div>
+      <div class="pool p1">
+        <div class="lvl">LV.3 三级奖池 · 至尊</div>
+        <h4 style="color:var(--gold-bright)">至尊九尾狐 一套</h4>
+        <ul>
+          <li>白色帅气 · 幸运原石概念</li>
+          <li>解锁新玩法【名利场】当船主</li>
+          <li>全服同时段仅一个名利场 = 唯一焦点</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- 02 作者方向 -->
+  <section id="authors">
+    <div class="sec-head"><span class="sec-no">02</span><h2>作者方向 · 生态作者内容矩阵</h2></div>
+    <div class="sec-sub">基于现有 309 位生态作者（合作 273 + 官方 36），按两大话题、八条赛道分工。商业化话题主攻转化，活跃话题主攻声量带量。</div>
+
+    <!-- 商业化话题 -->
+    <div style="margin-bottom:10px"><span class="topic-pill" style="background:rgba(255,106,61,.14);color:var(--fox)"># 炫舞狐神白白我</span> <span style="font-size:12.5px;color:var(--txt-dim)">商业化主话题 · 绑定至尊系列与幸运叙事</span></div>
+    <div class="lanes" style="margin-bottom:24px">
+      <div class="lane">
+        <div class="lh"><span class="lname">赛道1 · 向狐神许愿</span><span class="lcnt" style="background:var(--fox)">幸运叙事</span></div>
+        <div class="ldesc">绑定"狐神=幸运"心智，制造许愿仪式感</div>
+        <div class="ltask">
+          <div>向幸运狐神许愿想要的奖池套装、许愿一击必中欧气</div>
+          <div>狐火/原石视觉钩子，引导评论区跟风许愿</div>
+        </div>
+      </div>
+      <div class="lane">
+        <div class="lh"><span class="lname">赛道2 · 出货晒欧</span><span class="lcnt" style="background:var(--gold)">晒货UGC</span></div>
+        <div class="ldesc">促进晒欧内容量，营造"人人皆抽"氛围</div>
+        <div class="ltask">
+          <div>晒第一只小狐狸 / 十连闪光截图 / 出货战绩</div>
+          <div>黑色·异色小狐狸单独成梗，做收集图鉴向内容</div>
+        </div>
+      </div>
+      <div class="lane">
+        <div class="lh"><span class="lname">赛道3 · 登船留影</span><span class="lcnt" style="background:var(--cyber)">名利场社交</span></div>
+        <div class="ldesc">偏美·社交·不整活，放大名利场玩法</div>
+        <div class="ltask">
+          <div>名利场旅拍/走秀/共享衣橱/游轮二楼留影</div>
+          <div>"上船了"概念，与好友合拍记录炫耀场景</div>
+        </div>
+      </div>
+      <div class="lane">
+        <div class="lh"><span class="lname">赛道4 · 至尊攻略</span><span class="lcnt" style="background:var(--jade)">转化攻略</span></div>
+        <div class="ldesc">承接付费决策，降低抽奖与解锁门槛</div>
+        <div class="ltask">
+          <div>奖池/礼包购买/竞拍攻略 · 解锁链路讲解</div>
+          <div>登船/走秀/共享衣橱功能介绍，引导付费动作</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 活跃话题 -->
+    <div style="margin-bottom:10px"><span class="topic-pill" style="background:rgba(155,123,255,.14);color:var(--cyber)"># QQ炫舞旅拍季</span> <span style="font-size:12.5px;color:var(--txt-dim)">活跃主话题 · 暑期带量与扩列</span></div>
+    <div class="lanes" style="margin-bottom:24px">
+      <div class="lane">
+        <div class="lh"><span class="lname">征集1 · 旅拍穿搭</span><span class="lcnt" style="background:var(--cyber)">主力声量</span></div>
+        <div class="ldesc">我为家乡代言，地域+日常+游戏穿搭</div>
+        <div class="ltask">
+          <div>地域文旅 × 游戏穿搭混搭，制造话题广度</div>
+          <div>承接低活泛玩家，UGC 内容量主力来源</div>
+        </div>
+      </div>
+      <div class="lane">
+        <div class="lh"><span class="lname">征集2 · 星穿搭扩列</span><span class="lcnt" style="background:var(--fox2)">关注增长</span></div>
+        <div class="ldesc">分享星穿搭主页/作品，冲关注人气</div>
+        <div class="ltask">
+          <div>截止日发帖+游戏内关注排名前100瓜分奖励</div>
+          <div>把外部流量沉淀为游戏内关注关系</div>
+        </div>
+      </div>
+      <div class="lane">
+        <div class="lh"><span class="lname">征集3 · 暑期攻略</span><span class="lcnt" style="background:var(--gold)">补位赛道</span></div>
+        <div class="ldesc">兑换币/暑期神器/新臻品/足球宝贝获取攻略</div>
+        <div class="ltask">
+          <div>综合性暑期活动攻略，承接搜索型需求</div>
+          <div>当前主攻作者偏少，需重点补位调度</div>
+        </div>
+      </div>
+      <div class="lane" style="border-left:3px solid var(--fox2)">
+        <div class="lh"><span class="lname">特别企划 · 整活短剧</span><span class="lcnt" style="background:var(--fox2)">出圈实验</span></div>
+        <div class="ldesc">抽象整活短剧形式，冲破圈层</div>
+        <div class="ltask">
+          <div>以狐神/名利场/欧非为题材做短剧化内容</div>
+          <div>挑选有剧情能力的作者试点，跑爆款再放量</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 逐人策略卡 -->
+    <h3 style="font-family:var(--serif);color:var(--moon);font-size:19px;margin:26px 0 4px">🎯 逐人策略 · 按风格分组 · 具体到每位作者做什么 + 发布节奏</h3>
+    <p class="sec-sub" style="margin-bottom:18px">基于近周（6.15–6.21）每位作者真实内容方向与量级，逐人匹配风格 → 内容动作 → 对齐 7.10 的发布节奏。<b style="color:var(--gold-bright)">T1 头部 18 位</b> 主攻贵气炫耀做高客单，<b style="color:var(--gold-bright)">T2 腰部 72 位</b> 主攻"人人皆抽"做内容消费。节奏统一锚定：<span style="color:var(--fox)">预热 7.1–7.9</span> / <span style="color:var(--fox)">引爆 7.10–7.13</span> / <span style="color:var(--fox)">渗透 7.14–7.24</span> / <span style="color:var(--fox)">收口 7.25–7.31</span>。</p>
+
+    <!-- 风格组1：舞台秀 -->
+    <div class="styleblock">
+      <div class="sbhead"><span class="sbname">💃 舞台秀型</span><span class="sbpill" style="background:var(--gold)">最顶特效 · 动态炫耀</span><span class="sbcount">9 位 · T1为主</span></div>
+      <div class="sbdesc">核心动作：<b>4s 时装上身的婚纱/华丽舞台秀 + 强转场</b>，突出"今年最顶特效服饰"的动态质感，做炫耀向高传播。<b>发布节奏：预热期出 1 条狐神套装悬念转场 → 7.10 当天首发上身秀 → 渗透期每周 2 条跟拍模板。</b></div>
+      <div class="acards">
+        <div class="acrd"><div class="anh"><span class="annm">茶蘼是个小锦鲤</span><span class="anpf pf-ks">快手</span></div><div class="anmx">播 86.9w · T1</div><div class="anlane"><span style="background:#7c5cff1a;color:#9b7bff">主·登船留影</span><span style="background:#f0883e1a;color:#f0883e">辅·出货晒欧</span></div><div class="anact">婚纱/华丽舞台秀 + 强转场，<em>动态质感钩子</em>放大"全场最贵"炫耀</div><div class="anrhy"><b>7.1–9</b> 套装悬念转场×1｜<b>7.10</b> 首发上身秀｜<b>7.14+</b> 周更2条</div></div>
+        <div class="acrd"><div class="anh"><span class="annm">山頂黒毒蛇</span><span class="anpf pf-ks">快手</span></div><div class="anmx">播 56.7w · T1</div><div class="anlane"><span style="background:#7c5cff1a;color:#9b7bff">主·登船留影</span><span style="background:#f0883e1a;color:#f0883e">辅·出货晒欧</span></div><div class="anact">华丽舞台秀 + 转场卡点，主打<em>名利场登船</em>留影炫耀</div><div class="anrhy"><b>7.1–9</b> 悬念×1｜<b>7.10</b> 上身秀｜<b>7.14+</b> 周更2条</div></div>
+        <div class="acrd"><div class="anh"><span class="annm">安 颜</span><span class="anpf pf-dy">抖音</span></div><div class="anmx">播 46.6w · T1</div><div class="anlane"><span style="background:#7c5cff1a;color:#9b7bff">主·登船留影</span><span style="background:#f0883e1a;color:#f0883e">辅·出货晒欧</span></div><div class="anact">抖音侧舞台秀 + 强转场，主投<em>Dou+</em>放大首发声量</div><div class="anrhy"><b>7.1–9</b> 悬念×1｜<b>7.10</b> 首发+加投｜<b>7.14+</b> 周更2条</div></div>
+        <div class="acrd hideable" style="display:none"><div class="anh"><span class="annm">Simon</span><span class="anpf pf-ks">快手</span></div><div class="anmx">播 46.1w · T1</div><div class="anlane"><span style="background:#7c5cff1a;color:#9b7bff">主·登船留影</span><span style="background:#f0883e1a;color:#f0883e">辅·出货晒欧</span></div><div class="anact">华丽舞台秀 + 转场，强调<em>特效动态质感</em></div><div class="anrhy"><b>7.10</b> 上身秀｜<b>7.14+</b> 周更2条</div></div>
+        <div class="acrd hideable" style="display:none"><div class="anh"><span class="annm">n(沈玖)</span><span class="anpf pf-dy">抖音</span></div><div class="anmx">播 44.1w · T1</div><div class="anlane"><span style="background:#7c5cff1a;color:#9b7bff">主·登船留影</span><span style="background:#f0883e1a;color:#f0883e">辅·出货晒欧</span></div><div class="anact">抖音舞台秀 + 强转场炫耀</div><div class="anrhy"><b>7.10</b> 首发｜<b>7.14+</b> 周更2条</div></div>
+        <div class="acrd hideable" style="display:none"><div class="anh"><span class="annm">?点点头</span><span class="anpf pf-dy">抖音</span></div><div class="anmx">播 35.1w · T2</div><div class="anlane"><span style="background:#e8467c1a;color:#ff6f9c">主·向狐神许愿</span><span style="background:#f0883e1a;color:#f0883e">辅·出货晒欧</span></div><div class="anact">舞台秀 + <em>许愿欧气剧情</em>，营造"人人皆抽"</div><div class="anrhy"><b>7.10–13</b> 许愿秀×2｜<b>7.14+</b> 周更</div></div>
+        <div class="acrd hideable" style="display:none"><div class="anh"><span class="annm">D德玛西亚</span><span class="anpf pf-dy">抖音</span></div><div class="anmx">播 25.9w · T2</div><div class="anlane"><span style="background:#e8467c1a;color:#ff6f9c">主·向狐神许愿</span><span style="background:#f0883e1a;color:#f0883e">辅·出货晒欧</span></div><div class="anact">舞台秀 + 许愿欧气剧情</div><div class="anrhy"><b>7.10–13</b> 许愿秀×2｜<b>7.14+</b> 周更</div></div>
+        <div class="acrd hideable" style="display:none"><div class="anh"><span class="annm">Simon</span><span class="anpf pf-dy">抖音</span></div><div class="anmx">播 21.8w · T2</div><div class="anlane"><span style="background:#e8467c1a;color:#ff6f9c">主·向狐神许愿</span><span style="background:#f0883e1a;color:#f0883e">辅·出货晒欧</span></div><div class="anact">抖音舞台秀 + 许愿剧情</div><div class="anrhy"><b>7.10–13</b> 许愿秀×2</div></div>
+        <div class="acrd hideable" style="display:none"><div class="anh"><span class="annm">山頂黒毒蛇</span><span class="anpf pf-dy">抖音</span></div><div class="anmx">播 21.1w · T2</div><div class="anlane"><span style="background:#e8467c1a;color:#ff6f9c">主·向狐神许愿</span><span style="background:#f0883e1a;color:#f0883e">辅·出货晒欧</span></div><div class="anact">抖音舞台秀 + 许愿剧情</div><div class="anrhy"><b>7.10–13</b> 许愿秀×2</div></div>
+      </div>
+      <div class="morewrap"><span class="morebtn" onclick="tog(this)">展开全部 9 位 ▾</span></div>
+    </div>
+
+    <!-- 风格组2：捏脸 -->
+    <div class="styleblock">
+      <div class="sbhead"><span class="sbname">🎭 捏脸型</span><span class="sbpill" style="background:#9b7bff;color:#fff">贵气妆造 · 脸码可得</span><span class="sbcount">13 位</span></div>
+      <div class="sbdesc">核心动作：<b>高端脸码 + 4s 套装合成大片</b>，强调"贵气妆造"引导大R求同款；T2 侧做<b>4s 套装脸码合集 + 一键导入</b>，借捏脸圈"礼申"传统促互动。<b>发布节奏：预热期发狐神主题脸预告 → 7.10 起放脸码合集，评论礼申引爆收藏互动。</b></div>
+      <div class="acards">
+        <div class="acrd"><div class="anh"><span class="annm">瓜妹</span><span class="anpf pf-ks">快手</span></div><div class="anmx">播 77.6w · T1</div><div class="anlane"><span style="background:#f0883e1a;color:#f0883e">主·出货晒欧</span><span style="background:#7c5cff1a;color:#9b7bff">辅·登船留影</span></div><div class="anact">高端脸码 + 4s 套装合成大片，<em>引导大R求同款</em></div><div class="anrhy"><b>7.1–9</b> 狐神脸预告｜<b>7.10</b> 脸码合集｜<b>7.14+</b> 礼申互动</div></div>
+        <div class="acrd"><div class="anh"><span class="annm">星期三</span><span class="anpf pf-ks">快手</span></div><div class="anmx">播 70.4w · T1</div><div class="anlane"><span style="background:#f0883e1a;color:#f0883e">主·出货晒欧</span><span style="background:#7c5cff1a;color:#9b7bff">辅·登船留影</span></div><div class="anact">高端脸码大片 + <em>贵气妆造</em>种草</div><div class="anrhy"><b>7.1–9</b> 脸预告｜<b>7.10</b> 合集｜<b>7.14+</b> 礼申</div></div>
+        <div class="acrd"><div class="anh"><span class="annm">哒咩兔兔</span><span class="anpf pf-rb">小红书</span></div><div class="anmx">赞 2614 · T1</div><div class="anlane"><span style="background:#f0883e1a;color:#f0883e">主·出货晒欧</span><span style="background:#7c5cff1a;color:#9b7bff">辅·登船留影</span></div><div class="anact">小红书脸码笔记，<em>收藏向</em>狐神妆造</div><div class="anrhy"><b>7.10</b> 脸码笔记｜<b>7.14+</b> 周更2篇</div></div>
+        <div class="acrd hideable" style="display:none"><div class="anh"><span class="annm">野性難馴</span><span class="anpf pf-rb">小红书</span></div><div class="anmx">赞 2570 · T1</div><div class="anlane"><span style="background:#f0883e1a;color:#f0883e">主·出货晒欧</span><span style="background:#7c5cff1a;color:#9b7bff">辅·登船留影</span></div><div class="anact">脸码合成大片，贵气妆造</div><div class="anrhy"><b>7.10</b> 合集｜<b>7.14+</b> 周更</div></div>
+        <div class="acrd hideable" style="display:none"><div class="anh"><span class="annm">伍白-申脸勿急</span><span class="anpf pf-ks">快手</span></div><div class="anmx">播 14.4w · T2</div><div class="anlane"><span style="background:#f0883e1a;color:#f0883e">主·出货晒欧</span><span style="background:#2f9e5e1a;color:#3fcf8e">辅·至尊攻略</span></div><div class="anact">4s 脸码合集 + 一键导入，<em>礼申促互动</em></div><div class="anrhy"><b>7.10</b> 合集｜<b>7.14+</b> 申脸接龙</div></div>
+        <div class="acrd hideable" style="display:none"><div class="anh"><span class="annm">瓜妹</span><span class="anpf pf-dy">抖音</span></div><div class="anmx">播 9.4w · T2</div><div class="anlane"><span style="background:#f0883e1a;color:#f0883e">主·出货晒欧</span><span style="background:#2f9e5e1a;color:#3fcf8e">辅·至尊攻略</span></div><div class="anact">抖音脸码合集 + 一键导入</div><div class="anrhy"><b>7.10</b> 合集｜<b>7.14+</b> 礼申</div></div>
+        <div class="acrd hideable" style="display:none"><div class="anh"><span class="annm">星期三</span><span class="anpf pf-dy">抖音</span></div><div class="anmx">播 8.3w · T2</div><div class="anlane"><span style="background:#f0883e1a;color:#f0883e">主·出货晒欧</span><span style="background:#2f9e5e1a;color:#3fcf8e">辅·至尊攻略</span></div><div class="anact">抖音脸码合集，礼申互动</div><div class="anrhy"><b>7.10</b> 合集｜<b>7.14+</b> 礼申</div></div>
+        <div class="acrd hideable" style="display:none"><div class="anh"><span class="annm">野性難馴</span><span class="anpf pf-ks">快手</span></div><div class="anmx">播 6.4w · T2</div><div class="anlane"><span style="background:#f0883e1a;color:#f0883e">主·出货晒欧</span><span style="background:#2f9e5e1a;color:#3fcf8e">辅·至尊攻略</span></div><div class="anact">脸码合集 + 一键导入</div><div class="anrhy"><b>7.10</b> 合集｜<b>7.14+</b> 礼申</div></div>
+        <div class="acrd hideable" style="display:none"><div class="anh"><span class="annm">哒咩兔兔</span><span class="anpf pf-ks">快手</span></div><div class="anmx">播 4.9w · T2</div><div class="anlane"><span style="background:#f0883e1a;color:#f0883e">主·出货晒欧</span><span style="background:#2f9e5e1a;color:#3fcf8e">辅·至尊攻略</span></div><div class="anact">快手脸码合集，礼申互动</div><div class="anrhy"><b>7.10</b> 合集｜<b>7.14+</b> 礼申</div></div>
+        <div class="acrd hideable" style="display:none"><div class="anh"><span class="annm">黑澀禁卺</span><span class="anpf pf-ks">快手</span></div><div class="anmx">播 2.8w · T2</div><div class="anlane"><span style="background:#f0883e1a;color:#f0883e">主·出货晒欧</span><span style="background:#2f9e5e1a;color:#3fcf8e">辅·至尊攻略</span></div><div class="anact">脸码合集 + 一键导入</div><div class="anrhy"><b>7.10</b> 合集｜<b>7.14+</b> 礼申</div></div>
+        <div class="acrd hideable" style="display:none"><div class="anh"><span class="annm">瓜妹</span><span class="anpf pf-rb">小红书</span></div><div class="anmx">赞 1499 · T2</div><div class="anlane"><span style="background:#f0883e1a;color:#f0883e">主·出货晒欧</span><span style="background:#2f9e5e1a;color:#3fcf8e">辅·至尊攻略</span></div><div class="anact">小红书脸码笔记</div><div class="anrhy"><b>7.10</b> 笔记｜<b>7.14+</b> 周更</div></div>
+        <div class="acrd hideable" style="display:none"><div class="anh"><span class="annm">黑澀禁卺</span><span class="anpf pf-rb">小红书</span></div><div class="anmx">赞 846 · T2</div><div class="anlane"><span style="background:#f0883e1a;color:#f0883e">主·出货晒欧</span><span style="background:#2f9e5e1a;color:#3fcf8e">辅·至尊攻略</span></div><div class="anact">小红书脸码笔记</div><div class="anrhy"><b>7.10</b> 笔记｜<b>7.14+</b> 周更</div></div>
+        <div class="acrd hideable" style="display:none"><div class="anh"><span class="annm">星期三</span><span class="anpf pf-rb">小红书</span></div><div class="anmx">赞 598 · T2</div><div class="anlane"><span style="background:#f0883e1a;color:#f0883e">主·出货晒欧</span><span style="background:#2f9e5e1a;color:#3fcf8e">辅·至尊攻略</span></div><div class="anact">小红书脸码笔记</div><div class="anrhy"><b>7.10</b> 笔记｜<b>7.14+</b> 周更</div></div>
+      </div>
+      <div class="morewrap"><span class="morebtn" onclick="tog(this)">展开全部 13 位 ▾</span></div>
+    </div>
+
+    <!-- 风格组3：攻略 -->
+    <div class="styleblock">
+      <div class="sbhead"><span class="sbname">📖 攻略型</span><span class="sbpill" style="background:var(--jade);color:#06321f">付费转化 · 降决策门槛</span><span class="sbcount">17 位 · T2核心</span></div>
+      <div class="sbdesc">核心动作：<b>4s 系列抽奖 & 欧皇攻略</b>——至尊奖池保底/概率/礼包购买/竞拍解锁链路讲解，直接承接付费决策。这是收入转化的关键赛道，<b>头部攻略作者要在 7.10 前完成奖池机制预讲，上线日做实时开箱攻略。</b></div>
+      <div class="acards">
+        <div class="acrd"><div class="anh"><span class="annm">禁忌</span><span class="anpf pf-ks">快手</span></div><div class="anmx">播 126.8w · T2</div><div class="anlane"><span style="background:#2f9e5e1a;color:#3fcf8e">主·至尊攻略</span><span style="background:#e8467c1a;color:#ff6f9c">辅·向狐神许愿</span></div><div class="anact">至尊奖池<em>保底/概率/礼包</em>购买全解，转化主力</div><div class="anrhy"><b>7.1–9</b> 机制预讲×2｜<b>7.10</b> 实时开箱攻略｜<b>7.14+</b> 周更3条</div></div>
+        <div class="acrd"><div class="anh"><span class="annm">€AIN-翎</span><span class="anpf pf-ks">快手</span></div><div class="anmx">播 109.8w · T2</div><div class="anlane"><span style="background:#2f9e5e1a;color:#3fcf8e">主·至尊攻略</span><span style="background:#e8467c1a;color:#ff6f9c">辅·向狐神许愿</span></div><div class="anact">奖池概率/竞拍解锁讲解，<em>降付费门槛</em></div><div class="anrhy"><b>7.1–9</b> 预讲×2｜<b>7.10</b> 开箱攻略｜<b>7.14+</b> 周更3条</div></div>
+        <div class="acrd"><div class="anh"><span class="annm">虚伪</span><span class="anpf pf-ks">快手</span></div><div class="anmx">播 53.4w · T2</div><div class="anlane"><span style="background:#2f9e5e1a;color:#3fcf8e">主·至尊攻略</span><span style="background:#e8467c1a;color:#ff6f9c">辅·向狐神许愿</span></div><div class="anact">抽奖&欧皇攻略，礼包购买引导</div><div class="anrhy"><b>7.1–9</b> 预讲｜<b>7.10</b> 开箱｜<b>7.14+</b> 周更</div></div>
+        <div class="acrd hideable" style="display:none"><div class="anh"><span class="annm">冷白</span><span class="anpf pf-ks">快手</span></div><div class="anmx">播 43.7w · T2</div><div class="anlane"><span style="background:#2f9e5e1a;color:#3fcf8e">主·至尊攻略</span><span style="background:#e8467c1a;color:#ff6f9c">辅·向狐神许愿</span></div><div class="anact">奖池保底/概率讲解</div><div class="anrhy"><b>7.1–9</b> 预讲｜<b>7.10</b> 开箱｜<b>7.14+</b> 周更</div></div>
+        <div class="acrd hideable" style="display:none"><div class="anh"><span class="annm">爷青回、</span><span class="anpf pf-dy">抖音</span></div><div class="anmx">播 34.2w · T2</div><div class="anlane"><span style="background:#2f9e5e1a;color:#3fcf8e">主·至尊攻略</span><span style="background:#e8467c1a;color:#ff6f9c">辅·向狐神许愿</span></div><div class="anact">抖音侧抽奖攻略，礼包引导</div><div class="anrhy"><b>7.10</b> 开箱攻略｜<b>7.14+</b> 周更</div></div>
+        <div class="acrd hideable" style="display:none"><div class="anh"><span class="annm">不发脾气只发财✔</span><span class="anpf pf-dy">抖音</span></div><div class="anmx">播 25.1w · T2</div><div class="anlane"><span style="background:#2f9e5e1a;color:#3fcf8e">主·至尊攻略</span><span style="background:#e8467c1a;color:#ff6f9c">辅·向狐神许愿</span></div><div class="anact">抽奖&欧皇攻略</div><div class="anrhy"><b>7.10</b> 开箱｜<b>7.14+</b> 周更</div></div>
+        <div class="acrd hideable" style="display:none"><div class="anh"><span class="annm">禁忌</span><span class="anpf pf-dy">抖音</span></div><div class="anmx">播 17.4w · T2</div><div class="anlane"><span style="background:#2f9e5e1a;color:#3fcf8e">主·至尊攻略</span><span style="background:#e8467c1a;color:#ff6f9c">辅·向狐神许愿</span></div><div class="anact">抖音奖池攻略</div><div class="anrhy"><b>7.10</b> 开箱｜<b>7.14+</b> 周更</div></div>
+        <div class="acrd hideable" style="display:none"><div class="anh"><span class="annm">举个栗子</span><span class="anpf pf-dy">抖音</span></div><div class="anmx">播 10.3w · T2</div><div class="anlane"><span style="background:#2f9e5e1a;color:#3fcf8e">主·至尊攻略</span><span style="background:#e8467c1a;color:#ff6f9c">辅·向狐神许愿</span></div><div class="anact">奖池机制攻略</div><div class="anrhy"><b>7.10</b> 开箱｜<b>7.14+</b> 周更</div></div>
+        <div class="acrd hideable" style="display:none"><div class="anh"><span class="annm">虚伪</span><span class="anpf pf-dy">抖音</span></div><div class="anmx">播 7.3w · T2</div><div class="anlane"><span style="background:#2f9e5e1a;color:#3fcf8e">主·至尊攻略</span><span style="background:#e8467c1a;color:#ff6f9c">辅·向狐神许愿</span></div><div class="anact">抖音抽奖攻略</div><div class="anrhy"><b>7.10</b> 开箱｜<b>7.14+</b> 周更</div></div>
+        <div class="acrd hideable" style="display:none"><div class="anh"><span class="annm">€AIN-翎</span><span class="anpf pf-dy">抖音</span></div><div class="anmx">播 3.6w · T2</div><div class="anlane"><span style="background:#2f9e5e1a;color:#3fcf8e">主·至尊攻略</span><span style="background:#e8467c1a;color:#ff6f9c">辅·向狐神许愿</span></div><div class="anact">抖音奖池攻略</div><div class="anrhy"><b>7.10</b> 开箱｜<b>7.14+</b> 周更</div></div>
+        <div class="acrd hideable" style="display:none"><div class="anh"><span class="annm">禁忌</span><span class="anpf pf-rb">小红书</span></div><div class="anmx">赞 2030 · T2</div><div class="anlane"><span style="background:#2f9e5e1a;color:#3fcf8e">主·至尊攻略</span><span style="background:#e8467c1a;color:#ff6f9c">辅·向狐神许愿</span></div><div class="anact">小红书攻略笔记，搜索承接</div><div class="anrhy"><b>7.10</b> 攻略笔记｜<b>7.14+</b> 周更</div></div>
+        <div class="acrd hideable" style="display:none"><div class="anh"><span class="annm">fufu～</span><span class="anpf pf-rb">小红书</span></div><div class="anmx">赞 1539 · T2</div><div class="anlane"><span style="background:#2f9e5e1a;color:#3fcf8e">主·至尊攻略</span><span style="background:#e8467c1a;color:#ff6f9c">辅·向狐神许愿</span></div><div class="anact">小红书攻略笔记</div><div class="anrhy"><b>7.10</b> 笔记｜<b>7.14+</b> 周更</div></div>
+        <div class="acrd hideable" style="display:none"><div class="anh"><span class="annm">姐姐（看主页）</span><span class="anpf pf-rb">小红书</span></div><div class="anmx">赞 1295 · T2</div><div class="anlane"><span style="background:#2f9e5e1a;color:#3fcf8e">主·至尊攻略</span><span style="background:#e8467c1a;color:#ff6f9c">辅·向狐神许愿</span></div><div class="anact">小红书攻略笔记</div><div class="anrhy"><b>7.10</b> 笔记｜<b>7.14+</b> 周更</div></div>
+        <div class="acrd hideable" style="display:none"><div class="anh"><span class="annm">冷白</span><span class="anpf pf-rb">小红书</span></div><div class="anmx">赞 1186 · T2</div><div class="anlane"><span style="background:#2f9e5e1a;color:#3fcf8e">主·至尊攻略</span><span style="background:#e8467c1a;color:#ff6f9c">辅·向狐神许愿</span></div><div class="anact">小红书攻略笔记</div><div class="anrhy"><b>7.10</b> 笔记｜<b>7.14+</b> 周更</div></div>
+        <div class="acrd hideable" style="display:none"><div class="anh"><span class="annm">爷青回、</span><span class="anpf pf-rb">小红书</span></div><div class="anmx">赞 482 · T2</div><div class="anlane"><span style="background:#2f9e5e1a;color:#3fcf8e">主·至尊攻略</span><span style="background:#e8467c1a;color:#ff6f9c">辅·向狐神许愿</span></div><div class="anact">小红书攻略笔记</div><div class="anrhy"><b>7.10</b> 笔记｜<b>7.14+</b> 周更</div></div>
+        <div class="acrd hideable" style="display:none"><div class="anh"><span class="annm">虚伪</span><span class="anpf pf-rb">小红书</span></div><div class="anmx">赞 353 · T2</div><div class="anlane"><span style="background:#2f9e5e1a;color:#3fcf8e">主·至尊攻略</span><span style="background:#e8467c1a;color:#ff6f9c">辅·向狐神许愿</span></div><div class="anact">小红书攻略笔记</div><div class="anrhy"><b>7.10</b> 笔记｜<b>7.14+</b> 周更</div></div>
+        <div class="acrd hideable" style="display:none"><div class="anh"><span class="annm">萌面大侠</span><span class="anpf pf-rb">小红书</span></div><div class="anmx">赞 220 · T2</div><div class="anlane"><span style="background:#2f9e5e1a;color:#3fcf8e">主·至尊攻略</span><span style="background:#e8467c1a;color:#ff6f9c">辅·向狐神许愿</span></div><div class="anact">小红书攻略笔记</div><div class="anrhy"><b>7.10</b> 笔记｜<b>7.14+</b> 周更</div></div>
+      </div>
+      <div class="morewrap"><span class="morebtn" onclick="tog(this)">展开全部 17 位 ▾</span></div>
+    </div>
+
+    <!-- 风格组4：短剧 -->
+    <div class="styleblock">
+      <div class="sbhead"><span class="sbname">🎬 短剧型</span><span class="sbpill" style="background:var(--fox);color:#fff">情绪代入 · 出圈实验</span><span class="sbcount">4 位</span></div>
+      <div class="sbdesc">核心动作：<b>把 4s 时装植入高端 CP/恋爱短剧场景</b>，营造"贵气人设"情绪炫耀；或做<b>许愿狐神短剧</b>（欧皇/非酋反差人设），强化"一击必中"代入感。<b>发布节奏：7.10–13 引爆期主推短剧出圈，跑出爆款后渗透期放量。</b></div>
+      <div class="acards">
+        <div class="acrd"><div class="anh"><span class="annm">元姊</span><span class="anpf pf-dy">抖音</span></div><div class="anmx">播 71.1w · T1</div><div class="anlane"><span style="background:#7c5cff1a;color:#9b7bff">主·登船留影</span><span style="background:#e8467c1a;color:#ff6f9c">辅·向狐神许愿</span></div><div class="anact">4s 植入高端<em>CP/恋爱短剧</em>，贵气人设情绪炫耀</div><div class="anrhy"><b>7.10–13</b> 短剧出圈×1｜<b>7.14+</b> 续集2条</div></div>
+        <div class="acrd"><div class="anh"><span class="annm">千百媚</span><span class="anpf pf-dy">抖音</span></div><div class="anmx">播 17.1w · T2</div><div class="anlane"><span style="background:#e8467c1a;color:#ff6f9c">主·向狐神许愿</span><span style="background:#f0883e1a;color:#f0883e">辅·出货晒欧</span></div><div class="anact"><em>许愿狐神短剧</em>：欧皇/非酋反差人设，一击必中代入</div><div class="anrhy"><b>7.10–13</b> 许愿短剧×1｜<b>7.14+</b> 续集</div></div>
+        <div class="acrd"><div class="anh"><span class="annm">樱倷月裡</span><span class="anpf pf-rb">小红书</span></div><div class="anmx">赞 2241 · T1</div><div class="anlane"><span style="background:#7c5cff1a;color:#9b7bff">主·登船留影</span><span style="background:#e8467c1a;color:#ff6f9c">辅·向狐神许愿</span></div><div class="anact">小红书 CP 短剧笔记，贵气人设</div><div class="anrhy"><b>7.10–13</b> 短剧笔记×1｜<b>7.14+</b> 续集</div></div>
+        <div class="acrd"><div class="anh"><span class="annm">元气满满</span><span class="anpf pf-rb">小红书</span></div><div class="anmx">赞 1957 · T1</div><div class="anlane"><span style="background:#7c5cff1a;color:#9b7bff">主·登船留影</span><span style="background:#e8467c1a;color:#ff6f9c">辅·向狐神许愿</span></div><div class="anact">小红书恋爱短剧笔记，情绪炫耀</div><div class="anrhy"><b>7.10–13</b> 短剧笔记×1｜<b>7.14+</b> 续集</div></div>
+      </div>
+    </div>
+
+    <!-- 风格组5：穿搭种草 -->
+    <div class="styleblock">
+      <div class="sbhead"><span class="sbname">👗 穿搭种草型</span><span class="sbpill" style="background:#ff6f9c;color:#fff">美术种草 · 弱炫强好看</span><span class="sbcount">4 位</span></div>
+      <div class="sbdesc">核心动作：<b>4s 套装"史无前例美术效果"种草 + 前后对比</b>，弱炫耀强"好看到犯规"，主打第二梯队"今年最顶特效，人人皆抽"心智。<b>发布节奏：7.10 起密集种草，每周 2–3 条多角度展示。</b></div>
+      <div class="acards">
+        <div class="acrd"><div class="anh"><span class="annm">美玥</span><span class="anpf pf-ks">快手</span></div><div class="anmx">播 32.4w · T2</div><div class="anlane"><span style="background:#f0883e1a;color:#f0883e">主·出货晒欧</span><span style="background:#2f9e5e1a;color:#3fcf8e">辅·至尊攻略</span></div><div class="anact">4s 套装<em>美术效果种草</em> + 前后对比，"好看到犯规"</div><div class="anrhy"><b>7.10</b> 种草首发｜<b>7.14+</b> 周更2-3条</div></div>
+        <div class="acrd"><div class="anh"><span class="annm">狂熱玫瑰</span><span class="anpf pf-rb">小红书</span></div><div class="anmx">赞 1820 · T1</div><div class="anlane"><span style="background:#7c5cff1a;color:#9b7bff">主·登船留影</span><span style="background:#e8467c1a;color:#ff6f9c">辅·向狐神许愿</span></div><div class="anact">4s 多角度展示 + <em>真人质感/光影特写</em>，贵气炫耀</div><div class="anrhy"><b>7.10</b> 种草首发｜<b>7.14+</b> 周更2-3篇</div></div>
+        <div class="acrd"><div class="anh"><span class="annm">美玥</span><span class="anpf pf-dy">抖音</span></div><div class="anmx">播 12.9w · T2</div><div class="anlane"><span style="background:#f0883e1a;color:#f0883e">主·出货晒欧</span><span style="background:#2f9e5e1a;color:#3fcf8e">辅·至尊攻略</span></div><div class="anact">抖音套装种草 + 前后对比</div><div class="anrhy"><b>7.10</b> 种草｜<b>7.14+</b> 周更2条</div></div>
+        <div class="acrd"><div class="anh"><span class="annm">美玥</span><span class="anpf pf-rb">小红书</span></div><div class="anmx">赞 1191 · T2</div><div class="anlane"><span style="background:#f0883e1a;color:#f0883e">主·出货晒欧</span><span style="background:#2f9e5e1a;color:#3fcf8e">辅·至尊攻略</span></div><div class="anact">小红书套装种草笔记</div><div class="anrhy"><b>7.10</b> 笔记｜<b>7.14+</b> 周更</div></div>
+      </div>
+    </div>
+
+    <!-- 风格组6：日常陪玩(放量主力) -->
+    <div class="styleblock">
+      <div class="sbhead"><span class="sbname">🌿 日常陪玩型</span><span class="sbpill" style="background:#3fcf8e;color:#06321f">声量放量 · 内容消费主力</span><span class="sbcount">43 位 · T1/T2混合</span></div>
+      <div class="sbdesc">数量最大的一组，是声量与内容量的主力。<b>动作分两类</b>：T1 头部"升级为高质感时装秀，弱化日常水更，聚焦贵气炫耀"；T2 腰部做<b>"人人参与抽4s"的开箱/十连场景</b>，许愿 + 晒欧降低参与门槛。<b>发布节奏：贯穿全月稳定日更，7.10 当天集中晒首抽。</b>下列为代表，全量 43 位按此两类动作执行。</div>
+      <div class="acards">
+        <div class="acrd"><div class="anh"><span class="annm">QQ炫舞手游（安颜）</span><span class="anpf pf-ks">快手</span></div><div class="anmx">播 51.0w · T1</div><div class="anlane"><span style="background:#7c5cff1a;color:#9b7bff">主·登船留影</span><span style="background:#e8467c1a;color:#ff6f9c">辅·向狐神许愿</span></div><div class="anact">升级高质感时装秀，<em>弱化水更</em>聚焦贵气炫耀</div><div class="anrhy"><b>全月日更</b>｜<b>7.10</b> 集中晒首抽</div></div>
+        <div class="acrd"><div class="anh"><span class="annm">萘（沈玖）</span><span class="anpf pf-ks">快手</span></div><div class="anmx">播 46.8w · T1</div><div class="anlane"><span style="background:#7c5cff1a;color:#9b7bff">主·登船留影</span><span style="background:#e8467c1a;color:#ff6f9c">辅·向狐神许愿</span></div><div class="anact">高质感时装秀，贵气炫耀场景</div><div class="anrhy"><b>全月日更</b>｜<b>7.10</b> 晒首抽</div></div>
+        <div class="acrd"><div class="anh"><span class="annm">QQ炫舞手游 点点头</span><span class="anpf pf-ks">快手</span></div><div class="anmx">播 31.9w · T2</div><div class="anlane"><span style="background:#f0883e1a;color:#f0883e">主·出货晒欧</span><span style="background:#2f9e5e1a;color:#3fcf8e">辅·至尊攻略</span></div><div class="anact"><em>开箱/十连</em>场景，许愿+晒欧降门槛</div><div class="anrhy"><b>全月日更</b>｜<b>7.10</b> 十连开箱</div></div>
+        <div class="acrd hideable" style="display:none"><div class="anh"><span class="annm">懒云云</span><span class="anpf pf-ks">快手</span></div><div class="anmx">播 29.1w · T2</div><div class="anlane"><span style="background:#f0883e1a;color:#f0883e">主·出货晒欧</span><span style="background:#2f9e5e1a;color:#3fcf8e">辅·至尊攻略</span></div><div class="anact">开箱/十连场景，许愿晒欧</div><div class="anrhy"><b>全月日更</b>｜<b>7.10</b> 十连</div></div>
+        <div class="acrd hideable" style="display:none"><div class="anh"><span class="annm">QQ炫舞手游（兜兜熊）</span><span class="anpf pf-ks">快手</span></div><div class="anmx">播 27.5w · T2</div><div class="anlane"><span style="background:#f0883e1a;color:#f0883e">主·出货晒欧</span><span style="background:#2f9e5e1a;color:#3fcf8e">辅·至尊攻略</span></div><div class="anact">开箱/十连，许愿晒欧</div><div class="anrhy"><b>全月日更</b>｜<b>7.10</b> 十连</div></div>
+        <div class="acrd hideable" style="display:none"><div class="anh"><span class="annm">全区阎王</span><span class="anpf pf-ks">快手</span></div><div class="anmx">播 22.6w · T2</div><div class="anlane"><span style="background:#f0883e1a;color:#f0883e">主·出货晒欧</span><span style="background:#2f9e5e1a;color:#3fcf8e">辅·至尊攻略</span></div><div class="anact">开箱/十连场景</div><div class="anrhy"><b>全月日更</b>｜<b>7.10</b> 十连</div></div>
+        <div class="acrd hideable" style="display:none"><div class="anh"><span class="annm">老泽</span><span class="anpf pf-dy">抖音</span></div><div class="anmx">播 22.0w · T2</div><div class="anlane"><span style="background:#f0883e1a;color:#f0883e">主·出货晒欧</span><span style="background:#2f9e5e1a;color:#3fcf8e">辅·至尊攻略</span></div><div class="anact">抖音开箱/十连场景</div><div class="anrhy"><b>全月日更</b>｜<b>7.10</b> 十连</div></div>
+        <div class="acrd hideable" style="display:none"><div class="anh"><span class="annm">QQ炫舞手游 圣琳</span><span class="anpf pf-ks">快手</span></div><div class="anmx">播 16.8w · T2</div><div class="anlane"><span style="background:#f0883e1a;color:#f0883e">主·出货晒欧</span><span style="background:#2f9e5e1a;color:#3fcf8e">辅·至尊攻略</span></div><div class="anact">开箱/十连，许愿晒欧</div><div class="anrhy"><b>全月日更</b>｜<b>7.10</b> 十连</div></div>
+        <div class="acrd hideable" style="display:none"><div class="anh"><span class="annm">秋揪</span><span class="anpf pf-ks">快手</span></div><div class="anmx">播 14.5w · T2</div><div class="anlane"><span style="background:#f0883e1a;color:#f0883e">主·出货晒欧</span><span style="background:#2f9e5e1a;color:#3fcf8e">辅·至尊攻略</span></div><div class="anact">开箱/十连场景</div><div class="anrhy"><b>全月日更</b>｜<b>7.10</b> 十连</div></div>
+        <div class="acrd hideable" style="display:none"><div class="anh"><span class="annm">ι好哄</span><span class="anpf pf-ks">快手</span></div><div class="anmx">播 11.6w · T2</div><div class="anlane"><span style="background:#f0883e1a;color:#f0883e">主·出货晒欧</span><span style="background:#2f9e5e1a;color:#3fcf8e">辅·至尊攻略</span></div><div class="anact">开箱/十连场景</div><div class="anrhy"><b>全月日更</b>｜<b>7.10</b> 十连</div></div>
+        <div class="acrd hideable" style="display:none"><div class="anh"><span class="annm">雁塔66</span><span class="anpf pf-rb">小红书</span></div><div class="anmx">赞 520 · T2</div><div class="anlane"><span style="background:#f0883e1a;color:#f0883e">主·出货晒欧</span><span style="background:#2f9e5e1a;color:#3fcf8e">辅·至尊攻略</span></div><div class="anact">小红书晒欧笔记</div><div class="anrhy"><b>全月稳更</b>｜<b>7.10</b> 晒首抽</div></div>
+        <div class="acrd hideable" style="display:none"><div class="anh" style="opacity:.7"><span class="annm" style="font-size:13px">…等 43 位（含小红书尾部 30+ 位）</span></div><div class="anmx">UGC 放量</div><div class="anact" style="color:var(--txt-dim)">统一执行"开箱/十连 + 许愿晒欧"动作，承接低活泛玩家，是 #炫舞狐神白白我 话题声量主力来源。</div><div class="anrhy"><b>全月日更</b>，话题挂载</div></div>
+      </div>
+      <div class="morewrap"><span class="morebtn" onclick="tog(this)">展开更多代表 ▾</span></div>
+    </div>
+
+    <!-- 爆款公式 -->
+    <h3 style="font-family:var(--serif);color:var(--moon);font-size:18px;margin:26px 0 4px">🏆 可复用爆款公式（基于近周生态内容验证）</h3>
+    <p class="sec-sub" style="margin-bottom:14px">把跑通的内容范式注入至尊系列，降低作者创作不确定性。</p>
+    <div class="formulas">
+      <div class="fm"><div class="ft">① 免费钩子 + 利益前置 + 实测出货</div><div class="fd">标题首词放"免费/稀世/白嫖"，正文给清晰领取/兑换 step，结尾晒出货战绩 → 至尊侧改造为"超凡白嫖攻略+至尊出货实测"。</div></div>
+      <div class="fm"><div class="ft">② 转场卡点 + 婚纱/恋爱场景 + 情绪BGM</div><div class="fd">强转场+卡点情绪曲带来高完播转发 → 至尊侧做"名利场走秀/CP登船"可跟拍模板。</div><div class="fc">参考：「白纱为契」播赞比 10%</div></div>
+      <div class="fm"><div class="ft">③ 月光免费脸 + 妆容细节 + 脸码可得</div><div class="fd">"免费可捏高颜脸"为钩子，承诺评论礼申脸码，收藏互动双高 → 配套至尊狐神主题捏脸。</div></div>
+      <div class="fm"><div class="ft">④ 青春/周年情怀 + 第二人称代入</div><div class="fd">"假如你活在2010年"式怀旧叙事唤起老玩家 → 结合暑期旅拍季做情绪共鸣内容。</div></div>
+    </div>
+
+    <!-- 潜力标杆作者 定制扶持 -->
+    <h3 style="font-family:var(--serif);color:var(--moon);font-size:19px;margin:30px 0 4px">⭐ 潜力标杆作者 · 定制化重点扶持（4 位）</h3>
+    <p class="sec-sub" style="margin-bottom:8px">来自每周周报锁定的<b style="color:var(--gold-bright)">潜力标杆作者</b>，已持续 3 周稳定上榜。结合各自<b style="color:var(--gold-bright)">真实数据短板</b>（完播率 / 播赞比 / 赞评比）做一对一定制：明确做什么内容、针对性优化要求、对齐 7.10 的发布节奏，作为 7 月至尊系列重点孵化对象。</p>
+    <div class="potbanner">
+      <span class="pbt">🦊 4 位潜力作者 = 至尊系列"裂变种子"</span>
+      <span class="pbsrc">数据源：<b>生态作者周报 6.1–6.21（近三周）</b> 潜力标杆作者榜</span>
+    </div>
+    <div class="potgrid">
+
+      <!-- 美玥 -->
+      <div class="potcard">
+        <div class="pch"><span class="pcnm">美玥</span><span class="pcbadge dy">抖音</span><span class="pcbadge">粉 1.1w · 体量最大</span></div>
+        <div class="pcpersona">稳定头部潜力，完播健康、唯赞评比偏弱</div>
+        <div class="pcstats">
+          <div class="st good"><b>31.1%</b><span>完播率 健康</span></div>
+          <div class="st"><b>31:1</b><span>播赞比</span></div>
+          <div class="st warn"><b>2.1:1</b><span>赞评比 偏低</span></div>
+        </div>
+        <div class="pcrow pr-do"><b>做什么：</b>至尊九尾狐<span class="hl">捏脸/换装展示</span>为主线，主打"高颜成品脸 + 脸码可领"，承接其完播优势做系列合集。</div>
+        <div class="pcrow pr-fix"><b>要求修短板：</b>赞评比仅 2.1，<span class="hl">评论区互动是关键缺口</span>——每条置顶引导性提问（"想要哪套脸码扣1"）、首小时本人回评 ≥20 条，把流量转成关系。</div>
+        <div class="pcrow pr-rhy"><b>节奏：</b>7.1–9 预热捏脸预告 2 条 → <b>7.10–13 至尊狐神脸合集首发</b> → 渗透期每周 2 条稳更 + 评论区固定营业。</div>
+      </div>
+
+      <!-- 炫舞䞞䌉 -->
+      <div class="potcard">
+        <div class="pch"><span class="pcnm">炫舞䞞䌉</span><span class="pcbadge dy">抖音</span><span class="pcbadge" style="background:rgba(63,207,142,.16);color:#3fcf8e">环比 +138 涨粉最快</span></div>
+        <div class="pcpersona">爆款体质（播赞比破 100），但完播是硬伤</div>
+        <div class="pcstats">
+          <div class="st warn"><b>12.1%</b><span>完播率 偏低</span></div>
+          <div class="st good"><b>100:1</b><span>播赞比 顶级</span></div>
+          <div class="st"><b>1.9:1</b><span>赞评比</span></div>
+        </div>
+        <div class="pcrow pr-do"><b>做什么：</b>延续<span class="hl">高点赞爆款打法</span>（强钩子/强反差），切入"至尊出货实测 + 欧皇高光"，用其点赞转化优势冲单条爆量。</div>
+        <div class="pcrow pr-fix"><b>要求修短板：</b>完播仅 12%，<span class="hl">把时长压到 15–25s</span>、前 3 秒直给结果（"白嫖抽到至尊狐神"），去掉冗长铺垫，完播提到 20%+ 即可放大投流。</div>
+        <div class="pcrow pr-rhy"><b>节奏：</b>预热期试 2 条短钩子模板找手感 → <b>7.10 上线日首抽实测冲爆款</b> → 渗透期日更短平快，跑通即追投。</div>
+      </div>
+
+      <!-- €AIN-翎 -->
+      <div class="potcard">
+        <div class="pch"><span class="pcnm">€AIN-翎</span><span class="pcbadge dy">抖音</span><span class="pcbadge">粉 3.4k</span></div>
+        <div class="pcpersona">评论氛围极强（赞评比曾达 41:1），完播待补</div>
+        <div class="pcstats">
+          <div class="st warn"><b>7.5%</b><span>完播率 最低</span></div>
+          <div class="st"><b>66:1</b><span>播赞比 波动</span></div>
+          <div class="st good"><b>5.7:1</b><span>赞评比 强</span></div>
+        </div>
+        <div class="pcrow pr-do"><b>做什么：</b>放大其<span class="hl">强互动社区属性</span>，做"狐神许愿 / 玄学求欧 / 评论区抽脸码"话题型内容，把高赞评转成话题声量主力。</div>
+        <div class="pcrow pr-fix"><b>要求修短板：</b>完播 7.5% 为四人最低，<span class="hl">内容需结构化</span>——固定"开头抛问→中段悬念→结尾揭晓"三段式，缩短单条，把评论热度沉到完播上。</div>
+        <div class="pcrow pr-rhy"><b>节奏：</b>预热期发起 #向狐神许愿 话题 → <b>7.10 起每日许愿/揭晓互动条</b> → 渗透期周更话题局，承接评论区运营。</div>
+      </div>
+
+      <!-- 星期三 -->
+      <div class="potcard">
+        <div class="pch"><span class="pcnm">星期三</span><span class="pcbadge dy">抖音</span><span class="pcbadge">粉 3.0k</span></div>
+        <div class="pcpersona">互动最强（赞评比 15.6:1），点赞转化需提升</div>
+        <div class="pcstats">
+          <div class="st good"><b>22.0%</b><span>完播率 健康</span></div>
+          <div class="st warn"><b>8.4:1</b><span>播赞比 偏低</span></div>
+          <div class="st good"><b>15.6:1</b><span>赞评比 最强</span></div>
+        </div>
+        <div class="pcrow pr-do"><b>做什么：</b>主攻<span class="hl">情感共鸣 / 剧情向</span>至尊内容（名利场 CP 登船、怀旧周年代入），完播与赞评双高、是天然的"情绪型种子"。</div>
+        <div class="pcrow pr-fix"><b>要求修短板：</b>播赞比仅 8.4（看的人多、点赞少），<span class="hl">强化"点赞钩子"</span>——结尾明确引导（"被狐神戳到点赞"）+ 卡点情绪 BGM，把高完播转成点赞。</div>
+        <div class="pcrow pr-rhy"><b>节奏：</b>预热期做"狐神将至"情绪短片 → <b>7.10–13 名利场登船情感首发</b> → 渗透期结合暑期旅拍季周更，复用公式②④。</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 03 主播方向 -->
+  <section id="anchors">
+    <div class="sec-head"><span class="sec-no">03</span><h2>主播方向 · 生态主播分级 × 主题 × 节奏</h2></div>
+    <div class="sec-sub">基于 3 月 & 4 月生态主播真实直播数据收集表（38 位上报明细）重构。4 月在播 <b style="color:var(--gold-bright)">38 位</b>（较 3 月 21 位扩量 +81%），合计 <b style="color:var(--gold-bright)">1,162 场 · 3,635 小时 · 总观看 49.4w</b>（环比 3 月 33.5w，+48%）。按真实观看量分 S/A/B 三级，按直播内容分 5 类风格，逐级做主题规划与排播。</div>
+
+    <!-- 资源盘点 -->
+    <div class="astat" style="margin-bottom:24px">
+      <div class="s"><b>38</b><span>4月在播主播</span></div>
+      <div class="s"><b>+81%</b><span>较3月人数</span></div>
+      <div class="s"><b>49.4w</b><span>4月总观看</span></div>
+      <div class="s"><b>+48%</b><span>观看环比</span></div>
+      <div class="s"><b>1162</b><span>总直播场次</span></div>
+      <div class="s"><b>9 / 12 / 17</b><span>S / A / B 分级</span></div>
+    </div>
+
+    <!-- 三级分层 -->
+    <div class="anchor-tiers">
+      <div class="atier s">
+        <div class="ath"><span class="atlv">S</span><span class="attl">头部引爆层</span><span class="atnum">9 位 · 观看≥2w</span></div>
+        <div class="atdesc">单月观看 2w–6.6w，是 7.10 上线引爆的主力。以<b>抽奖代抽</b>为核心，大R云抽、欧皇围观直接承接付费转化。</div>
+        <div class="atnames">倒爺(6.6w) · 小桥流水人家(5.9w) · 琳琳(5.3w) · 开心每一天(3.4w) · <b>点点头(3.1w)</b> · 安颜(3.1w) · <b>兜兜熊(3.0w)</b> · 沈玖nn(2.6w) · 湫Two兔(2.0w)</div>
+      </div>
+      <div class="atier a">
+        <div class="ath"><span class="atlv">A</span><span class="attl">腰部渗透层</span><span class="atnum">12 位 · 5k–2w</span></div>
+        <div class="atdesc">观看 5k–2w，覆盖<b>攻略讲解 / 情感陪伴 / 剧情人设</b>多元风格，做内容消费与氛围渗透，拉长停留。</div>
+        <div class="atnames">付总代抽(1.9w) · <b>秋揪·攻略(1.4w)</b> · <b>Aiden·情感(1.2w)</b> · 做个俗人(1.1w) · 初玖·代抽(0.9w) · 多喜 · <b>神经蛙·剧情(0.7w)</b> · 阿布大大 · 阿别 · <b>倩·点唱(0.5w)</b> · 约定 · -灵</div>
+      </div>
+      <div class="atier b">
+        <div class="ath"><span class="atlv">B</span><span class="attl">基础带量层</span><span class="atnum">17 位 · <5k</span></div>
+        <div class="atdesc">观看 &lt;5k，<b>竞技音游 / 日常陪玩</b>为主，是日常稳定开播的内容量底座，配合切片反哺生态。</div>
+        <div class="atnames">Yz · 蕙忆 · <b>音游小司机·音游</b> · 嗔纾 · 白茶清欢 · 鬼公子 · 北槐 · 闵渊 · 腿长一米八 · <b>别cue我·音游</b> · 柏湮 · 大迷糊 · 野娃 · 野梓 · 稻城亚丁 · 厉偌熙 · 沐白</div>
+      </div>
+    </div>
+
+    <!-- 5类风格主题×节奏 -->
+    <h3 style="font-family:var(--serif);color:var(--moon);font-size:18px;margin:8px 0 4px">🎬 5 类风格 · 至尊主题规划 × 上线节奏</h3>
+    <p class="sec-sub" style="margin-bottom:14px">按真实直播内容归类，逐风格给至尊系列主题与对齐 7.10 的排播节奏。</p>
+    <div class="atheme">
+      <div class="athcard">
+        <div class="tht">🎰 抽奖代抽 <span style="font-size:11px;color:var(--txt-dim);font-weight:400">14 位 · 收入主引擎</span></div>
+        <div class="thmeta">倒爺 / 琳琳 / 点点头 / 兜兜熊 / 安颜 / 付总代抽 / 初玖 / 秋揪…</div>
+        <div class="thd"><b>至尊主题：</b>至尊九尾狐奖池开箱专场、圆梦帮抽、欧皇手气王、黑卡/返场战绩 PK。承接"今年最顶特效人人皆抽"，把大R云抽做成围观爆点。</div>
+        <div class="thr"><b>节奏：</b>预热 7.1–9 每日"奖池预告+许愿"暖场 → <b>7.10–13 上线日连续 3 天至尊首抽专场</b>（黄金档 20:00–24:00）→ 渗透期日常开箱稳更 → 收口做月度欧皇盘点。</div>
+      </div>
+      <div class="athcard">
+        <div class="tht">📖 攻略讲解 <span style="font-size:11px;color:var(--txt-dim);font-weight:400">代表：秋揪</span></div>
+        <div class="thmeta">秋揪（稀世/奖池讲解，130 场/月，勤播标杆）</div>
+        <div class="thd"><b>至尊主题：</b>至尊奖池保底/概率拆解、礼包性价比、竞拍解锁链路直播讲解，"不懂可问"答疑承接付费决策。</div>
+        <div class="thr"><b>节奏：</b><b>7.10 前完成机制预讲专场</b> → 上线日做实时开箱+边抽边讲 → 渗透期每周固定 2 场答疑攻略。</div>
+      </div>
+      <div class="athcard">
+        <div class="tht">💞 点唱情感 <span style="font-size:11px;color:var(--txt-dim);font-weight:400">代表：倩 / Aiden</span></div>
+        <div class="thmeta">倩（捏脸营业+听歌，峰值157）· Aiden（点歌灯牌+情感陪伴）</div>
+        <div class="thd"><b>至尊主题：</b>狐神主题点歌房、CP 登船连麦、名利场氛围陪伴，把至尊套装作为"贵气人设"展示道具，拉长停留与打赏。</div>
+        <div class="thr"><b>节奏：</b>预热期做狐神主题房预告 → <b>7.10 起夜档情感陪伴专场</b> → 渗透期常态化点歌房，周末加 CP 连麦。</div>
+      </div>
+      <div class="athcard">
+        <div class="tht">🎮 竞技音游 <span style="font-size:11px;color:var(--txt-dim);font-weight:400">3 位</span></div>
+        <div class="thmeta">音游小司机 / 别cue我 / 厉偌熙（巅峰排位+谱面）</div>
+        <div class="thd"><b>至尊主题：</b>穿至尊套装打巅峰排位"贵气出战"、新赛季冲分、谱面挑战，强化"最顶特效"在竞技场景的动态展示，覆盖硬核玩家。</div>
+        <div class="thr"><b>节奏：</b>上线日穿至尊套装首战巅峰 → 渗透期每周 2–3 场赛季冲分，剪高光切片反哺。</div>
+      </div>
+      <div class="athcard">
+        <div class="tht">🎭 剧情人设 <span style="font-size:11px;color:var(--txt-dim);font-weight:400">代表：神经蛙</span></div>
+        <div class="thmeta">神经蛙（"小趴菜·你的电子榨菜"人设鲜明）</div>
+        <div class="thd"><b>至尊主题：</b>欧非反差整活、"狐神显灵 vs 非酋"剧情直播，把至尊抽奖做成有梗的下饭内容，反哺短视频出圈。</div>
+        <div class="thr"><b>节奏：</b><b>7.10–13 主推整活首抽出圈</b> → 渗透期每周固定整活档，跑通后剪二创放量。</div>
+      </div>
+      <div class="athcard" style="border-left-color:var(--jade)">
+        <div class="tht" style="color:#3fcf8e">🌿 日常陪玩 <span style="font-size:11px;color:var(--txt-dim);font-weight:400">19 位 · 内容量底座</span></div>
+        <div class="thmeta">约定 / 嗔纾 / 白茶清欢 / 野娃 / 柏湮 / 多喜…（B级为主）</div>
+        <div class="thd"><b>至尊主题：</b>日常陪玩中穿插至尊套装上身展示、对暗号领钻、任务托管，承接泛玩家与回归号，做稳定开播底座。</div>
+        <div class="thr"><b>节奏：</b>全月稳定日更不断档 → 7.10 当天集中晒首抽/换装 → 配合话题挂载持续带量。</div>
+      </div>
+    </div>
+
+    <!-- 引爆策略 -->
+    <div class="acard" style="margin-top:20px">
+      <h4>⭐ 7.10 上线引爆 · S 级头部组合拳</h4>
+      <p style="font-size:13.5px;color:var(--txt);margin-bottom:12px">以 S 级抽奖代抽主播（倒爺/琳琳/点点头/兜兜熊/小桥流水人家）为核心引爆点，沉淀大量大R与围观粉丝，是至尊系列付费转化最关键的一层。</p>
+      <div class="atype">
+        <div class="row"><span class="tg" style="background:var(--fox)">7.10 当天</span><span class="rx">S 级集中开"至尊九尾狐首抽专场"，制造"全服首位船主"话题，黄金档错峰排播形成全天霸屏</span></div>
+        <div class="row"><span class="tg" style="background:var(--gold)">大R专场</span><span class="rx">倒爺/琳琳私域大R定向触达，圆梦帮抽 + 名利场炫耀，做高客单转化</span></div>
+        <div class="row"><span class="tg" style="background:var(--cyber)">切片二创</span><span class="rx">S/A 级直播高光（欧皇出货、至尊换装）剪成短视频反哺生态作者，放大单场声量</span></div>
+      </div>
+    </div>
+
+    <!-- 潜力标杆主播 定制深耕 -->
+    <h3 style="font-family:var(--serif);color:var(--moon);font-size:19px;margin:30px 0 4px">⭐ 潜力标杆主播 · 定制化人设深耕（3 位）</h3>
+    <p class="sec-sub" style="margin-bottom:8px">来自每周周报锁定的<b style="color:var(--gold-bright)">潜力标杆主播</b>，已持续 3 周稳定上榜，各自<b style="color:var(--gold-bright)">人设鲜明</b>。围绕真实人设 + PCU 波动短板做专属主题与排播，作为生态主播侧 7.10 引爆的"人设王牌"。</p>
+    <div class="potbanner">
+      <span class="pbt">🎙️ 3 位潜力主播 = 至尊系列"人设王牌"</span>
+      <span class="pbsrc">数据源：<b>生态主播周报 6.1–6.21（近三周）</b> 潜力标杆主播榜（含 PCU 趋势）</span>
+    </div>
+    <div class="potgrid">
+
+      <!-- 圣琳 -->
+      <div class="potcard anchorp">
+        <div class="pch"><span class="pcnm">QQ炫舞手游 圣琳</span><span class="pcbadge ks">快手</span><span class="pcbadge">粉 4.2w · 头部</span></div>
+        <div class="pcpersona">"搞笑抽奖不装腔的陪伴型炫舞搭子"</div>
+        <div class="pcstats">
+          <div class="st good"><b>4.2w</b><span>粉丝 最高</span></div>
+          <div class="st warn"><b>147–274</b><span>PCU 波动大</span></div>
+          <div class="st"><b>+36</b><span>周涨粉</span></div>
+        </div>
+        <div class="pcrow pr-do"><b>专属主题：</b>把"<span class="hl">陪伴型搭子</span>"做成至尊核心场——"陪你抽到至尊狐神"长陪伴抽奖专场，搞笑不装腔，承接其头部粉丝盘做付费转化。</div>
+        <div class="pcrow pr-fix"><b>要求稳PCU：</b>PCU 在 147–274 间剧烈波动，<span class="hl">固定开播时段 + 整点福利节点</span>（每整点一波帮抽/对暗号送钻），把峰值拉成稳定在线。</div>
+        <div class="pcrow pr-rhy"><b>节奏：</b>7.1–9 预告"全服首位船主"悬念 → <b>7.10 当天 S 级首抽专场扛旗</b>（黄金档 20:00–24:00）→ 渗透期每日固定陪伴档。</div>
+      </div>
+
+      <!-- 酥大宝 -->
+      <div class="potcard anchorp">
+        <div class="pch"><span class="pcnm">QQ炫舞手游—酥大宝</span><span class="pcbadge ks">快手</span><span class="pcbadge">粉 1.3w</span></div>
+        <div class="pcpersona">"搞笑逗比抽奖主播"</div>
+        <div class="pcstats">
+          <div class="st"><b>1.3w</b><span>粉丝</span></div>
+          <div class="st warn"><b>71–335</b><span>PCU 起伏剧烈</span></div>
+          <div class="st good"><b>+27</b><span>周涨粉 稳增</span></div>
+        </div>
+        <div class="pcrow pr-do"><b>专属主题：</b>主打"<span class="hl">逗比整活欧非反差</span>"——至尊抽奖现场玩"狐神显灵 vs 非酋"梗，把开箱做成下饭整活，强适合切片二创出圈。</div>
+        <div class="pcrow pr-fix"><b>要求稳PCU：</b>PCU 71→335 起伏最剧烈（高度依赖偶发爆点），<span class="hl">需固定整活脚本+预告海报</span>提前一天预热引流，降低对随机流量的依赖。</div>
+        <div class="pcrow pr-rhy"><b>节奏：</b>预热期发整活预告切片造势 → <b>7.10–13 至尊整活首抽专场</b> → 渗透期每周 2–3 场固定整活档，高光剪二创反哺生态。</div>
+      </div>
+
+      <!-- 劲歌喵总 -->
+      <div class="potcard anchorp">
+        <div class="pch"><span class="pcnm">𝑿𝒔.劲歌喵总</span><span class="pcbadge ks">快手</span><span class="pcbadge">粉 7.4k</span></div>
+        <div class="pcpersona">"炫舞陪伴式氛围感歌手"</div>
+        <div class="pcstats">
+          <div class="st"><b>7.4k</b><span>粉丝</span></div>
+          <div class="st warn"><b>21–36</b><span>PCU 偏低</span></div>
+          <div class="st"><b>差异化</b><span>唯一歌手</span></div>
+        </div>
+        <div class="pcrow pr-do"><b>专属主题：</b>差异化"<span class="hl">狐神主题点歌房</span>"——穿至尊套装做氛围感点唱，把至尊作为"贵气人设"展示道具，夜档情感陪伴拉长停留与打赏。</div>
+        <div class="pcrow pr-fix"><b>要求提PCU：</b>PCU 仅 21–36 为三人最低，<span class="hl">需外部引流补量</span>——与抽奖类主播连麦导流 + 短视频切高光歌切片挂播预约，把基础在线抬起来。</div>
+        <div class="pcrow pr-rhy"><b>节奏：</b>预热期发狐神主题房预约切片 → <b>7.10 起夜档（21:00 后）情感点歌专场</b> → 渗透期常态化点歌房，周末加 CP 连麦。</div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- 04 周节奏 -->
+  <section id="rhythm">
+    <div class="sec-head"><span class="sec-no">04</span><h2>每周节奏 · 以 7.10 上线为锚点</h2></div>
+    <div class="sec-sub">四阶段推进：预热蓄水 → 上线引爆 → 持续渗透 → 长尾收口。生态作者与主播按周排播，节奏前紧后稳。</div>
+
+    <div class="timeline">
+      <!-- W1 预热 -->
+      <div class="tnode">
+        <div class="dot"></div>
+        <div class="wk"><span class="w">PHASE 1</span><span class="phase">预热蓄水</span><span class="dt">7.1 – 7.9（上线前）</span></div>
+        <div class="wbox">
+          <div class="tgoal">🎯 目标：拉满期待，铺设话题，制造"狐神将至"悬念，为上线攒首批 UGC 弹药</div>
+          <div class="tgrid">
+            <div class="tcol"><b>生态作者</b><ul>
+              <li>赛道1 向狐神许愿先行，预埋 #炫舞狐神白白我</li>
+              <li>至尊套装美术爆料/捏脸预热（公式③）</li>
+              <li>旅拍季征集启动，泛玩家蓄水</li>
+            </ul></div>
+            <div class="tcol"><b>主播</b><ul>
+              <li>预告 7.10 上线，挂载倒计时</li>
+              <li>头部抽奖主播放风"全服首位船主"悬念</li>
+            </ul></div>
+          </div>
+        </div>
+      </div>
+      <!-- W2 引爆 -->
+      <div class="tnode fire">
+        <div class="dot"></div>
+        <div class="wk"><span class="w">PHASE 2</span><span class="phase">上线引爆 🔥</span><span class="dt">7.10 – 7.13（上线日起）</span></div>
+        <div class="wbox">
+          <div class="tgoal">🎯 目标：7.10 集中放量打出声量峰值，至尊首抽+名利场首秀刷屏，单日声量冲全月最高</div>
+          <div class="tgrid">
+            <div class="tcol"><b>生态作者</b><ul>
+              <li>四赛道全量铺开，赛道2晒欧+赛道4攻略主攻</li>
+              <li>名利场登船留影（赛道3）集中产出</li>
+              <li>整活短剧特别企划首发试爆</li>
+            </ul></div>
+            <div class="tcol"><b>主播</b><ul>
+              <li>头部主播 7.10 至尊首抽专场，全力引爆</li>
+              <li>抽奖类集中开播，直播切片反哺生态</li>
+              <li>"全服首位船主"话题落地</li>
+            </ul></div>
+          </div>
+        </div>
+      </div>
+      <!-- W3 渗透 -->
+      <div class="tnode">
+        <div class="dot"></div>
+        <div class="wk"><span class="w">PHASE 3</span><span class="phase">持续渗透</span><span class="dt">7.14 – 7.24</span></div>
+        <div class="wbox">
+          <div class="tgoal">🎯 目标：维持热度不滑坡，把声量转沉淀——付费渗透中活、扩列沉淀关注</div>
+          <div class="tgrid">
+            <div class="tcol"><b>生态作者</b><ul>
+              <li>T2 攻略/抽奖/捏脸主攻内容消费深度</li>
+              <li>星穿搭扩列（征集2）冲关注排名前100</li>
+              <li>爆款公式批量复用，跑通模板放量</li>
+            </ul></div>
+            <div class="tcol"><b>主播</b><ul>
+              <li>聊天/打歌类陪伴向稳住日常热度</li>
+              <li>名利场玩法解读，引导中活体验</li>
+            </ul></div>
+          </div>
+        </div>
+      </div>
+      <!-- W4 收口 -->
+      <div class="tnode">
+        <div class="dot"></div>
+        <div class="wk"><span class="w">PHASE 4</span><span class="phase">长尾收口</span><span class="dt">7.25 – 7.31</span></div>
+        <div class="wbox">
+          <div class="tgoal">🎯 目标：UGC 长尾带量+收口复盘，沉淀小狐狸图鉴梗，为下一波蓄能</div>
+          <div class="tgrid">
+            <div class="tcol"><b>生态作者</b><ul>
+              <li>小狐狸图鉴收集向/异色狐狸梗收尾</li>
+              <li>旅拍季优质内容二次分发，长尾带量</li>
+              <li>暑期攻略（征集3）补位承接搜索需求</li>
+            </ul></div>
+            <div class="tcol"><b>主播</b><ul>
+              <li>末轮抽奖冲刺，清尾大R转化</li>
+              <li>声量数据复盘，沉淀爆款主播打法</li>
+            </ul></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 05 KPI -->
+  <section id="kpi">
+    <div class="sec-head"><span class="sec-no">05</span><h2>KPI · 同比去年7月声量 +30%</h2></div>
+    <div class="sec-sub">基线为去年7月（2025.7.1–7.31）真实声量数据（UA / qqx5，发布口径）。聚焦整体 + 生态作者两部分，KOL 不计入。核心口径：内容篇数 / 互动量(赞+评+转) / 播放量。</div>
+
+    <div class="kpi-note">📌 <b>口径说明</b>：数据源 UA（qqx5）发布口径，渠道=抖音/快手/小红书。<b>小红书无播放量数据</b>（平台不开放），播放量仅统计抖音+快手。互动量 = 点赞+评论+转发。目标 = 去年同期 × 1.3。</div>
+
+    <!-- 整体 -->
+    <div class="kpi-block">
+      <div class="bt">🌐 整体声量目标 <span class="tag" style="background:rgba(231,200,120,.15);color:var(--gold)">全平台内容生态</span></div>
+      <div class="bsub">去年7月整体基线：内容 37,692 篇 · 互动 659万 · 播放 1.84亿（抖+快）</div>
+      <table class="ktable">
+        <thead><tr><th>平台 / 指标</th><th>去年7月基线</th><th>今年目标 (+30%)</th><th>同比</th></tr></thead>
+        <tbody>
+          <tr><td class="plat"><span class="pdot" style="background:#ff3d6e"></span>抖音 · 内容篇数</td><td class="base">10,525</td><td class="goal">13,683</td><td class="up">↑ +30%</td></tr>
+          <tr><td class="plat"><span class="pdot" style="background:#ff3d6e"></span>抖音 · 互动量</td><td class="base">3,789,034</td><td class="goal">4,925,744</td><td class="up">↑ +30%</td></tr>
+          <tr><td class="plat"><span class="pdot" style="background:#ff3d6e"></span>抖音 · 播放量</td><td class="base">92,195,558</td><td class="goal">119,854,225</td><td class="up">↑ +30%</td></tr>
+          <tr><td class="plat"><span class="pdot" style="background:#ff8c42"></span>快手 · 内容篇数</td><td class="base">10,122</td><td class="goal">13,159</td><td class="up">↑ +30%</td></tr>
+          <tr><td class="plat"><span class="pdot" style="background:#ff8c42"></span>快手 · 互动量</td><td class="base">1,516,372</td><td class="goal">1,971,284</td><td class="up">↑ +30%</td></tr>
+          <tr><td class="plat"><span class="pdot" style="background:#ff8c42"></span>快手 · 播放量</td><td class="base">91,752,564</td><td class="goal">119,278,333</td><td class="up">↑ +30%</td></tr>
+          <tr><td class="plat"><span class="pdot" style="background:#ff2e4d"></span>小红书 · 内容篇数</td><td class="base">17,045</td><td class="goal">22,159</td><td class="up">↑ +30%</td></tr>
+          <tr><td class="plat"><span class="pdot" style="background:#ff2e4d"></span>小红书 · 互动量</td><td class="base">1,285,890</td><td class="goal">1,671,657</td><td class="up">↑ +30%</td></tr>
+          <tr><td class="plat"><span class="pdot" style="background:#ff2e4d"></span>小红书 · 播放量</td><td class="base na">N/A</td><td class="goal na">N/A</td><td><span class="na">平台不开放</span></td></tr>
+          <tr class="total"><td class="plat">三平台合计 · 内容篇数</td><td class="base">37,692</td><td class="goal">48,999</td><td class="up">↑ +30%</td></tr>
+          <tr class="total"><td class="plat">三平台合计 · 互动量</td><td class="base">6,591,296</td><td class="goal">8,568,685</td><td class="up">↑ +30%</td></tr>
+          <tr class="total"><td class="plat">抖+快合计 · 播放量</td><td class="base">183,948,122</td><td class="goal">239,132,559</td><td class="up">↑ +30%</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- 生态作者 -->
+    <div class="kpi-block">
+      <div class="bt">🌱 生态作者声量目标</div>
+      <div class="bsub">去年7月生态作者基线：内容 5,222 篇 · 互动 182万 · 播放 7,160万（抖+快） · 当前生态作者 309 位</div>
+      <table class="ktable">
+        <thead><tr><th>平台 / 指标</th><th>去年7月基线</th><th>今年目标 (+30%)</th><th>同比</th></tr></thead>
+        <tbody>
+          <tr><td class="plat"><span class="pdot" style="background:#ff3d6e"></span>抖音 · 内容篇数</td><td class="base">2,208</td><td class="goal">2,870</td><td class="up">↑ +30%</td></tr>
+          <tr><td class="plat"><span class="pdot" style="background:#ff3d6e"></span>抖音 · 互动量</td><td class="base">690,404</td><td class="goal">897,525</td><td class="up">↑ +30%</td></tr>
+          <tr><td class="plat"><span class="pdot" style="background:#ff3d6e"></span>抖音 · 播放量</td><td class="base">22,635,566</td><td class="goal">29,426,236</td><td class="up">↑ +30%</td></tr>
+          <tr><td class="plat"><span class="pdot" style="background:#ff8c42"></span>快手 · 内容篇数</td><td class="base">1,806</td><td class="goal">2,348</td><td class="up">↑ +30%</td></tr>
+          <tr><td class="plat"><span class="pdot" style="background:#ff8c42"></span>快手 · 互动量</td><td class="base">819,866</td><td class="goal">1,065,826</td><td class="up">↑ +30%</td></tr>
+          <tr><td class="plat"><span class="pdot" style="background:#ff8c42"></span>快手 · 播放量</td><td class="base">48,960,688</td><td class="goal">63,648,894</td><td class="up">↑ +30%</td></tr>
+          <tr><td class="plat"><span class="pdot" style="background:#ff2e4d"></span>小红书 · 内容篇数</td><td class="base">1,208</td><td class="goal">1,570</td><td class="up">↑ +30%</td></tr>
+          <tr><td class="plat"><span class="pdot" style="background:#ff2e4d"></span>小红书 · 互动量</td><td class="base">309,266</td><td class="goal">402,046</td><td class="up">↑ +30%</td></tr>
+          <tr><td class="plat"><span class="pdot" style="background:#ff2e4d"></span>小红书 · 播放量</td><td class="base na">N/A</td><td class="goal na">N/A</td><td><span class="na">平台不开放</span></td></tr>
+          <tr class="total"><td class="plat">三平台合计 · 内容篇数</td><td class="base">5,222</td><td class="goal">6,789</td><td class="up">↑ +30%</td></tr>
+          <tr class="total"><td class="plat">三平台合计 · 互动量</td><td class="base">1,819,536</td><td class="goal">2,365,397</td><td class="up">↑ +30%</td></tr>
+          <tr class="total"><td class="plat">抖+快合计 · 播放量</td><td class="base">71,596,254</td><td class="goal">93,075,130</td><td class="up">↑ +30%</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <div class="foot">
+    <div class="fl">🦊 至尊系列「九尾狐神」· 全场最贵 · 唯一焦点</div>
+    QQ炫舞手游 7月内容宣发方案 · 以 7.10 至尊上线为节奏锚点 · 声量目标同比去年7月 +30%<br>
+    数据来源：UA（qqx5）发布口径 · 基线周期 2025.07.01–07.31 · 编制于 2026.06.26
+  </div>
+
+</div>
+
+<script>
+// 进入视口淡入
+const io=new IntersectionObserver((es)=>{es.forEach(e=>{if(e.isIntersecting){e.target.style.opacity=1;e.target.style.transform='none';io.unobserve(e.target)}})},{threshold:.08});
+document.querySelectorAll('section, .tier, .lane, .pool, .fm, .tnode, .kpi-block').forEach((el,i)=>{
+  el.style.opacity=0;el.style.transform='translateY(26px)';el.style.transition='opacity .7s cubic-bezier(.2,.7,.2,1), transform .7s cubic-bezier(.2,.7,.2,1)';
+  io.observe(el);
+});
+// 逐人卡折叠展开
+function tog(btn){
+  const block=btn.closest('.styleblock');
+  const hidden=block.querySelectorAll('.hideable');
+  const open=btn.dataset.open==='1';
+  hidden.forEach(c=>{c.style.display=open?'none':'flex'});
+  btn.dataset.open=open?'0':'1';
+  btn.textContent=open?btn.textContent.replace('收起','展开').replace('▴','▾'):btn.textContent.replace('展开','收起').replace('▾','▴');
+}
+</script>
+</body>
+</html>
