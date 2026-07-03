@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>炫舞手游 · 周维度舆情作战室</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;900&family=Noto+Sans+SC:wght@300;400;500;700&family=Archivo+Black&display=swap" rel="stylesheet" />
+<style>
+:root{
+  --ink:#1c1a17; --ink2:#2a2621; --panel:#211d18; --card:#26221c;
+  --paper:#f4ede0; --paper2:#e9dfcc;
+  --line:rgba(244,237,224,.10); --line2:rgba(244,237,224,.18);
+  --muted:#9c9184; --sub:#b9ad9c;
+  --gold:#d4a24e; --rust:#e8734a;
+  --up:#e2504e;    /* 负向/上升 —— 红(中国习惯) */
+  --down:#4fa06f;  /* 正向 —— 绿 */
+  --p0:#e2504e; --p1:#d4a24e; --p2:#7f9ab0;
+  --m-activity:#e8734a; --m-ip:#d4a24e; --m-biz:#c25b6e; --m-system:#5b8fa8; --m-other:#8a8577;
+  --shadow:0 18px 50px -22px rgba(0,0,0,.7);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{
+  font-family:"Noto Sans SC",sans-serif;
+  background:
+    radial-gradient(1200px 600px at 88% -8%, rgba(212,162,78,.10), transparent 60%),
+    radial-gradient(900px 500px at 5% 100%, rgba(232,115,74,.08), transparent 55%),
+    var(--ink);
+  color:var(--paper); line-height:1.6; -webkit-font-smoothing:antialiased;
+  min-height:100vh;
+}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:0;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='140' height='140'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.03'/%3E%3C/svg%3E");
+  mix-blend-mode:overlay;opacity:.6}
+.wrap{max-width:1180px;margin:0 auto;padding:0 26px;position:relative;z-index:1}
+
+/* ---------- Header ---------- */
+header{padding:46px 0 26px;border-bottom:1px solid var(--line2);position:relative}
+.eyebrow{display:flex;align-items:center;gap:12px;color:var(--gold);
+  font-size:12.5px;letter-spacing:.42em;text-transform:uppercase;font-weight:700}
+.eyebrow .dot{width:7px;height:7px;border-radius:50%;background:var(--rust);box-shadow:0 0 0 4px rgba(232,115,74,.18)}
+h1{font-family:"Noto Serif SC",serif;font-weight:900;font-size:clamp(34px,5.4vw,60px);
+  line-height:1.02;margin:16px 0 6px;letter-spacing:-.01em}
+h1 .accent{color:var(--gold);position:relative}
+.subline{color:var(--sub);font-size:15px;max-width:720px}
+.meta-row{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:20px;font-size:13.5px;color:var(--muted)}
+.meta-row b{color:var(--paper);font-weight:600}
+.baseline-tag{display:inline-flex;align-items:center;gap:7px;padding:5px 13px;border:1px dashed var(--gold);
+  border-radius:30px;color:var(--gold);font-size:12px;font-weight:600;letter-spacing:.04em}
+
+/* ---------- Toolbar ---------- */
+.toolbar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:26px 0 8px;
+  padding:14px 16px;background:linear-gradient(180deg,var(--panel),rgba(33,29,24,.6));
+  border:1px solid var(--line);border-radius:16px}
+.btn{font-family:inherit;cursor:pointer;border:1px solid var(--line2);background:transparent;color:var(--paper);
+  padding:9px 16px;border-radius:10px;font-size:13px;font-weight:500;display:inline-flex;align-items:center;gap:8px;
+  transition:.18s}
+.btn:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-1px)}
+.btn.primary{background:var(--gold);color:#1c1712;border-color:var(--gold);font-weight:700}
+.btn.primary:hover{background:#e0b264;color:#1c1712}
+.btn svg{width:15px;height:15px}
+.tb-spacer{flex:1}
+.import-note{font-size:12px;color:var(--muted);max-width:280px;line-height:1.4}
+
+/* ---------- Stats ---------- */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;margin:24px 0 8px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 18px 16px;position:relative;overflow:hidden}
+.stat .lab{font-size:12px;color:var(--muted);letter-spacing:.06em;font-weight:500}
+.stat .val{font-family:"Noto Serif SC",serif;font-weight:900;font-size:38px;line-height:1;margin-top:8px}
+.stat .foot{font-size:11.5px;color:var(--sub);margin-top:7px}
+.stat.neg .val{color:var(--up)} .stat.pos .val{color:var(--down)}
+.senti-bar{height:8px;border-radius:6px;overflow:hidden;display:flex;margin-top:10px;border:1px solid var(--line)}
+.senti-bar i{display:block;height:100%}
+
+/* ---------- Filters ---------- */
+.filters{display:flex;flex-wrap:wrap;gap:10px;margin:22px 0 6px;align-items:center}
+.fgroup{display:flex;gap:7px;flex-wrap:wrap}
+.chip{cursor:pointer;user-select:none;font-size:13px;font-weight:500;padding:8px 15px;border-radius:30px;
+  border:1px solid var(--line2);color:var(--sub);background:rgba(255,255,255,.015);transition:.16s;position:relative}
+.chip:hover{color:var(--paper);border-color:var(--line2)}
+.chip.on{color:#1c1712;font-weight:700}
+.chip .cnt{opacity:.7;font-size:11px;margin-left:5px}
+.chip.mod.on{border-color:transparent}
+.flabel{font-size:11.5px;color:var(--muted);letter-spacing:.14em;text-transform:uppercase;margin-right:2px;font-weight:600}
+
+/* ---------- Module section ---------- */
+.modsec{margin:34px 0}
+.modhead{display:flex;align-items:center;gap:14px;margin:0 0 18px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+.modhead .bar{width:5px;height:30px;border-radius:4px}
+.modhead h2{font-family:"Noto Serif SC",serif;font-weight:900;font-size:24px;letter-spacing:.01em}
+.modhead .mdesc{font-size:12.5px;color:var(--muted);flex:1}
+.modhead .mcount{font-size:12px;color:var(--sub);font-weight:600;white-space:nowrap}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:16px}
+
+/* ---------- Issue card ---------- */
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px 18px 16px;
+  position:relative;transition:.2s;display:flex;flex-direction:column;overflow:hidden}
+.card:hover{transform:translateY(-3px);box-shadow:var(--shadow);border-color:var(--line2)}
+.card::before{content:"";position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--gold)}
+.card.mod-activity::before{background:var(--m-activity)} .card.mod-ip::before{background:var(--m-ip)}
+.card.mod-biz::before{background:var(--m-biz)} .card.mod-system::before{background:var(--m-system)}
+.card.mod-other::before{background:var(--m-other)}
+.card-top{display:flex;align-items:flex-start;gap:9px;flex-wrap:wrap;margin-bottom:10px}
+.pri{font-size:11px;font-weight:800;letter-spacing:.04em;padding:3px 9px;border-radius:6px;color:#160f08}
+.pri.P0{background:var(--p0)} .pri.P1{background:var(--p1)} .pri.P2{background:var(--p2);color:#101a22}
+.src{font-size:10.5px;font-weight:600;padding:3px 8px;border-radius:6px;border:1px solid var(--line2);color:var(--sub)}
+.src.评论区{border-color:rgba(91,143,168,.5);color:#9dc3d6}
+.src.生态作者{border-color:rgba(212,162,78,.5);color:var(--gold)}
+.senti-tag{font-size:10.5px;font-weight:700;padding:3px 8px;border-radius:6px;margin-left:auto}
+.senti-tag.负{background:rgba(226,80,78,.16);color:#f08a88} .senti-tag.正{background:rgba(79,160,111,.16);color:#7bd0a0}
+.senti-tag.中{background:rgba(160,150,135,.16);color:#c7bcaa}
+.card h3{font-family:"Noto Serif SC",serif;font-weight:600;font-size:17px;line-height:1.35;margin-bottom:9px}
+.card .sum{font-size:13px;color:var(--sub);line-height:1.62;margin-bottom:12px}
+.quotes{border-left:2px solid var(--line2);padding-left:11px;margin-bottom:12px;display:flex;flex-direction:column;gap:5px}
+.quotes .q{font-size:12px;color:var(--muted);font-style:italic;position:relative}
+.quotes .q::before{content:"“";color:var(--gold);font-family:"Noto Serif SC",serif;font-weight:900;margin-right:1px}
+.action{font-size:12px;color:var(--paper);background:rgba(212,162,78,.07);border:1px solid rgba(212,162,78,.18);
+  border-radius:9px;padding:9px 11px;margin-bottom:13px;line-height:1.55}
+.action b{color:var(--gold);font-weight:700}
+.card-foot{margin-top:auto;display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding-top:12px;border-top:1px solid var(--line)}
+.mentions{font-size:11.5px;color:var(--muted);display:flex;align-items:center;gap:5px}
+.mentions b{color:var(--paper);font-family:"Noto Serif SC",serif;font-size:15px;font-weight:900}
+.statebtns{display:flex;gap:5px;margin-left:auto;flex-wrap:wrap}
+.sbtn{cursor:pointer;font-size:11px;font-weight:600;padding:5px 10px;border-radius:8px;border:1px solid var(--line2);
+  background:transparent;color:var(--sub);transition:.14s;font-family:inherit}
+.sbtn:hover{color:var(--paper);border-color:var(--paper)}
+.sbtn.active[data-state="ignore"]{background:#5a5348;color:#fff;border-color:#5a5348}
+.sbtn.active[data-state="resolved"]{background:var(--down);color:#0e1a12;border-color:var(--down)}
+.sbtn.active[data-state="watching"]{background:var(--gold);color:#1c1712;border-color:var(--gold)}
+
+/* card status visual */
+.card.st-ignore{opacity:.62}
+.card.st-ignore h3{text-decoration:line-through;text-decoration-color:var(--muted)}
+.card.st-resolved::before{background:var(--down)!important}
+.card.st-resolved{opacity:.8}
+
+/* regression badges */
+.rbadges{position:absolute;top:14px;right:14px;display:flex;flex-direction:column;gap:6px;align-items:flex-end;z-index:2}
+.rbadge{font-size:10.5px;font-weight:800;letter-spacing:.03em;padding:4px 10px;border-radius:20px;
+  display:inline-flex;align-items:center;gap:5px;box-shadow:0 4px 14px -4px rgba(0,0,0,.6);white-space:nowrap}
+.rbadge.recurring{background:linear-gradient(90deg,#e8734a,#d4a24e);color:#1c1712}
+.rbadge.reopened{background:linear-gradient(90deg,#e2504e,#c02c2a);color:#fff;animation:pulse 1.8s infinite}
+.rbadge.new{background:rgba(91,143,168,.22);color:#a9cfe0;border:1px solid rgba(91,143,168,.4)}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(226,80,78,.5)}50%{box-shadow:0 0 0 7px rgba(226,80,78,0)}}
+.card.has-reopened{border-color:rgba(226,80,78,.55)}
+.card.has-recurring{border-color:rgba(232,115,74,.45)}
+
+/* alert strip */
+.alert{display:none;margin:22px 0 4px;padding:16px 18px;border-radius:14px;
+  background:linear-gradient(90deg,rgba(226,80,78,.16),rgba(232,115,74,.10));border:1px solid rgba(226,80,78,.4)}
+.alert.show{display:block;animation:slideIn .4s ease}
+@keyframes slideIn{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+.alert h4{font-size:14px;color:#f3a09e;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.alert ul{list-style:none;display:flex;flex-wrap:wrap;gap:8px}
+.alert li{font-size:12px;padding:5px 11px;border-radius:8px;background:rgba(0,0,0,.25);border:1px solid var(--line2);cursor:pointer}
+.alert li:hover{border-color:var(--paper)}
+.alert li .k{font-weight:700;color:var(--rust);margin-right:6px}
+
+.empty{grid-column:1/-1;text-align:center;padding:40px;color:var(--muted);font-size:14px;border:1px dashed var(--line2);border-radius:14px}
+
+footer{margin:50px 0 40px;padding-top:22px;border-top:1px solid var(--line);color:var(--muted);font-size:12.5px;line-height:1.7}
+footer b{color:var(--sub)}
+.legend{display:flex;flex-wrap:wrap;gap:14px;margin-bottom:14px}
+.legend span{display:inline-flex;align-items:center;gap:6px;font-size:12px;color:var(--sub)}
+.legend i{width:11px;height:11px;border-radius:3px;display:inline-block}
+
+.toast{position:fixed;bottom:26px;left:50%;transform:translateX(-50%) translateY(20px);opacity:0;
+  background:var(--gold);color:#1c1712;font-weight:700;font-size:13px;padding:11px 20px;border-radius:10px;
+  box-shadow:var(--shadow);z-index:99;transition:.3s;pointer-events:none}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+@media(max-width:600px){.grid{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}h1{font-size:34px}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header>
+    <div class="eyebrow"><span class="dot"></span> QQ 炫舞手游 · 周维度舆情作战室</div>
+    <h1>玩家<span class="accent">舆情</span>周报 <span style="font-size:.42em;color:var(--muted);font-weight:400;font-family:'Noto Sans SC'">MODULE OPS BOARD</span></h1>
+    <p class="subline">融合「UA 内容评论区」与「生态作者集中反馈」双数据源，按模块 × 优先级归纳，供各模块认领问题、标注处置，并在下周基于本报告做回归对比。</p>
+    <div class="meta-row">
+      <span>统计周期 <b id="m-range"></b></span>
+      <span>生成日期 <b id="m-date"></b></span>
+      <span>问题条目 <b id="m-total"></b> 项</span>
+      <span class="baseline-tag" id="m-baseline">📌 本周为基线周（首次试跑）</span>
+    </div>
+  </header>
+
+  <!-- Toolbar -->
+  <div class="toolbar">
+    <button class="btn primary" id="exportBtn" title="导出本周处置状态，作为下周回归基线">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>
+      导出本周快照
+    </button>
+    <label class="btn" for="importFile" title="导入上周导出的快照，自动比对复现问题">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15V3m0 0l-4 4m4-4l4 4M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>
+      导入上周快照回归
+    </label>
+    <input type="file" id="importFile" accept=".json" hidden />
+    <span class="import-note" id="regInfo">尚未导入上周快照。导入后将自动标记：二次出现 · 标注不处理又复现。</span>
+    <span class="tb-spacer"></span>
+    <button class="btn" id="resetBtn">重置本周标注</button>
+    <button class="btn" id="printBtn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V3h12v6M6 18H4a2 2 0 01-2-2v-4a2 2 0 012-2h16a2 2 0 012 2v4a2 2 0 01-2 2h-2M6 14h12v7H6z"/></svg>
+      打印 / PDF
+    </button>
+  </div>
+
+  <!-- Stats -->
+  <div class="stats" id="stats"></div>
+
+  <!-- Regression alert -->
+  <div class="alert" id="alert">
+    <h4>⚠️ 回归预警 — 以下问题在本周复现，需重点关注</h4>
+    <ul id="alertList"></ul>
+  </div>
+
+  <!-- Filters -->
+  <div class="filters">
+    <span class="flabel">模块</span>
+    <div class="fgroup" id="modFilters"></div>
+  </div>
+  <div class="filters">
+    <span class="flabel">优先级</span>
+    <div class="fgroup" id="priFilters"></div>
+    <span class="flabel" style="margin-left:14px">状态</span>
+    <div class="fgroup" id="stateFilters"></div>
+  </div>
+
+  <!-- Issues -->
+  <div id="board"></div>
+
+  <footer>
+    <div class="legend">
+      <span><i style="background:var(--m-biz)"></i>商业化</span>
+      <span><i style="background:var(--m-activity)"></i>活跃活动</span>
+      <span><i style="background:var(--m-ip)"></i>市场IP</span>
+      <span><i style="background:var(--m-system)"></i>本地化(系统玩法)</span>
+      <span><i style="background:var(--m-other)"></i>其他</span>
+      <span><i style="background:var(--up)"></i>P0 高</span>
+      <span><i style="background:var(--gold)"></i>P1 中</span>
+      <span><i style="background:var(--p2)"></i>P2 低</span>
+    </div>
+    <p><b>数据来源</b>：① UA 内容评论区（小红书/抖音/快手，2026.06.22–06.28，293 条，负向 147 / 正向 146，情感由算法标注，含大量“礼申/收/占卜”抽奖打卡类互动噪声，已剔除后提炼有效信号）；② 生态作者集中反馈 Excel（供应商整理，含签约与直播作者集中意见）。</p>
+    <p style="margin-top:8px"><b>使用说明</b>：各模块可在卡片上标注「处理中(默认) / 不处理 / 已解决 / 观察中」，标注实时保存在本地浏览器。周末点「导出本周快照」得到 JSON；下周打开新报告后「导入上周快照」，系统自动标记 <span style="color:var(--rust);font-weight:700">二次出现</span> 与 <span style="color:#e2504e;font-weight:700">不处理又复现</span> 的问题。红色代表负向/上升（遵循国内习惯）。</p>
+    <p style="margin-top:8px;color:var(--muted)">⚠️ 情感与部分提及量为算法/人工近似估计，仅供优先级参考，非精确统计。</p>
+  </footer>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script src="data.js"></script>
+<script>
+const LS_KEY = "qqx5_yuqing_state_v1";
+const STATES = [
+  {k:"open",     t:"处理中"},
+  {k:"watching", t:"观察中"},
+  {k:"ignore",   t:"不处理"},
+  {k:"resolved", t:"已解决"}
+];
+const MOD_MAP = Object.fromEntries(MODULES.map(m=>[m.key,m]));
+let state = loadState();          // { issueId: "open|ignore|resolved|watching" }
+let lastWeek = null;              // imported snapshot
+let filter = { mod:"all", pri:"all", st:"all" };
+
+function loadState(){ try{return JSON.parse(localStorage.getItem(LS_KEY))||{}}catch(e){return {}} }
+function saveState(){ localStorage.setItem(LS_KEY, JSON.stringify(state)); }
+function getState(id){ return state[id] || "open"; }
+
+/* ---------- meta ---------- */
+document.getElementById("m-range").textContent = WEEK_META.range;
+document.getElementById("m-date").textContent  = WEEK_META.generatedAt;
+document.getElementById("m-total").textContent = ISSUES.length;
+if(!WEEK_META.isBaseline) document.getElementById("m-baseline").style.display="none";
+
+/* ---------- stats ---------- */
+function renderStats(){
+  const s = WEEK_META.sentiment;
+  const p0 = ISSUES.filter(i=>i.priority==="P0").length;
+  const authorIssues = ISSUES.filter(i=>i.sources.includes("生态作者")).length;
+  const negPct = Math.round(s.neg/s.total*100);
+  document.getElementById("stats").innerHTML = `
+    <div class="stat"><div class="lab">问题总数</div><div class="val">${ISSUES.length}</div><div class="foot">覆盖 5 大模块</div></div>
+    <div class="stat"><div class="lab">P0 高优先级</div><div class="val" style="color:var(--up)">${p0}</div><div class="foot">需本周优先推进</div></div>
+    <div class="stat neg"><div class="lab">评论区负向占比</div><div class="val">${negPct}%</div>
+      <div class="senti-bar"><i style="width:${negPct}%;background:var(--up)"></i><i style="width:${100-negPct}%;background:var(--down)"></i></div>
+      <div class="foot">负向 ${s.neg} · 正向 ${s.pos}（共 ${s.total} 条）</div></div>
+    <div class="stat"><div class="lab">生态作者相关</div><div class="val" style="color:var(--gold)">${authorIssues}</div><div class="foot">含作者集中诉求</div></div>`;
+}
+
+/* ---------- filters ---------- */
+function renderFilters(){
+  const modBox=document.getElementById("modFilters");
+  const allc=ISSUES.length;
+  modBox.innerHTML = `<span class="chip mod ${filter.mod==='all'?'on':''}" data-t="mod" data-v="all"
+      style="${filter.mod==='all'?'background:var(--paper);color:#1c1712':''}">全部<span class="cnt">${allc}</span></span>`
+    + MODULES.map(m=>{
+      const c=ISSUES.filter(i=>i.module===m.key).length;
+      const on=filter.mod===m.key;
+      return `<span class="chip mod ${on?'on':''}" data-t="mod" data-v="${m.key}"
+        style="${on?`background:${m.color};color:#1c1712`:`border-color:${m.color}55;color:${m.color}`}">${m.name}<span class="cnt">${c}</span></span>`;
+    }).join("");
+
+  const priBox=document.getElementById("priFilters");
+  const pris=[["all","全部"],["P0","P0 高"],["P1","P1 中"],["P2","P2 低"]];
+  priBox.innerHTML=pris.map(([v,t])=>{
+    const on=filter.pri===v;
+    const c=v==="all"?ISSUES.length:ISSUES.filter(i=>i.priority===v).length;
+    let bg="var(--paper)";if(v==="P0")bg="var(--p0)";if(v==="P1")bg="var(--p1)";if(v==="P2")bg="var(--p2)";
+    return `<span class="chip ${on?'on':''}" data-t="pri" data-v="${v}" style="${on?`background:${bg};color:#1c1712`:''}">${t}<span class="cnt">${c}</span></span>`;
+  }).join("");
+
+  const stBox=document.getElementById("stateFilters");
+  const sts=[["all","全部"],["open","处理中"],["watching","观察中"],["ignore","不处理"],["resolved","已解决"]];
+  stBox.innerHTML=sts.map(([v,t])=>{
+    const on=filter.st===v;
+    const c=v==="all"?ISSUES.length:ISSUES.filter(i=>getState(i.id)===v).length;
+    return `<span class="chip ${on?'on':''}" data-t="st" data-v="${v}" style="${on?'background:var(--paper);color:#1c1712':''}">${t}<span class="cnt">${c}</span></span>`;
+  }).join("");
+
+  document.querySelectorAll(".chip").forEach(ch=>ch.onclick=()=>{
+    const t=ch.dataset.t,v=ch.dataset.v;
+    if(t==="mod")filter.mod=v; if(t==="pri")filter.pri=v; if(t==="st")filter.st=v;
+    renderFilters(); renderBoard();
+  });
+}
+
+/* ---------- regression logic ---------- */
+// recurring: 问题上周存在(任意状态) 且 本周仍在 → 二次出现
+// reopened : 上周被标注为 ignore(不处理) → 本周复现 → 不处理又复现(最高警示)
+function regressionOf(id){
+  if(!lastWeek) return null;
+  const prev = lastWeek.state ? lastWeek.state[id] : undefined;
+  const existedPrev = lastWeek.ids && lastWeek.ids.includes(id);
+  if(!existedPrev) return "new";
+  if(prev==="ignore") return "reopened";
+  if(prev==="resolved") return "reopened"; // 已标记解决却又出现,同样警示
+  return "recurring";
+}
+
+/* ---------- board ---------- */
+function match(i){
+  if(filter.mod!=="all"&&i.module!==filter.mod)return false;
+  if(filter.pri!=="all"&&i.priority!==filter.pri)return false;
+  if(filter.st!=="all"&&getState(i.id)!==filter.st)return false;
+  return true;
+}
+function priRank(p){return p==="P0"?0:p==="P1"?1:2}
+
+function renderBoard(){
+  const board=document.getElementById("board");
+  const mods = filter.mod==="all" ? MODULES : MODULES.filter(m=>m.key===filter.mod);
+  let html="";
+  let anyShown=false;
+  mods.forEach(m=>{
+    let items=ISSUES.filter(i=>i.module===m.key&&match(i));
+    if(!items.length) return;
+    items.sort((a,b)=>{
+      // reopened first, then priority, then mentions
+      const ra=regressionOf(a.id)==="reopened"?0:1, rb=regressionOf(b.id)==="reopened"?0:1;
+      if(ra!==rb)return ra-rb;
+      if(priRank(a.priority)!==priRank(b.priority))return priRank(a.priority)-priRank(b.priority);
+      return b.mentions-a.mentions;
+    });
+    anyShown=true;
+    html+=`<section class="modsec">
+      <div class="modhead"><div class="bar" style="background:${m.color}"></div>
+        <h2>${m.name}</h2><span class="mdesc">${m.desc}</span>
+        <span class="mcount">${items.length} 项 · P0 ${items.filter(i=>i.priority==='P0').length}</span></div>
+      <div class="grid">${items.map(cardHtml).join("")}</div></section>`;
+  });
+  if(!anyShown) html=`<div class="grid"><div class="empty">当前筛选条件下没有匹配的问题。</div></div>`;
+  board.innerHTML=html;
+  bindCards();
+}
+
+function cardHtml(i){
+  const st=getState(i.id);
+  const reg=regressionOf(i.id);
+  let regBadge="",cardReg="";
+  if(reg==="reopened"){regBadge=`<span class="rbadge reopened">● 不处理又复现</span>`;cardReg="has-reopened";}
+  else if(reg==="recurring"){regBadge=`<span class="rbadge recurring">↻ 二次出现</span>`;cardReg="has-recurring";}
+  else if(reg==="new"){regBadge=`<span class="rbadge new">✦ 本周新增</span>`;}
+  const srcTags=i.sources.map(s=>`<span class="src ${s}">${s}</span>`).join("");
+  const quotes=i.quotes.map(q=>`<div class="q">${esc(q)}</div>`).join("");
+  const sbtns=STATES.filter(s=>s.k!=="open").map(s=>
+    `<button class="sbtn ${st===s.k?'active':''}" data-state="${s.k}" data-id="${i.id}">${s.t}</button>`).join("");
+  return `<article class="card mod-${i.module} st-${st} ${cardReg}" data-id="${i.id}">
+    ${regBadge?`<div class="rbadges">${regBadge}</div>`:""}
+    <div class="card-top">
+      <span class="pri ${i.priority}">${i.priority}</span>
+      ${srcTags}
+      <span class="senti-tag ${i.sentiment}">${i.sentiment}向</span>
+    </div>
+    <h3>${esc(i.title)}</h3>
+    <div class="sum">${esc(i.summary)}</div>
+    <div class="quotes">${quotes}</div>
+    <div class="action"><b>推进方向 · </b>${esc(i.action)}</div>
+    <div class="card-foot">
+      <span class="mentions">🔥 <b>${i.mentions}</b> 提及热度</span>
+      <div class="statebtns">${sbtns}</div>
+    </div>
+  </article>`;
+}
+
+function bindCards(){
+  document.querySelectorAll(".sbtn").forEach(b=>b.onclick=()=>{
+    const id=b.dataset.id, s=b.dataset.state;
+    state[id] = (getState(id)===s) ? "open" : s;   // toggle back to open
+    saveState(); renderFilters(); renderBoard();
+    toast(getState(id)==="open"?"已恢复为处理中":`已标注：${STATES.find(x=>x.k===getState(id)).t}`);
+  });
+}
+
+/* ---------- regression alert strip ---------- */
+function renderAlert(){
+  const alert=document.getElementById("alert"),list=document.getElementById("alertList");
+  if(!lastWeek){alert.classList.remove("show");return;}
+  const flagged=ISSUES.filter(i=>{const r=regressionOf(i.id);return r==="reopened"||r==="recurring";});
+  if(!flagged.length){alert.classList.remove("show");return;}
+  list.innerHTML=flagged.map(i=>{
+    const r=regressionOf(i.id);
+    return `<li data-id="${i.id}"><span class="k">${r==="reopened"?"不处理又复现":"二次出现"}</span>${esc(i.title)} · ${MOD_MAP[i.module].name}</li>`;
+  }).join("");
+  list.querySelectorAll("li").forEach(li=>li.onclick=()=>{
+    filter={mod:"all",pri:"all",st:"all"};renderFilters();renderBoard();
+    const el=document.querySelector(`.card[data-id="${li.dataset.id}"]`);
+    if(el){el.scrollIntoView({behavior:"smooth",block:"center"});el.style.outline="2px solid var(--gold)";setTimeout(()=>el.style.outline="",1600);}
+  });
+  alert.classList.add("show");
+}
+
+/* ---------- export / import ---------- */
+document.getElementById("exportBtn").onclick=()=>{
+  const snap={
+    week:WEEK_META.weekLabel, range:WEEK_META.range, exportedAt:new Date().toISOString(),
+    ids:ISSUES.map(i=>i.id),
+    state:Object.fromEntries(ISSUES.map(i=>[i.id,getState(i.id)])),
+    titles:Object.fromEntries(ISSUES.map(i=>[i.id,i.title]))
+  };
+  const blob=new Blob([JSON.stringify(snap,null,2)],{type:"application/json"});
+  const a=document.createElement("a");a.href=URL.createObjectURL(blob);
+  a.download=`炫舞舆情快照_${WEEK_META.range.replace(/[.\s–]/g,"").slice(0,17)}.json`;a.click();
+  toast("已导出本周快照，可作为下周回归基线");
+};
+document.getElementById("importFile").onchange=(e)=>{
+  const f=e.target.files[0];if(!f)return;
+  const r=new FileReader();
+  r.onload=()=>{
+    try{
+      lastWeek=JSON.parse(r.result);
+      const flagged=ISSUES.filter(i=>{const g=regressionOf(i.id);return g==="reopened"||g==="recurring";}).length;
+      const reopen=ISSUES.filter(i=>regressionOf(i.id)==="reopened").length;
+      document.getElementById("regInfo").innerHTML=
+        `已载入上周快照（${esc(lastWeek.week||lastWeek.range||"上周")}）：<b style="color:var(--rust)">${flagged}</b> 项复现，其中 <b style="color:#e2504e">${reopen}</b> 项“不处理/已解决又复现”。`;
+      renderAlert();renderFilters();renderBoard();
+      toast("回归对比完成");
+    }catch(err){toast("快照文件解析失败");}
+  };
+  r.readAsText(f);
+};
+document.getElementById("resetBtn").onclick=()=>{
+  if(confirm("确定重置本周所有标注？此操作不可撤销。")){state={};saveState();renderFilters();renderBoard();toast("已重置本周标注");}
+};
+document.getElementById("printBtn").onclick=()=>window.print();
+
+/* ---------- utils ---------- */
+function esc(s){return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
+let toastT;
+function toast(msg){const t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove("show"),2200);}
+
+/* ---------- init ---------- */
+renderStats();renderFilters();renderBoard();
+</script>
+</body>
+</html>
