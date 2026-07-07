@@ -113,6 +113,14 @@ h1 .accent{color:var(--gold);position:relative}
 .card-top{display:flex;align-items:flex-start;gap:9px;flex-wrap:wrap;margin-bottom:10px}
 .pri{font-size:11px;font-weight:800;letter-spacing:.04em;padding:3px 9px;border-radius:6px;color:#160f08}
 .pri.P0{background:var(--p0)} .pri.P1{background:var(--p1)} .pri.P2{background:var(--p2);color:#101a22}
+/* 本期新出现角标（相对上期 07.01–07.05 未覆盖的议题） */
+.newtag{font-size:10.5px;font-weight:800;letter-spacing:.06em;padding:3px 9px 3px 8px;border-radius:6px;
+  background:linear-gradient(90deg,var(--rust),#f0913f);color:#1c1712;display:inline-flex;align-items:center;gap:4px;
+  box-shadow:0 3px 10px -3px rgba(232,115,74,.6)}
+.newtag::before{content:"✦";font-size:11px;line-height:1}
+.card.is-new{border-color:rgba(232,115,74,.4)}
+.card.is-new::after{content:"";position:absolute;top:0;right:0;border-width:0 34px 34px 0;border-style:solid;
+  border-color:transparent var(--rust) transparent transparent;opacity:.9}
 .src{font-size:10.5px;font-weight:600;padding:3px 8px;border-radius:6px;border:1px solid var(--line2);color:var(--sub)}
 .src.评论区{border-color:rgba(91,143,168,.5);color:#9dc3d6}
 .src.生态作者{border-color:rgba(212,162,78,.5);color:var(--gold)}
@@ -238,6 +246,8 @@ footer b{color:var(--sub)}
     <div class="fgroup" id="priFilters"></div>
     <span class="flabel" style="margin-left:14px">状态</span>
     <div class="fgroup" id="stateFilters"></div>
+    <span class="flabel" style="margin-left:14px">新增</span>
+    <div class="fgroup" id="newFilters"></div>
   </div>
 
   <!-- Issues -->
@@ -253,6 +263,7 @@ footer b{color:var(--sub)}
       <span><i style="background:var(--up)"></i>P0 高</span>
       <span><i style="background:var(--gold)"></i>P1 中</span>
       <span><i style="background:var(--p2)"></i>P2 低</span>
+      <span><i style="background:var(--rust)"></i><b style="color:var(--rust)">新</b> 本期新出现（上期 07.01–07.05 未覆盖）</span>
     </div>
     <p><b>数据来源</b>：① UA 内容评论区（小红书 / 抖音，2026.07.01–07.06，193 条，负向 62 / 正向 131，情感由算法标注）；② 生态作者集中反馈（供应商整理 CSV，159 条，作者/资深玩家累积集中反馈）。评论区约九成为“礼申/求图/贴贴/🉑”类互动与抽卡打卡噪声，已人工剔除；<b>本期实质产品诉求主要来自生态作者反馈</b>。</p>
     <p style="margin-top:8px"><b>使用说明</b>：各模块可在卡片上标注「处理中(默认) / 不处理 / 已解决 / 观察中」，标注实时保存在本地浏览器。周末点「导出本期快照」得到 JSON；下期打开新报告后「导入上期快照」，系统自动标记 <span style="color:var(--rust);font-weight:700">二次出现</span> 与 <span style="color:#e2504e;font-weight:700">不处理又复现</span> 的问题。红色代表负向/上升（遵循国内习惯）。</p>
@@ -274,7 +285,7 @@ const STATES = [
 const MOD_MAP = Object.fromEntries(MODULES.map(m=>[m.key,m]));
 let state = loadState();
 let lastWeek = null;
-let filter = { mod:"all", pri:"all", st:"all" };
+let filter = { mod:"all", pri:"all", st:"all", nw:"all" };
 
 function loadState(){ try{return JSON.parse(localStorage.getItem(LS_KEY))||{}}catch(e){return {}} }
 function saveState(){ localStorage.setItem(LS_KEY, JSON.stringify(state)); }
@@ -292,9 +303,12 @@ function renderStats(){
   const s = WEEK_META.sentiment;
   const p0 = ISSUES.filter(i=>i.priority==="P0").length;
   const authorIssues = ISSUES.filter(i=>i.sources.includes("生态作者")).length;
+  const newCnt = ISSUES.filter(i=>i.isNew===true).length;
+  const contCnt = ISSUES.length - newCnt;
   const negPct = Math.round(s.neg/s.total*100);
   document.getElementById("stats").innerHTML = `
     <div class="stat"><div class="lab">问题条目</div><div class="val">${ISSUES.length}</div><div class="foot">双源合并·剔噪后</div></div>
+    <div class="stat"><div class="lab">本期新增 <span style="color:var(--rust)">✦</span></div><div class="val" style="color:var(--rust)">${newCnt}</div><div class="foot">上期(07.01–07.05)未覆盖 · 延续 ${contCnt} 项</div></div>
     <div class="stat"><div class="lab">P0 高优先级</div><div class="val" style="color:var(--up)">${p0}</div><div class="foot">需本期优先推进</div></div>
     <div class="stat neg"><div class="lab">评论区负向占比</div><div class="val">${negPct}%</div>
       <div class="senti-bar"><i style="width:${negPct}%;background:var(--up)"></i><i style="width:${100-negPct}%;background:var(--down)"></i></div>
@@ -332,9 +346,18 @@ function renderFilters(){
     return `<span class="chip ${on?'on':''}" data-t="st" data-v="${v}" style="${on?'background:var(--paper);color:#1c1712':''}">${t}<span class="cnt">${c}</span></span>`;
   }).join("");
 
+  const nwBox=document.getElementById("newFilters");
+  const nws=[["all","全部"],["new","仅新增"],["cont","仅延续"]];
+  nwBox.innerHTML=nws.map(([v,t])=>{
+    const on=filter.nw===v;
+    const c=v==="all"?ISSUES.length:(v==="new"?ISSUES.filter(i=>i.isNew===true).length:ISSUES.filter(i=>i.isNew!==true).length);
+    const bg=v==="new"?"var(--rust)":"var(--paper)";
+    return `<span class="chip ${on?'on':''}" data-t="nw" data-v="${v}" style="${on?`background:${bg};color:#1c1712`:''}">${t}<span class="cnt">${c}</span></span>`;
+  }).join("");
+
   document.querySelectorAll(".chip").forEach(ch=>ch.onclick=()=>{
     const t=ch.dataset.t,v=ch.dataset.v;
-    if(t==="mod")filter.mod=v; if(t==="pri")filter.pri=v; if(t==="st")filter.st=v;
+    if(t==="mod")filter.mod=v; if(t==="pri")filter.pri=v; if(t==="st")filter.st=v; if(t==="nw")filter.nw=v;
     renderFilters(); renderBoard();
   });
 }
@@ -355,6 +378,8 @@ function match(i){
   if(filter.mod!=="all"&&i.module!==filter.mod)return false;
   if(filter.pri!=="all"&&i.priority!==filter.pri)return false;
   if(filter.st!=="all"&&getState(i.id)!==filter.st)return false;
+  if(filter.nw==="new"&&i.isNew!==true)return false;
+  if(filter.nw==="cont"&&i.isNew===true)return false;
   return true;
 }
 function priRank(p){return p==="P0"?0:p==="P1"?1:2}
@@ -396,10 +421,15 @@ function cardHtml(i){
   const quotes=i.quotes.map(q=>`<div class="q">${esc(q)}</div>`).join("");
   const sbtns=STATES.filter(s=>s.k!=="open").map(s=>
     `<button class="sbtn ${st===s.k?'active':''}" data-state="${s.k}" data-id="${i.id}">${s.t}</button>`).join("");
-  return `<article class="card mod-${i.module} st-${st} ${cardReg}" data-id="${i.id}">
+  // 本期新出现（相对上期 07.01–07.05）：静态角标；与右上角动态回归 badge 共存，无回归 badge 时额外显示右上角折角
+  const isNew = i.isNew === true;
+  const newTag = isNew ? `<span class="newtag" title="本期新出现（上期 07.01–07.05 未覆盖）">新</span>` : "";
+  const cornerRibbon = (isNew && !regBadge) ? "is-new" : "";
+  return `<article class="card mod-${i.module} st-${st} ${cardReg} ${cornerRibbon}" data-id="${i.id}">
     ${regBadge?`<div class="rbadges">${regBadge}</div>`:""}
     <div class="card-top">
       <span class="pri ${i.priority}">${i.priority}</span>
+      ${newTag}
       ${srcTags}
       <span class="senti-tag ${i.sentiment}">${i.sentiment}向</span>
     </div>

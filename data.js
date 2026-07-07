@@ -17,7 +17,7 @@ window.WEEK_META = {
     { name: "生态作者集中反馈", detail: "供应商整理 CSV，共 159 条（作者/资深玩家累积集中反馈，含优化建议 95 · 游戏体验 31 · Bug 12 · 资讯反馈 8 等）", tag: "生态作者" }
   ],
   sentiment: { pos: 131, neg: 62, neu: 0, total: 193 },
-  noticeHtml: "本期为<strong>双源</strong>：UA 评论区（193 条）+ 生态作者集中反馈（159 条）。评论区噪声占比极高（约九成为“礼申/求图/贴贴/🉑”互动与抽卡打卡），<strong>实质产品诉求主要来自生态作者反馈</strong>——作者意见集中在系统玩法（捏脸/染色/自定义/穿模）、商业化（奖池性价比/至尊争议/送礼）、活跃（舞团/榜单治理）三大块。下方为两源合并、剔噪后的归纳。",
+  noticeHtml: "本期为<strong>双源</strong>：UA 评论区（193 条）+ 生态作者集中反馈（159 条）。评论区噪声占比极高（约九成为“礼申/求图/贴贴/🉑”互动与抽卡打卡），<strong>实质产品诉求主要来自生态作者反馈</strong>——作者意见集中在系统玩法（捏脸/染色/自定义/穿模）、商业化（奖池性价比/至尊争议/送礼）、活跃（舞团/榜单治理）三大块。下方为两源合并、剔噪后的归纳。带 <strong style=\"color:#e8734a\">✦新</strong> 角标的为<strong>本期新出现</strong>（对比上期 07.01–07.05 未覆盖的议题），未带角标即延续上期已有议题。",
   isBaseline: true
 };
 
@@ -34,11 +34,12 @@ window.MODULES = [
  * priority: P0/P1/P2
  * status(默认 open) 由前端本地存储覆盖: open / ignore / resolved / watching
  * mentions: 提及热度(合并近似量)
+ * isNew: true=本期新出现（上期 07.01–07.05 未覆盖）; false=延续上期已有议题
  */
 window.ISSUES = [
   /* ================= 商业化 biz ================= */
   {
-    id: "biz-01", module: "biz", priority: "P0",
+    id: "biz-01", module: "biz", priority: "P0", isNew: false,
     title: "抽卡获取焦虑延续 · “抽不到 / 幻不出 / 坚持不下去”",
     summary: "评论区多名玩家表达获取焦虑：金门定制/占卜稀世“好看却抽不到”、幻卡“还没幻出来”、集齐进度长“我还早着呢……不想坚持了”；作者侧亦提出爆率太低、希望闪耀像臻品甄选长期返场。获取门槛与长线坚持疲劳是延续上期的核心负向。",
     mentions: 10, sources: ["评论区","生态作者"], sentiment: "负",
@@ -51,7 +52,7 @@ window.ISSUES = [
     action: "评估幻卡进度体感、保底透明度与返场机制；关注长线集齐节奏带来的坚持疲劳，可与“皮/绮兑换”诉求合并跟进。"
   },
   {
-    id: "biz-02", module: "biz", priority: "P0",
+    id: "biz-02", module: "biz", priority: "P0", isNew: true,
     title: "“至尊”新标价高质低争议 · 超凡与稀世同质、货不对板",
     summary: "作者集中吐槽新推“至尊”标：奖池贵得离谱却“像塑料纸/塑料袋”，把一套衣服拆开卖、超凡与稀世“一个样只多图鉴”，直播称耗时半年但画面全是 AI、货不对板。多位作者认为新标缺乏与价格匹配的品质与特色，情绪偏激烈。",
     mentions: 9, sources: ["生态作者"], sentiment: "负",
@@ -64,7 +65,7 @@ window.ISSUES = [
     action: "复盘“至尊”新标的品质/差异化与定价合理性；对齐宣发（AI 海报）与实际建模，避免货不对板放大付费落差。"
   },
   {
-    id: "biz-03", module: "biz", priority: "P1",
+    id: "biz-03", module: "biz", priority: "P1", isNew: true,
     title: "高氪/升钻/氪条福利“越活越回去”，性价比被质疑",
     summary: "作者反馈氪金福利力度倒退：升紫钻/V20 这种大事只送寒酸奖励“看不起高氪玩家”，钻等级越高送的越差（与他游相反），蜕变臻品/图鉴“一套衣服都舍不得送”，回流一周送 1000 钻反显对比。指向高价值付费用户的获得感缺失。",
     mentions: 6, sources: ["生态作者"], sentiment: "负",
@@ -77,7 +78,7 @@ window.ISSUES = [
     action: "重审高钻等级/氪条奖励梯度，对齐同类竞品的高氪回馈；提升高价值用户的仪式感与获得感。"
   },
   {
-    id: "biz-04", module: "biz", priority: "P1",
+    id: "biz-04", module: "biz", priority: "P1", isNew: true,
     title: "钻石/道具交易与重复超凡分解诉求",
     summary: "作者多次提出希望开放玩家间钻石/道具交易——“拿钻抽自己想抽的，重复的不用分”；同时反馈稀世/黑卡/金门奖池抽到的重复超凡部件（含头发）背包内不能一键分解，体验割裂。属付费产出的资产流通与处置诉求。",
     mentions: 4, sources: ["生态作者"], sentiment: "负",
@@ -88,7 +89,7 @@ window.ISSUES = [
     action: "评估可控范围内的资产流通（交易/兑换）与重复部件一键分解，缓解抽卡沉没成本焦虑。"
   },
   {
-    id: "biz-05", module: "biz", priority: "P2",
+    id: "biz-05", module: "biz", priority: "P2", isNew: false,
     title: "低价小额活动体验获正向（可复用）· 甄选送抽获好评",
     summary: "评论区“这6块钱真好玩”对小额活动明确正向；作者亦点名“几次甄选送的1888抽还是不错的”，说明轻付费/高感知让利有良好口碑，是拉新与活跃的低门槛抓手。",
     mentions: 3, sources: ["评论区","生态作者"], sentiment: "正",
@@ -101,7 +102,7 @@ window.ISSUES = [
 
   /* ================= 活跃活动 activity ================= */
   {
-    id: "act-01", module: "activity", priority: "P0",
+    id: "act-01", module: "activity", priority: "P0", isNew: true,
     title: "舞团玩法奖励单薄致卖团/流失 · 强烈诉求超凡衣任务兑换",
     summary: "作者长文集中反馈：舞团活跃低迷、新人不愿进、老玩家退团卖团，核心是缺留人奖励，恳请开放舞团币兑换超凡/大体臻品套装以盘活舞团任务与引流；并配套多项舞团优化（送礼舞团币奖励、公告气泡弹窗、申请/知名度醒目提示、派对上锁、奖励盒子可多锁、人物展示自定义与坑位增加）。舞团系整体活跃度告急。",
     mentions: 10, sources: ["生态作者"], sentiment: "负",
@@ -114,7 +115,7 @@ window.ISSUES = [
     action: "系统性盘活舞团：评估舞团币兑换高价值时装（超凡/大体臻品）、送礼舞团币激励、公告/申请/知名度提示与派对上锁等管理体验优化。"
   },
   {
-    id: "act-02", module: "activity", priority: "P1",
+    id: "act-02", module: "activity", priority: "P1", isNew: true,
     title: "排位/巅峰赛体验问题 · 匹配难、双模强制、恶意穿搭卡人送分",
     summary: "作者反馈排位/巅峰赛多项体验问题：连胜后极难匹配只能等人机局；排位强制两模式希望改单选；星动巅峰赛长期无人玩建议换弹珠；并有长文实名投诉“组团穿超凡花里胡哨大裙摆双排双人舞多设备撞车卡人、挂机送分”破坏对局公平与体验。竞技公平与匹配体验是活跃负向重点。",
     mentions: 6, sources: ["生态作者"], sentiment: "负",
@@ -127,7 +128,7 @@ window.ISSUES = [
     action: "优化连胜匹配与巅峰赛人数池、评估排位模式单选；排查恶意穿搭/多设备卡人送分的对局公平治理与举报处置。"
   },
   {
-    id: "act-03", module: "activity", priority: "P1",
+    id: "act-03", module: "activity", priority: "P1", isNew: true,
     title: "社区/游乐场/街区长期不更新，玩法荒废",
     summary: "作者反馈非抽卡内容长期停滞：小岛新鲜一阵就不更新、美人鱼/游乐场“没人玩却占内存”、街区荒废、对战中心常驻活动衣服几年不更新、语音房玩法单薄；游乐场地图一年未更。呼吁把精力从奖池转向可玩性与社区活跃。",
     mentions: 7, sources: ["生态作者"], sentiment: "负",
@@ -140,7 +141,7 @@ window.ISSUES = [
     action: "制定非抽卡内容更新节奏（社区/游乐场/街区/语音房），把可玩性纳入版本 KPI，缓解“只出奖池”的负面观感。"
   },
   {
-    id: "act-04", module: "activity", priority: "P1",
+    id: "act-04", module: "activity", priority: "P1", isNew: true,
     title: "新品上新/活动时间不规律，公告体验差",
     summary: "作者反馈上新与活动排期不上心：预告有时不放图直接上视频、视频放完隔两天才上架；臻品盒子活动凌晨五点到很晚仍未更新。运营节奏与公告透明度影响玩家预期与活跃。",
     mentions: 3, sources: ["生态作者"], sentiment: "负",
@@ -151,7 +152,7 @@ window.ISSUES = [
     action: "规范上新预告与活动上线时间标准，提升排期透明度与公告一致性。"
   },
   {
-    id: "act-05", module: "activity", priority: "P2",
+    id: "act-05", module: "activity", priority: "P2", isNew: false,
     title: "官号/掌上内容吸引力受质疑（评论区个案，需观察）",
     summary: "抖音“掌上炫舞关注有礼”官号内容下出现负向“老古董了，没人看了”，指向官号内容形态与掌上活跃度吸引力。本期为个案，建议纳入官号内容提分观察项，跟踪是否成趋势。",
     mentions: 2, sources: ["评论区"], sentiment: "负",
@@ -162,7 +163,7 @@ window.ISSUES = [
     action: "纳入官号内容提分观察；评估掌上/官号内容年轻化表达，跟踪该类负向是否扩大。"
   },
   {
-    id: "act-06", module: "activity", priority: "P2",
+    id: "act-06", module: "activity", priority: "P2", isNew: false,
     title: "任务难度与日常节奏 · 词条任务过难 vs 速刷任务正向",
     summary: "作者反馈部分活动任务过难——词条刷三天找不到、无法兑换也刷不到，建议开放幻彩石兑换词条；同时评论区对日常“每天五分钟速刷任务”给正向。任务设计在“硬核活动”与“轻量日常”间需平衡。",
     mentions: 3, sources: ["评论区","生态作者"], sentiment: "负",
@@ -175,7 +176,7 @@ window.ISSUES = [
 
   /* ================= 市场IP ip ================= */
   {
-    id: "ip-01", module: "ip", priority: "P0",
+    id: "ip-01", module: "ip", priority: "P0", isNew: true,
     title: "服设创新乏力 · 泳衣睡衣循环、擦边露腿、缺民族/非遗/戏曲题材",
     summary: "作者高频且强烈反馈题材单一、创新不足：泳衣睡衣来回循环、女装老一套露腿擦边、狐狸人鱼反复出、男生头发换来换去；集中呼吁出民族/非遗/戏曲等文化题材（56 个民族、苗族、戏服），并要求戏服尊重传统不露腿、配套片子头/外搭。设计力与题材多样性是市场IP最大痛点。",
     mentions: 15, sources: ["生态作者"], sentiment: "负",
@@ -188,7 +189,7 @@ window.ISSUES = [
     action: "提升服设创新与题材多样性，规划民族/非遗/戏曲等文化向系列；戏服尊重传统形制并配齐头饰外搭。"
   },
   {
-    id: "ip-02", module: "ip", priority: "P1",
+    id: "ip-02", module: "ip", priority: "P1", isNew: false,
     title: "古风/占卜穿搭内容口碑好，题材方向获正向印证",
     summary: "评论区正向集中在古风/占卜系穿搭“美/绝美/两个都美/好美的宝”，达人古风内容高赞，印证古风题材内容力，可作为题材延续与达人共创的正向依据。",
     mentions: 12, sources: ["评论区"], sentiment: "正",
@@ -200,7 +201,7 @@ window.ISSUES = [
     action: "延续古风/占卜系穿搭题材与达人共创；将高口碑视觉沉淀为宣发素材。"
   },
   {
-    id: "ip-03", module: "ip", priority: "P1",
+    id: "ip-03", module: "ip", priority: "P1", isNew: true,
     title: "稀世光效泛滥、染色范围窄、编号信息缺失",
     summary: "作者反馈稀世/皮肤“乱七八糟光效”泛滥影响美观、玩家都想要干净款并呼吁一键隐藏光效；染色范围窄——多件不能染、红光/红珠染不掉、送的粉臻只能染一半；本次稀世编号缺专属时间/名字（前几个都有）。视觉与自定义细节拉低稀世体验。",
     mentions: 8, sources: ["生态作者"], sentiment: "负",
@@ -214,7 +215,7 @@ window.ISSUES = [
 
   /* ================= 本地化（系统玩法） system ================= */
   {
-    id: "sys-01", module: "system", priority: "P0",
+    id: "sys-01", module: "system", priority: "P0", isNew: true,
     title: "捏脸/美颜社系统长期未升级（作者提了两年）· 直接影响抽奖意愿",
     summary: "资深作者系统性反馈：捏脸系统满足不了日常需求、多数定制脸瞳孔/脸型拉条拉不动无变化；恳请升级美颜社、细化拉条（眉峰眉尾、多眼型、丰富脸型如刘亦菲/甄嬛），对齐端游拉条数据。作者明确指出“很多玩家因为脸不好看放弃抽奖”，把捏脸质量与商业化直接挂钩。男号定制脸糊弄、白皮脸颊凹陷等问题突出。",
     mentions: 14, sources: ["生态作者"], sentiment: "负",
@@ -227,7 +228,7 @@ window.ISSUES = [
     action: "立项升级美颜社/捏脸：细化拉条与脸型库、修复拉不动的定制脸、对齐端游数据、补齐男号脸质量——直接联动商业化抽奖转化。"
   },
   {
-    id: "sys-02", module: "system", priority: "P0",
+    id: "sys-02", module: "system", priority: "P0", isNew: true,
     title: "自定义乱跑/穿模严重 · 影响作者出片与建模观感",
     summary: "作者高频反馈自定义与建模问题：自定义部件“乱跑乱飞”不跟随人物、做动作就穿模消失；金标稀世/小倩大体/假面魅影披风等穿模“穿飞了太丑”，剪辑出片尴尬；建模偏硬、希望像崽崽随动作拉扯。穿模与自定义稳定性是作者出片的硬伤。",
     mentions: 10, sources: ["生态作者"], sentiment: "负",
@@ -240,7 +241,7 @@ window.ISSUES = [
     action: "专项修复自定义部件乱跑与稀世/大体穿模；提升建模跟随与柔顺度，保障作者出片质量。"
   },
   {
-    id: "sys-03", module: "system", priority: "P1",
+    id: "sys-03", module: "system", priority: "P1", isNew: true,
     title: "染色/光效自定义诉求 · 全衣可染、分区染色、隐藏光效",
     summary: "作者强诉求扩大染色自由度：希望所有衣服可自定义染色、染色分区更细（含戏服可染玩法多），并反复要求“一键隐藏光效”还原干净外观（炫舞2曾有）；买了色盘却只有几件能染。自定义染色是提升穿搭表达与留存的高频需求。",
     mentions: 9, sources: ["生态作者"], sentiment: "负",
@@ -252,7 +253,7 @@ window.ISSUES = [
     action: "扩大可染色范围并做分区染色；提供一键隐藏光效开关，对齐竞品自由染色体验。"
   },
   {
-    id: "sys-04", module: "system", priority: "P1",
+    id: "sys-04", module: "system", priority: "P1", isNew: true,
     title: "拍照/录制/MV 自定义能力弱 · 画质模糊、依赖 AI 后期",
     summary: "作者反馈拍照录制体验落后：炫乐园/游乐园无拍摄、镜头难调、画质模糊“全靠后期软件增高清”；希望打歌/所有模式像 MV 一样可自行录制保存、好友不在线也能拉入场景取代机器人、支持竖屏与自定义比例、歌舞剧加绿幕。内容创作工具链是作者刚需。",
     mentions: 8, sources: ["生态作者"], sentiment: "负",
@@ -265,7 +266,7 @@ window.ISSUES = [
     action: "升级拍照录制工具链：提高清晰度、开放各模式自录与保存、支持竖屏/自定义比例与虚拟录制对象，减少对 AI 后期依赖。"
   },
   {
-    id: "sys-05", module: "system", priority: "P1",
+    id: "sys-05", module: "system", priority: "P1", isNew: true,
     title: "打歌对局体验 · 聊天框误触、隐藏分数、发热、皮肤少",
     summary: "作者反馈打歌对局多处体验问题：左下角聊天框打多指歌易误触（有人拿布挡着玩）、希望可隐藏/改语音转文字；观战与录屏希望可隐藏分数更美观；打歌烧内存发热“能煮鸡蛋”；星动珠子间距希望自定义；除星动外模式皮肤少（传统仅一个还要付费）。",
     mentions: 8, sources: ["生态作者"], sentiment: "负",
@@ -278,7 +279,7 @@ window.ISSUES = [
     action: "优化打歌 UI（聊天框可隐藏/转文字、分数可隐藏）、排查发热性能、开放珠距自定义与更多模式皮肤。"
   },
   {
-    id: "sys-06", module: "system", priority: "P1",
+    id: "sys-06", module: "system", priority: "P1", isNew: true,
     title: "大体/小体一致性 · 宠物坐骑/交互设施大体不通用",
     summary: "作者反馈大体/小体割裂：宠物坐骑单人是小体、双人才大体，希望单双人都能大体；游乐园部分交互设施可用变身大体、部分不行，希望统一通用；星穿搭小体动作仅升级两个希望全部升级。形态一致性影响展示与体验统一。",
     mentions: 5, sources: ["生态作者"], sentiment: "负",
@@ -290,7 +291,7 @@ window.ISSUES = [
     action: "统一大体/小体在宠物坐骑、游乐园交互设施、星穿搭动作上的可用性。"
   },
   {
-    id: "sys-07", module: "system", priority: "P1",
+    id: "sys-07", module: "system", priority: "P1", isNew: true,
     title: "自定义动作诉求 · 口令/视频生成、双人动作、永久动作卡",
     summary: "作者多次提出自定义动作能力：下指令/导入视频自动生成动作（含嘴巴能动）、增加双人情侣动作卡与名片静态动作卡；并反馈动作卡贵/一次性、录素材消耗大，希望改永久动作卡、动作免费、展示动作卡上架用点券购买盘活点券。",
     mentions: 6, sources: ["生态作者"], sentiment: "负",
@@ -302,7 +303,7 @@ window.ISSUES = [
     action: "评估自定义动作生成与双人动作供给；优化动作卡计费（永久化/点券购买），降低创作消耗。"
   },
   {
-    id: "sys-08", module: "system", priority: "P1",
+    id: "sys-08", module: "system", priority: "P1", isNew: false,
     title: "客户端稳定性 · 卡顿/闪退/掉线/超凡越穿越卡",
     summary: "评论区与作者均有稳定性反馈：更新后大退掉线、争上游/打牌卡死、三月版本反复卡住要大退、排位卡顿延迟一天卡死数次；角色首饰越多/越超凡越卡（换高奢即好转）。稳定性与性能是跨源共性负向，建议持续监控修复。",
     mentions: 8, sources: ["评论区","生态作者"], sentiment: "负",
@@ -315,7 +316,7 @@ window.ISSUES = [
     action: "持续排查卡顿/闪退/掉线与超凡部件性能开销；加强版本上线前测试，减少“上线即卡”。"
   },
   {
-    id: "sys-09", module: "system", priority: "P2",
+    id: "sys-09", module: "system", priority: "P2", isNew: true,
     title: "图鉴/背包/交互零散 Bug 与体验优化",
     summary: "作者反馈一批零散 Bug 与体验点：定制脸占用服饰图鉴（希望单独图鉴）、高定学院男女号部件数不一致、发型带不出衣柜、环球影城挂树上进不去、戴稀世配件佩戴图鉴卡住、名片增加背包按键、掌上打开衣柜自由搭配、歌曲收藏分类、跨区好友位过少、同性伴侣证等。数量多但单点强度较低。",
     mentions: 12, sources: ["生态作者"], sentiment: "负",
@@ -330,7 +331,7 @@ window.ISSUES = [
 
   /* ================= 其他 other ================= */
   {
-    id: "oth-01", module: "other", priority: "P1",
+    id: "oth-01", module: "other", priority: "P1", isNew: true,
     title: "AI 宣发货不对板 · 海报好看建模撑不起，观感似“诈骗”",
     summary: "作者集中批评宣发过度依赖 AI：海报/直播画面全 AI、货不对板“太假像诈骗”，实际人物与衣服和封面半毛关系没有，甚至用上隔壁角色的脸。建议要么真实呈现、要么把 AI 能力真正做进游戏（自定义妆容染色）。这是横跨市场与信任的品牌观感问题。",
     mentions: 5, sources: ["生态作者"], sentiment: "负",
@@ -342,7 +343,7 @@ window.ISSUES = [
     action: "规范宣发素材真实性（AI 使用披露/对齐实机），或将 AI 能力落到游戏内自定义，修复品牌信任。"
   },
   {
-    id: "oth-02", module: "other", priority: "P1",
+    id: "oth-02", module: "other", priority: "P1", isNew: true,
     title: "外挂/语音骚扰治理诉求",
     summary: "作者反馈治理问题：排位外挂脚本多严重影响排名（希望恢复18/19年环境）、部分玩家追着卡语音放录音骂人。属安全与社区秩序治理，影响核心玩法公平与社交体验。",
     mentions: 3, sources: ["生态作者"], sentiment: "负",
