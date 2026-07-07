@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>炫舞手游 · 周维度舆情周报</title>
+<title>炫舞手游 · 玩家舆情周报 07.01–07.06</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;900&family=Noto+Sans+SC:wght@300;400;500;700&family=Archivo+Black&display=swap" rel="stylesheet" />
@@ -44,14 +44,21 @@ header{padding:46px 0 26px;border-bottom:1px solid var(--line2);position:relativ
 h1{font-family:"Noto Serif SC",serif;font-weight:900;font-size:clamp(34px,5.4vw,60px);
   line-height:1.02;margin:16px 0 6px;letter-spacing:-.01em}
 h1 .accent{color:var(--gold);position:relative}
-.subline{color:var(--sub);font-size:15px;max-width:720px}
+.subline{color:var(--sub);font-size:15px;max-width:760px}
 .meta-row{display:flex;flex-wrap:wrap;gap:10px 26px;margin-top:20px;font-size:13.5px;color:var(--muted)}
 .meta-row b{color:var(--paper);font-weight:600}
 .baseline-tag{display:inline-flex;align-items:center;gap:7px;padding:5px 13px;border:1px dashed var(--gold);
   border-radius:30px;color:var(--gold);font-size:12px;font-weight:600;letter-spacing:.04em}
 
+/* ---------- Notice ---------- */
+.notice{margin:22px 0 4px;padding:15px 18px;border-radius:14px;
+  background:linear-gradient(90deg,rgba(212,162,78,.14),rgba(232,115,74,.07));
+  border:1px solid rgba(212,162,78,.34);font-size:13.5px;color:var(--sub);line-height:1.65;display:flex;gap:11px;align-items:flex-start}
+.notice .ic{font-size:17px;line-height:1.3}
+.notice strong{color:var(--paper);font-weight:700}
+
 /* ---------- Toolbar ---------- */
-.toolbar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:26px 0 8px;
+.toolbar{display:flex;flex-wrap:wrap;gap:12px;align-items:center;margin:22px 0 8px;
   padding:14px 16px;background:linear-gradient(180deg,var(--panel),rgba(33,29,24,.6));
   border:1px solid var(--line);border-radius:16px}
 .btn{font-family:inherit;cursor:pointer;border:1px solid var(--line2);background:transparent;color:var(--paper);
@@ -180,29 +187,32 @@ footer b{color:var(--sub)}
   <header>
     <div class="eyebrow"><span class="dot"></span> QQ 炫舞手游</div>
     <h1>玩家<span class="accent">舆情</span>周报 <span style="font-size:.42em;color:var(--muted);font-weight:400;font-family:'Noto Sans SC'">MODULE OPS BOARD</span></h1>
-    <p class="subline">融合「UA 内容评论区」与「生态作者集中反馈」双数据源，按模块 × 优先级归纳，供各模块认领问题、标注处置，并在下周基于本报告做回归对比。</p>
+    <p class="subline">本期为<b style="color:var(--paper)">双源</b>：UA 内容评论区 + 生态作者集中反馈，按模块 × 优先级归纳，供各模块认领问题、标注处置，并在下期基于本报告做回归对比。</p>
     <div class="meta-row">
       <span>统计周期 <b id="m-range"></b></span>
       <span>生成日期 <b id="m-date"></b></span>
       <span>问题条目 <b id="m-total"></b> 项</span>
-      <span class="baseline-tag" id="m-baseline">📌 本周为基线周（首次试跑）</span>
+      <span class="baseline-tag" id="m-baseline">📌 双源 · 可作下期回归基线</span>
     </div>
   </header>
 
+  <!-- Notice -->
+  <div class="notice" id="notice"><span class="ic">⚠️</span><span id="noticeText"></span></div>
+
   <!-- Toolbar -->
   <div class="toolbar">
-    <button class="btn primary" id="exportBtn" title="导出本周处置状态，作为下周回归基线">
+    <button class="btn primary" id="exportBtn" title="导出本期处置状态，作为下期回归基线">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>
-      导出本周快照
+      导出本期快照
     </button>
-    <label class="btn" for="importFile" title="导入上周导出的快照，自动比对复现问题">
+    <label class="btn" for="importFile" title="导入上期导出的快照，自动比对复现问题">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15V3m0 0l-4 4m4-4l4 4M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>
-      导入上周快照回归
+      导入上期快照回归
     </label>
     <input type="file" id="importFile" accept=".json" hidden />
-    <span class="import-note" id="regInfo">尚未导入上周快照。导入后将自动标记：二次出现 · 标注不处理又复现。</span>
+    <span class="import-note" id="regInfo">尚未导入上期快照。导入后将自动标记：二次出现 · 标注不处理又复现。</span>
     <span class="tb-spacer"></span>
-    <button class="btn" id="resetBtn">重置本周标注</button>
+    <button class="btn" id="resetBtn">重置本期标注</button>
     <button class="btn" id="printBtn">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9V3h12v6M6 18H4a2 2 0 01-2-2v-4a2 2 0 012-2h16a2 2 0 012 2v4a2 2 0 01-2 2h-2M6 14h12v7H6z"/></svg>
       打印 / PDF
@@ -214,7 +224,7 @@ footer b{color:var(--sub)}
 
   <!-- Regression alert -->
   <div class="alert" id="alert">
-    <h4>⚠️ 回归预警 — 以下问题在本周复现，需重点关注</h4>
+    <h4>⚠️ 回归预警 — 以下问题在本期复现，需重点关注</h4>
     <ul id="alertList"></ul>
   </div>
 
@@ -244,9 +254,9 @@ footer b{color:var(--sub)}
       <span><i style="background:var(--gold)"></i>P1 中</span>
       <span><i style="background:var(--p2)"></i>P2 低</span>
     </div>
-    <p><b>数据来源</b>：① UA 内容评论区（小红书/抖音/快手，2026.06.22–06.28，293 条，负向 147 / 正向 146，情感由算法标注，含大量“礼申/收/占卜”抽奖打卡类互动噪声，已剔除后提炼有效信号）；② 生态作者集中反馈 Excel（供应商整理，含签约与直播作者集中意见）。</p>
-    <p style="margin-top:8px"><b>使用说明</b>：各模块可在卡片上标注「处理中(默认) / 不处理 / 已解决 / 观察中」，标注实时保存在本地浏览器。周末点「导出本周快照」得到 JSON；下周打开新报告后「导入上周快照」，系统自动标记 <span style="color:var(--rust);font-weight:700">二次出现</span> 与 <span style="color:#e2504e;font-weight:700">不处理又复现</span> 的问题。红色代表负向/上升（遵循国内习惯）。</p>
-    <p style="margin-top:8px;color:var(--muted)">⚠️ 情感与部分提及量为算法/人工近似估计，仅供优先级参考，非精确统计。</p>
+    <p><b>数据来源</b>：① UA 内容评论区（小红书 / 抖音，2026.07.01–07.06，193 条，负向 62 / 正向 131，情感由算法标注）；② 生态作者集中反馈（供应商整理 CSV，159 条，作者/资深玩家累积集中反馈）。评论区约九成为“礼申/求图/贴贴/🉑”类互动与抽卡打卡噪声，已人工剔除；<b>本期实质产品诉求主要来自生态作者反馈</b>。</p>
+    <p style="margin-top:8px"><b>使用说明</b>：各模块可在卡片上标注「处理中(默认) / 不处理 / 已解决 / 观察中」，标注实时保存在本地浏览器。周末点「导出本期快照」得到 JSON；下期打开新报告后「导入上期快照」，系统自动标记 <span style="color:var(--rust);font-weight:700">二次出现</span> 与 <span style="color:#e2504e;font-weight:700">不处理又复现</span> 的问题。红色代表负向/上升（遵循国内习惯）。</p>
+    <p style="margin-top:8px;color:var(--muted)">⚠️ 情感与提及热度为算法/人工近似估计，仅供优先级参考，非精确统计。生态作者反馈时间跨度较长（累积至 6 月），代表作者侧长期集中诉求。</p>
   </footer>
 </div>
 
@@ -254,7 +264,7 @@ footer b{color:var(--sub)}
 
 <script src="data.js"></script>
 <script>
-const LS_KEY = "qqx5_yuqing_state_v1";
+const LS_KEY = "qqx5_yuqing_state_0701_0706";
 const STATES = [
   {k:"open",     t:"处理中"},
   {k:"watching", t:"观察中"},
@@ -262,8 +272,8 @@ const STATES = [
   {k:"resolved", t:"已解决"}
 ];
 const MOD_MAP = Object.fromEntries(MODULES.map(m=>[m.key,m]));
-let state = loadState();          // { issueId: "open|ignore|resolved|watching" }
-let lastWeek = null;              // imported snapshot
+let state = loadState();
+let lastWeek = null;
 let filter = { mod:"all", pri:"all", st:"all" };
 
 function loadState(){ try{return JSON.parse(localStorage.getItem(LS_KEY))||{}}catch(e){return {}} }
@@ -274,7 +284,8 @@ function getState(id){ return state[id] || "open"; }
 document.getElementById("m-range").textContent = WEEK_META.range;
 document.getElementById("m-date").textContent  = WEEK_META.generatedAt;
 document.getElementById("m-total").textContent = ISSUES.length;
-if(!WEEK_META.isBaseline) document.getElementById("m-baseline").style.display="none";
+document.getElementById("noticeText").innerHTML = WEEK_META.noticeHtml || "";
+if(!WEEK_META.noticeHtml) document.getElementById("notice").style.display="none";
 
 /* ---------- stats ---------- */
 function renderStats(){
@@ -283,12 +294,12 @@ function renderStats(){
   const authorIssues = ISSUES.filter(i=>i.sources.includes("生态作者")).length;
   const negPct = Math.round(s.neg/s.total*100);
   document.getElementById("stats").innerHTML = `
-    <div class="stat"><div class="lab">问题总数</div><div class="val">${ISSUES.length}</div><div class="foot">覆盖 5 大模块</div></div>
-    <div class="stat"><div class="lab">P0 高优先级</div><div class="val" style="color:var(--up)">${p0}</div><div class="foot">需本周优先推进</div></div>
+    <div class="stat"><div class="lab">问题条目</div><div class="val">${ISSUES.length}</div><div class="foot">双源合并·剔噪后</div></div>
+    <div class="stat"><div class="lab">P0 高优先级</div><div class="val" style="color:var(--up)">${p0}</div><div class="foot">需本期优先推进</div></div>
     <div class="stat neg"><div class="lab">评论区负向占比</div><div class="val">${negPct}%</div>
       <div class="senti-bar"><i style="width:${negPct}%;background:var(--up)"></i><i style="width:${100-negPct}%;background:var(--down)"></i></div>
       <div class="foot">负向 ${s.neg} · 正向 ${s.pos}（共 ${s.total} 条）</div></div>
-    <div class="stat"><div class="lab">生态作者相关</div><div class="val" style="color:var(--gold)">${authorIssues}</div><div class="foot">含作者集中诉求</div></div>`;
+    <div class="stat"><div class="lab">生态作者相关</div><div class="val" style="color:var(--gold)">${authorIssues}</div><div class="foot">含作者反馈的条目</div></div>`;
 }
 
 /* ---------- filters ---------- */
@@ -329,15 +340,13 @@ function renderFilters(){
 }
 
 /* ---------- regression logic ---------- */
-// recurring: 问题上周存在(任意状态) 且 本周仍在 → 二次出现
-// reopened : 上周被标注为 ignore(不处理) → 本周复现 → 不处理又复现(最高警示)
 function regressionOf(id){
   if(!lastWeek) return null;
   const prev = lastWeek.state ? lastWeek.state[id] : undefined;
   const existedPrev = lastWeek.ids && lastWeek.ids.includes(id);
   if(!existedPrev) return "new";
   if(prev==="ignore") return "reopened";
-  if(prev==="resolved") return "reopened"; // 已标记解决却又出现,同样警示
+  if(prev==="resolved") return "reopened";
   return "recurring";
 }
 
@@ -359,7 +368,6 @@ function renderBoard(){
     let items=ISSUES.filter(i=>i.module===m.key&&match(i));
     if(!items.length) return;
     items.sort((a,b)=>{
-      // reopened first, then priority, then mentions
       const ra=regressionOf(a.id)==="reopened"?0:1, rb=regressionOf(b.id)==="reopened"?0:1;
       if(ra!==rb)return ra-rb;
       if(priRank(a.priority)!==priRank(b.priority))return priRank(a.priority)-priRank(b.priority);
@@ -383,7 +391,7 @@ function cardHtml(i){
   let regBadge="",cardReg="";
   if(reg==="reopened"){regBadge=`<span class="rbadge reopened">● 不处理又复现</span>`;cardReg="has-reopened";}
   else if(reg==="recurring"){regBadge=`<span class="rbadge recurring">↻ 二次出现</span>`;cardReg="has-recurring";}
-  else if(reg==="new"){regBadge=`<span class="rbadge new">✦ 本周新增</span>`;}
+  else if(reg==="new"){regBadge=`<span class="rbadge new">✦ 本期新增</span>`;}
   const srcTags=i.sources.map(s=>`<span class="src ${s}">${s}</span>`).join("");
   const quotes=i.quotes.map(q=>`<div class="q">${esc(q)}</div>`).join("");
   const sbtns=STATES.filter(s=>s.k!=="open").map(s=>
@@ -409,7 +417,7 @@ function cardHtml(i){
 function bindCards(){
   document.querySelectorAll(".sbtn").forEach(b=>b.onclick=()=>{
     const id=b.dataset.id, s=b.dataset.state;
-    state[id] = (getState(id)===s) ? "open" : s;   // toggle back to open
+    state[id] = (getState(id)===s) ? "open" : s;
     saveState(); renderFilters(); renderBoard();
     toast(getState(id)==="open"?"已恢复为处理中":`已标注：${STATES.find(x=>x.k===getState(id)).t}`);
   });
@@ -443,8 +451,8 @@ document.getElementById("exportBtn").onclick=()=>{
   };
   const blob=new Blob([JSON.stringify(snap,null,2)],{type:"application/json"});
   const a=document.createElement("a");a.href=URL.createObjectURL(blob);
-  a.download=`炫舞舆情快照_${WEEK_META.range.replace(/[.\s–]/g,"").slice(0,17)}.json`;a.click();
-  toast("已导出本周快照，可作为下周回归基线");
+  a.download=`炫舞舆情快照_0701-0706.json`;a.click();
+  toast("已导出本期快照，可作为下期回归基线");
 };
 document.getElementById("importFile").onchange=(e)=>{
   const f=e.target.files[0];if(!f)return;
@@ -455,7 +463,7 @@ document.getElementById("importFile").onchange=(e)=>{
       const flagged=ISSUES.filter(i=>{const g=regressionOf(i.id);return g==="reopened"||g==="recurring";}).length;
       const reopen=ISSUES.filter(i=>regressionOf(i.id)==="reopened").length;
       document.getElementById("regInfo").innerHTML=
-        `已载入上周快照（${esc(lastWeek.week||lastWeek.range||"上周")}）：<b style="color:var(--rust)">${flagged}</b> 项复现，其中 <b style="color:#e2504e">${reopen}</b> 项“不处理/已解决又复现”。`;
+        `已载入上期快照（${esc(lastWeek.week||lastWeek.range||"上期")}）：<b style="color:var(--rust)">${flagged}</b> 项复现，其中 <b style="color:#e2504e">${reopen}</b> 项“不处理/已解决又复现”。`;
       renderAlert();renderFilters();renderBoard();
       toast("回归对比完成");
     }catch(err){toast("快照文件解析失败");}
@@ -463,7 +471,7 @@ document.getElementById("importFile").onchange=(e)=>{
   r.readAsText(f);
 };
 document.getElementById("resetBtn").onclick=()=>{
-  if(confirm("确定重置本周所有标注？此操作不可撤销。")){state={};saveState();renderFilters();renderBoard();toast("已重置本周标注");}
+  if(confirm("确定重置本期所有标注？此操作不可撤销。")){state={};saveState();renderFilters();renderBoard();toast("已重置本期标注");}
 };
 document.getElementById("printBtn").onclick=()=>window.print();
 
