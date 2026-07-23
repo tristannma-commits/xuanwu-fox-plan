@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>炫舞手游 · 玩家舆情周报 07.01–07.06</title>
+<title>炫舞手游 · 玩家舆情周报中心（07.13–07.19 · 含历史回看）</title>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;900&family=Noto+Sans+SC:wght@300;400;500;700&family=Archivo+Black&display=swap" rel="stylesheet" />
@@ -49,6 +49,34 @@ h1 .accent{color:var(--gold);position:relative}
 .meta-row b{color:var(--paper);font-weight:600}
 .baseline-tag{display:inline-flex;align-items:center;gap:7px;padding:5px 13px;border:1px dashed var(--gold);
   border-radius:30px;color:var(--gold);font-size:12px;font-weight:600;letter-spacing:.04em}
+
+/* ---------- Period switcher (历史周报切换) ---------- */
+.periodbar{margin:24px 0 4px;padding:16px 18px;border-radius:16px;
+  background:linear-gradient(180deg,var(--panel),rgba(33,29,24,.55));border:1px solid var(--line);position:relative}
+.periodbar .pb-head{display:flex;align-items:center;gap:10px;margin-bottom:13px}
+.periodbar .pb-head .pb-ic{width:26px;height:26px;border-radius:8px;background:rgba(212,162,78,.16);
+  display:flex;align-items:center;justify-content:center;font-size:14px}
+.periodbar .pb-head .pb-t{font-family:"Noto Serif SC",serif;font-weight:600;font-size:15px;color:var(--paper)}
+.periodbar .pb-head .pb-sub{font-size:12px;color:var(--muted);margin-left:2px}
+.ptabs{display:flex;gap:10px;flex-wrap:wrap;align-items:stretch}
+.ptab{cursor:pointer;user-select:none;min-width:132px;flex:0 0 auto;text-align:left;
+  padding:11px 15px 10px;border-radius:13px;border:1px solid var(--line2);background:rgba(255,255,255,.015);
+  transition:.18s;position:relative;overflow:hidden}
+.ptab:hover{border-color:var(--gold);transform:translateY(-2px)}
+.ptab .pt-key{font-family:"Noto Serif SC",serif;font-weight:900;font-size:16px;color:var(--paper);letter-spacing:.02em;line-height:1.1}
+.ptab .pt-meta{font-size:11px;color:var(--muted);margin-top:5px;display:flex;gap:9px;flex-wrap:wrap}
+.ptab .pt-meta .pm-p0{color:var(--up);font-weight:700}
+.ptab .pt-tag{position:absolute;top:0;right:0;font-size:9.5px;font-weight:800;letter-spacing:.05em;
+  padding:3px 8px;border-bottom-left-radius:9px;color:#1c1712}
+.ptab .pt-tag.latest{background:var(--rust)}
+.ptab .pt-tag.base{background:rgba(212,162,78,.85)}
+.ptab.on{border-color:transparent;background:linear-gradient(180deg,rgba(212,162,78,.20),rgba(232,115,74,.10));
+  box-shadow:0 0 0 1.5px var(--gold) inset}
+.ptab.on .pt-key{color:var(--gold)}
+.ptab .pt-bar{position:absolute;left:0;top:0;bottom:0;width:4px;background:var(--line2)}
+.ptab.on .pt-bar{background:var(--gold)}
+.periodbar .pb-hint{margin-top:12px;font-size:11.5px;color:var(--muted);line-height:1.5}
+.periodbar .pb-hint b{color:var(--sub)}
 
 /* ---------- Notice ---------- */
 .notice{margin:22px 0 4px;padding:15px 18px;border-radius:14px;
@@ -113,7 +141,6 @@ h1 .accent{color:var(--gold);position:relative}
 .card-top{display:flex;align-items:flex-start;gap:9px;flex-wrap:wrap;margin-bottom:10px}
 .pri{font-size:11px;font-weight:800;letter-spacing:.04em;padding:3px 9px;border-radius:6px;color:#160f08}
 .pri.P0{background:var(--p0)} .pri.P1{background:var(--p1)} .pri.P2{background:var(--p2);color:#101a22}
-/* 本期新出现角标（相对上期 07.01–07.05 未覆盖的议题） */
 .newtag{font-size:10.5px;font-weight:800;letter-spacing:.06em;padding:3px 9px 3px 8px;border-radius:6px;
   background:linear-gradient(90deg,var(--rust),#f0913f);color:#1c1712;display:inline-flex;align-items:center;gap:4px;
   box-shadow:0 3px 10px -3px rgba(232,115,74,.6)}
@@ -124,6 +151,7 @@ h1 .accent{color:var(--gold);position:relative}
 .src{font-size:10.5px;font-weight:600;padding:3px 8px;border-radius:6px;border:1px solid var(--line2);color:var(--sub)}
 .src.评论区{border-color:rgba(91,143,168,.5);color:#9dc3d6}
 .src.生态作者{border-color:rgba(212,162,78,.5);color:var(--gold)}
+.src.内容声量{border-color:rgba(79,160,111,.5);color:#7bd0a0}
 .senti-tag{font-size:10.5px;font-weight:700;padding:3px 8px;border-radius:6px;margin-left:auto}
 .senti-tag.负{background:rgba(226,80,78,.16);color:#f08a88} .senti-tag.正{background:rgba(79,160,111,.16);color:#7bd0a0}
 .senti-tag.中{background:rgba(160,150,135,.16);color:#c7bcaa}
@@ -186,39 +214,50 @@ footer b{color:var(--sub)}
   background:var(--gold);color:#1c1712;font-weight:700;font-size:13px;padding:11px 20px;border-radius:10px;
   box-shadow:var(--shadow);z-index:99;transition:.3s;pointer-events:none}
 .toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
-@media(max-width:600px){.grid{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}h1{font-size:34px}}
+@media(max-width:600px){.grid{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}h1{font-size:34px}.ptab{min-width:120px}}
 </style>
 </head>
 <body>
 <div class="wrap">
 
   <header>
-    <div class="eyebrow"><span class="dot"></span> QQ 炫舞手游</div>
+    <div class="eyebrow"><span class="dot"></span> QQ 炫舞手游 · 舆情周报中心</div>
     <h1>玩家<span class="accent">舆情</span>周报 <span style="font-size:.42em;color:var(--muted);font-weight:400;font-family:'Noto Sans SC'">MODULE OPS BOARD</span></h1>
-    <p class="subline">本期为<b style="color:var(--paper)">双源</b>：UA 内容评论区 + 生态作者集中反馈，按模块 × 优先级归纳，供各模块认领问题、标注处置，并在下期基于本报告做回归对比。</p>
+    <p class="subline">多期舆情周报聚合看板：以 <b style="color:var(--paper)">UA 评论区 + content 声量 + 生态作者反馈</b> 为源，按模块 × 优先级归纳。<b style="color:var(--gold)">下方可切换任意历史周期回看</b>，各期处置标注独立保存。</p>
     <div class="meta-row">
-      <span>统计周期 <b id="m-range"></b></span>
+      <span>当前周期 <b id="m-range"></b></span>
       <span>生成日期 <b id="m-date"></b></span>
       <span>问题条目 <b id="m-total"></b> 项</span>
-      <span class="baseline-tag" id="m-baseline">📌 双源 · 可作下期回归基线</span>
+      <span class="baseline-tag" id="m-baseline">🔁 可作下期回归基线</span>
     </div>
   </header>
+
+  <!-- Period switcher（历史周报切换入口） -->
+  <div class="periodbar">
+    <div class="pb-head">
+      <span class="pb-ic">🗂️</span>
+      <span class="pb-t">历史周报切换</span>
+      <span class="pb-sub">点击任一周期即可切换查看，最新期默认展示</span>
+    </div>
+    <div class="ptabs" id="ptabs"></div>
+    <div class="pb-hint">共 <b id="pb-count"></b> 期舆情周报已整合。切换周期后，下方统计 / 筛选 / 卡片将整体重渲染；<b>每期的处置标注（处理中 / 观察中 / 不处理 / 已解决）分别独立保存在本地浏览器</b>，互不影响。</div>
+  </div>
 
   <!-- Notice -->
   <div class="notice" id="notice"><span class="ic">⚠️</span><span id="noticeText"></span></div>
 
   <!-- Toolbar -->
   <div class="toolbar">
-    <button class="btn primary" id="exportBtn" title="导出本期处置状态，作为下期回归基线">
+    <button class="btn primary" id="exportBtn" title="导出当前周期处置状态，作为下期回归基线">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v12m0 0l-4-4m4 4l4-4M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>
-      导出本期快照
+      导出当前周期快照
     </button>
-    <label class="btn" for="importFile" title="导入上期导出的快照，自动比对复现问题">
+    <label class="btn" for="importFile" title="导入某期导出的快照，自动比对复现问题">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 15V3m0 0l-4 4m4-4l4 4M4 17v2a2 2 0 002 2h12a2 2 0 002-2v-2"/></svg>
-      导入上期快照回归
+      导入快照回归对比
     </label>
     <input type="file" id="importFile" accept=".json" hidden />
-    <span class="import-note" id="regInfo">尚未导入上期快照。导入后将自动标记：二次出现 · 标注不处理又复现。</span>
+    <span class="import-note" id="regInfo">尚未导入对比快照。导入后将自动标记：二次出现 · 标注不处理又复现。</span>
     <span class="tb-spacer"></span>
     <button class="btn" id="resetBtn">重置本期标注</button>
     <button class="btn" id="printBtn">
@@ -263,60 +302,140 @@ footer b{color:var(--sub)}
       <span><i style="background:var(--up)"></i>P0 高</span>
       <span><i style="background:var(--gold)"></i>P1 中</span>
       <span><i style="background:var(--p2)"></i>P2 低</span>
-      <span><i style="background:var(--rust)"></i><b style="color:var(--rust)">新</b> 本期新出现（上期 07.01–07.05 未覆盖）</span>
+      <span><i style="background:var(--rust)"></i><b style="color:var(--rust)">新</b> 本期新出现（对比上一期未覆盖）</span>
     </div>
-    <p><b>数据来源</b>：① UA 内容评论区（小红书 / 抖音，2026.07.01–07.06，193 条，负向 62 / 正向 131，情感由算法标注）；② 生态作者集中反馈（供应商整理 CSV，159 条，作者/资深玩家累积集中反馈）。评论区约九成为“礼申/求图/贴贴/🉑”类互动与抽卡打卡噪声，已人工剔除；<b>本期实质产品诉求主要来自生态作者反馈</b>。</p>
-    <p style="margin-top:8px"><b>使用说明</b>：各模块可在卡片上标注「处理中(默认) / 不处理 / 已解决 / 观察中」，标注实时保存在本地浏览器。周末点「导出本期快照」得到 JSON；下期打开新报告后「导入上期快照」，系统自动标记 <span style="color:var(--rust);font-weight:700">二次出现</span> 与 <span style="color:#e2504e;font-weight:700">不处理又复现</span> 的问题。红色代表负向/上升（遵循国内习惯）。</p>
-    <p style="margin-top:8px;color:var(--muted)">⚠️ 情感与提及热度为算法/人工近似估计，仅供优先级参考，非精确统计。生态作者反馈时间跨度较长（累积至 6 月），代表作者侧长期集中诉求。</p>
+    <p id="footNote"></p>
+    <p style="margin-top:8px"><b>使用说明</b>：上方「历史周报切换」可回看任意历史周期。各模块可在卡片上标注「处理中(默认) / 不处理 / 已解决 / 观察中」，标注按周期实时保存在本地浏览器。点「导出当前周期快照」得到 JSON；下期或对比时「导入快照回归对比」，系统自动标记 <span style="color:var(--rust);font-weight:700">二次出现</span> 与 <span style="color:#e2504e;font-weight:700">不处理又复现</span> 的问题。红色代表负向/上升（遵循国内习惯）。</p>
+    <p style="margin-top:8px;color:var(--muted)">⚠️ 情感与提及热度为算法/人工近似估计，仅供优先级参考，非精确统计。评论区正文源（comment 表）仅覆盖部分监控帖，content 作品表虽有全量声量但不含评论正文，故以有效评论 + 内容声量 + 生态作者反馈交叉印证。</p>
   </footer>
 </div>
 
 <div class="toast" id="toast"></div>
 
-<script src="data.js"></script>
+<!-- 多期数据聚合：window.WEEK_REGISTRY = [{key, meta, modules, issues}, ...] 按时间升序 -->
+<script src="all_weeks.js"></script>
 <script>
-const LS_KEY = "qqx5_yuqing_state_0701_0706";
+/* ========== 多期状态 ========== */
+const REG = (window.WEEK_REGISTRY || []).slice();
+// 时间升序 → 展示时最新期在最右
 const STATES = [
   {k:"open",     t:"处理中"},
   {k:"watching", t:"观察中"},
   {k:"ignore",   t:"不处理"},
   {k:"resolved", t:"已解决"}
 ];
-const MOD_MAP = Object.fromEntries(MODULES.map(m=>[m.key,m]));
-let state = loadState();
+
+let curIdx = REG.length - 1;   // 默认最新期
+let WEEK_META, MODULES, ISSUES, MOD_MAP, LS_KEY;
+let state = {};
 let lastWeek = null;
 let filter = { mod:"all", pri:"all", st:"all", nw:"all" };
 
+function lsKeyOf(key){ return "qqx5_yuqing_state_" + key.replace(/[^0-9a-zA-Z]/g,"_"); }
 function loadState(){ try{return JSON.parse(localStorage.getItem(LS_KEY))||{}}catch(e){return {}} }
 function saveState(){ localStorage.setItem(LS_KEY, JSON.stringify(state)); }
 function getState(id){ return state[id] || "open"; }
 
-/* ---------- meta ---------- */
-document.getElementById("m-range").textContent = WEEK_META.range;
-document.getElementById("m-date").textContent  = WEEK_META.generatedAt;
-document.getElementById("m-total").textContent = ISSUES.length;
-document.getElementById("noticeText").innerHTML = WEEK_META.noticeHtml || "";
-if(!WEEK_META.noticeHtml) document.getElementById("notice").style.display="none";
+/* ========== 切换周期 ========== */
+function selectWeek(idx){
+  curIdx = idx;
+  const w = REG[idx];
+  WEEK_META = w.meta;
+  MODULES   = w.modules;
+  ISSUES    = w.issues;
+  MOD_MAP   = Object.fromEntries(MODULES.map(m=>[m.key,m]));
+  LS_KEY    = lsKeyOf(w.key);
+  state     = loadState();
+  lastWeek  = null;                 // 切换周期清空上一次导入的对比基线
+  filter    = { mod:"all", pri:"all", st:"all", nw:"all" };
+  document.getElementById("regInfo").textContent =
+    "尚未导入对比快照。导入后将自动标记：二次出现 · 标注不处理又复现。";
+  renderPeriodTabs();
+  renderMeta();
+  renderStats();
+  renderAlert();
+  renderFilters();
+  renderBoard();
+  window.scrollTo({top:0,behavior:"smooth"});
+}
 
-/* ---------- stats ---------- */
+/* ========== 周期切换器 UI ========== */
+function renderPeriodTabs(){
+  const box = document.getElementById("ptabs");
+  document.getElementById("pb-count").textContent = REG.length;
+  box.innerHTML = REG.map((w,idx)=>{
+    const m=w.meta;
+    const p0 = w.issues.filter(i=>i.priority==="P0").length;
+    const on = idx===curIdx;
+    const isLatest = idx===REG.length-1;
+    let tag="";
+    if(isLatest) tag=`<span class="pt-tag latest">最新</span>`;
+    else if(m.isBaseline) tag=`<span class="pt-tag base">基线</span>`;
+    // 短标签：用 key（例 0713-0719）
+    const shortKey = w.key.replace(/(\d{2})(\d{2})-(\d{2})(\d{2})/, "$1.$2–$3.$4");
+    return `<div class="ptab ${on?'on':''}" data-idx="${idx}">
+      <span class="pt-bar"></span>${tag}
+      <div class="pt-key">${esc(shortKey)}</div>
+      <div class="pt-meta"><span>${w.issues.length} 项</span><span class="pm-p0">P0 ${p0}</span></div>
+    </div>`;
+  }).join("");
+  box.querySelectorAll(".ptab").forEach(el=>el.onclick=()=>{
+    const idx=+el.dataset.idx;
+    if(idx!==curIdx) selectWeek(idx);
+  });
+}
+
+/* ========== meta ========== */
+function renderMeta(){
+  document.getElementById("m-range").textContent = WEEK_META.range;
+  document.getElementById("m-date").textContent  = WEEK_META.generatedAt;
+  document.getElementById("m-total").textContent = ISSUES.length;
+  const baseTag=document.getElementById("m-baseline");
+  if(WEEK_META.isBaseline){ baseTag.textContent="📌 基线期 · 可作后续回归基线"; }
+  else{ baseTag.textContent="🔁 可作下期回归基线"; }
+  const nt=document.getElementById("noticeText");
+  const notice=document.getElementById("notice");
+  if(WEEK_META.noticeHtml){ nt.innerHTML=WEEK_META.noticeHtml; notice.style.display=""; }
+  else{ notice.style.display="none"; }
+  // footer 数据来源随周期更新
+  renderFootNote();
+}
+
+function renderFootNote(){
+  const el=document.getElementById("footNote");
+  const srcTxt = (WEEK_META.sources||[]).map(s=>`<b>${esc(s.name)}</b>：${esc(s.detail)}`).join("；<br>");
+  el.innerHTML = `<b>本期（${esc(WEEK_META.range)}）数据来源</b><br>${srcTxt || "—"}`;
+}
+
+/* ========== stats ========== */
 function renderStats(){
   const s = WEEK_META.sentiment;
   const p0 = ISSUES.filter(i=>i.priority==="P0").length;
-  const authorIssues = ISSUES.filter(i=>i.sources.includes("生态作者")).length;
   const newCnt = ISSUES.filter(i=>i.isNew===true).length;
   const contCnt = ISSUES.length - newCnt;
-  const negPct = Math.round(s.neg/s.total*100);
-  document.getElementById("stats").innerHTML = `
-    <div class="stat"><div class="lab">问题条目</div><div class="val">${ISSUES.length}</div><div class="foot">双源合并·剔噪后</div></div>
-    <div class="stat"><div class="lab">本期新增 <span style="color:var(--rust)">✦</span></div><div class="val" style="color:var(--rust)">${newCnt}</div><div class="foot">上期(07.01–07.05)未覆盖 · 延续 ${contCnt} 项</div></div>
-    <div class="stat"><div class="lab">P0 高优先级</div><div class="val" style="color:var(--up)">${p0}</div><div class="foot">需本期优先推进</div></div>
+  const negPct = s && s.total ? Math.round(s.neg/s.total*100) : 0;
+  const fmt = n => n>=10000 ? (n/10000).toFixed(1)+"万" : n.toLocaleString();
+  const cv = WEEK_META.contentVolume;
+
+  let cards = `
+    <div class="stat"><div class="lab">问题条目</div><div class="val">${ISSUES.length}</div><div class="foot">评论区剔噪 + 内容/作者侧归纳</div></div>
+    <div class="stat"><div class="lab">本期新增 <span style="color:var(--rust)">✦</span></div><div class="val" style="color:var(--rust)">${newCnt}</div><div class="foot">对比上期未覆盖 · 延续 ${contCnt} 项</div></div>
+    <div class="stat"><div class="lab">P0 高优先级</div><div class="val" style="color:var(--up)">${p0}</div><div class="foot">需本期优先推进</div></div>`;
+
+  if(s){
+    cards += `
     <div class="stat neg"><div class="lab">评论区负向占比</div><div class="val">${negPct}%</div>
       <div class="senti-bar"><i style="width:${negPct}%;background:var(--up)"></i><i style="width:${100-negPct}%;background:var(--down)"></i></div>
-      <div class="foot">负向 ${s.neg} · 正向 ${s.pos}（共 ${s.total} 条）</div></div>
-    <div class="stat"><div class="lab">生态作者相关</div><div class="val" style="color:var(--gold)">${authorIssues}</div><div class="foot">含作者反馈的条目</div></div>`;
+      <div class="foot">有效负向 ${s.neg} · 正向 ${s.pos} · 打卡噪声 ${s.neu}（共 ${s.total} 条）</div></div>`;
+  }
+  if(cv){
+    cards += `
+    <div class="stat"><div class="lab">内容声量（本周作品）</div><div class="val" style="color:var(--gold)">${fmt(cv.works)}</div><div class="foot">全平台作品 · 播放 ${fmt(cv.play)} · 评论 ${fmt(cv.comment)}</div></div>`;
+  }
+  document.getElementById("stats").innerHTML = cards;
 }
 
-/* ---------- filters ---------- */
+/* ========== filters ========== */
 function renderFilters(){
   const modBox=document.getElementById("modFilters");
   const allc=ISSUES.length;
@@ -326,7 +445,7 @@ function renderFilters(){
       const c=ISSUES.filter(i=>i.module===m.key).length;
       const on=filter.mod===m.key;
       return `<span class="chip mod ${on?'on':''}" data-t="mod" data-v="${m.key}"
-        style="${on?`background:${m.color};color:#1c1712`:`border-color:${m.color}55;color:${m.color}`}">${m.name}<span class="cnt">${c}</span></span>`;
+        style="${on?`background:${m.color};color:#1c1712`:`border-color:${m.color}55;color:${m.color}`}">${esc(m.name)}<span class="cnt">${c}</span></span>`;
     }).join("");
 
   const priBox=document.getElementById("priFilters");
@@ -355,14 +474,14 @@ function renderFilters(){
     return `<span class="chip ${on?'on':''}" data-t="nw" data-v="${v}" style="${on?`background:${bg};color:#1c1712`:''}">${t}<span class="cnt">${c}</span></span>`;
   }).join("");
 
-  document.querySelectorAll(".chip").forEach(ch=>ch.onclick=()=>{
+  document.querySelectorAll(".filters .chip").forEach(ch=>ch.onclick=()=>{
     const t=ch.dataset.t,v=ch.dataset.v;
     if(t==="mod")filter.mod=v; if(t==="pri")filter.pri=v; if(t==="st")filter.st=v; if(t==="nw")filter.nw=v;
     renderFilters(); renderBoard();
   });
 }
 
-/* ---------- regression logic ---------- */
+/* ========== regression logic ========== */
 function regressionOf(id){
   if(!lastWeek) return null;
   const prev = lastWeek.state ? lastWeek.state[id] : undefined;
@@ -373,7 +492,7 @@ function regressionOf(id){
   return "recurring";
 }
 
-/* ---------- board ---------- */
+/* ========== board ========== */
 function match(i){
   if(filter.mod!=="all"&&i.module!==filter.mod)return false;
   if(filter.pri!=="all"&&i.priority!==filter.pri)return false;
@@ -401,7 +520,7 @@ function renderBoard(){
     anyShown=true;
     html+=`<section class="modsec">
       <div class="modhead"><div class="bar" style="background:${m.color}"></div>
-        <h2>${m.name}</h2><span class="mdesc">${m.desc}</span>
+        <h2>${esc(m.name)}</h2><span class="mdesc">${esc(m.desc||"")}</span>
         <span class="mcount">${items.length} 项 · P0 ${items.filter(i=>i.priority==='P0').length}</span></div>
       <div class="grid">${items.map(cardHtml).join("")}</div></section>`;
   });
@@ -417,13 +536,12 @@ function cardHtml(i){
   if(reg==="reopened"){regBadge=`<span class="rbadge reopened">● 不处理又复现</span>`;cardReg="has-reopened";}
   else if(reg==="recurring"){regBadge=`<span class="rbadge recurring">↻ 二次出现</span>`;cardReg="has-recurring";}
   else if(reg==="new"){regBadge=`<span class="rbadge new">✦ 本期新增</span>`;}
-  const srcTags=i.sources.map(s=>`<span class="src ${s}">${s}</span>`).join("");
-  const quotes=i.quotes.map(q=>`<div class="q">${esc(q)}</div>`).join("");
+  const srcTags=(i.sources||[]).map(s=>`<span class="src ${s}">${esc(s)}</span>`).join("");
+  const quotes=(i.quotes||[]).map(q=>`<div class="q">${esc(q)}</div>`).join("");
   const sbtns=STATES.filter(s=>s.k!=="open").map(s=>
     `<button class="sbtn ${st===s.k?'active':''}" data-state="${s.k}" data-id="${i.id}">${s.t}</button>`).join("");
-  // 本期新出现（相对上期 07.01–07.05）：静态角标；与右上角动态回归 badge 共存，无回归 badge 时额外显示右上角折角
   const isNew = i.isNew === true;
-  const newTag = isNew ? `<span class="newtag" title="本期新出现（上期 07.01–07.05 未覆盖）">新</span>` : "";
+  const newTag = isNew ? `<span class="newtag" title="本期新出现（对比上一期未覆盖）">新</span>` : "";
   const cornerRibbon = (isNew && !regBadge) ? "is-new" : "";
   return `<article class="card mod-${i.module} st-${st} ${cardReg} ${cornerRibbon}" data-id="${i.id}">
     ${regBadge?`<div class="rbadges">${regBadge}</div>`:""}
@@ -431,7 +549,7 @@ function cardHtml(i){
       <span class="pri ${i.priority}">${i.priority}</span>
       ${newTag}
       ${srcTags}
-      <span class="senti-tag ${i.sentiment}">${i.sentiment}向</span>
+      <span class="senti-tag ${i.sentiment}">${esc(i.sentiment)}向</span>
     </div>
     <h3>${esc(i.title)}</h3>
     <div class="sum">${esc(i.summary)}</div>
@@ -453,7 +571,7 @@ function bindCards(){
   });
 }
 
-/* ---------- regression alert strip ---------- */
+/* ========== regression alert strip ========== */
 function renderAlert(){
   const alert=document.getElementById("alert"),list=document.getElementById("alertList");
   if(!lastWeek){alert.classList.remove("show");return;}
@@ -461,17 +579,17 @@ function renderAlert(){
   if(!flagged.length){alert.classList.remove("show");return;}
   list.innerHTML=flagged.map(i=>{
     const r=regressionOf(i.id);
-    return `<li data-id="${i.id}"><span class="k">${r==="reopened"?"不处理又复现":"二次出现"}</span>${esc(i.title)} · ${MOD_MAP[i.module].name}</li>`;
+    return `<li data-id="${i.id}"><span class="k">${r==="reopened"?"不处理又复现":"二次出现"}</span>${esc(i.title)} · ${esc(MOD_MAP[i.module]?MOD_MAP[i.module].name:i.module)}</li>`;
   }).join("");
   list.querySelectorAll("li").forEach(li=>li.onclick=()=>{
-    filter={mod:"all",pri:"all",st:"all"};renderFilters();renderBoard();
+    filter={mod:"all",pri:"all",st:"all",nw:"all"};renderFilters();renderBoard();
     const el=document.querySelector(`.card[data-id="${li.dataset.id}"]`);
     if(el){el.scrollIntoView({behavior:"smooth",block:"center"});el.style.outline="2px solid var(--gold)";setTimeout(()=>el.style.outline="",1600);}
   });
   alert.classList.add("show");
 }
 
-/* ---------- export / import ---------- */
+/* ========== export / import ========== */
 document.getElementById("exportBtn").onclick=()=>{
   const snap={
     week:WEEK_META.weekLabel, range:WEEK_META.range, exportedAt:new Date().toISOString(),
@@ -481,8 +599,8 @@ document.getElementById("exportBtn").onclick=()=>{
   };
   const blob=new Blob([JSON.stringify(snap,null,2)],{type:"application/json"});
   const a=document.createElement("a");a.href=URL.createObjectURL(blob);
-  a.download=`炫舞舆情快照_0701-0706.json`;a.click();
-  toast("已导出本期快照，可作为下期回归基线");
+  a.download=`炫舞舆情快照_${REG[curIdx].key}.json`;a.click();
+  toast("已导出当前周期快照，可作为下期回归基线");
 };
 document.getElementById("importFile").onchange=(e)=>{
   const f=e.target.files[0];if(!f)return;
@@ -493,25 +611,30 @@ document.getElementById("importFile").onchange=(e)=>{
       const flagged=ISSUES.filter(i=>{const g=regressionOf(i.id);return g==="reopened"||g==="recurring";}).length;
       const reopen=ISSUES.filter(i=>regressionOf(i.id)==="reopened").length;
       document.getElementById("regInfo").innerHTML=
-        `已载入上期快照（${esc(lastWeek.week||lastWeek.range||"上期")}）：<b style="color:var(--rust)">${flagged}</b> 项复现，其中 <b style="color:#e2504e">${reopen}</b> 项“不处理/已解决又复现”。`;
+        `已载入对比快照（${esc(lastWeek.week||lastWeek.range||"上期")}）：<b style="color:var(--rust)">${flagged}</b> 项复现，其中 <b style="color:#e2504e">${reopen}</b> 项“不处理/已解决又复现”。`;
       renderAlert();renderFilters();renderBoard();
       toast("回归对比完成");
     }catch(err){toast("快照文件解析失败");}
   };
   r.readAsText(f);
+  e.target.value="";
 };
 document.getElementById("resetBtn").onclick=()=>{
-  if(confirm("确定重置本期所有标注？此操作不可撤销。")){state={};saveState();renderFilters();renderBoard();toast("已重置本期标注");}
+  if(confirm("确定重置当前周期的所有标注？此操作不可撤销。")){state={};saveState();renderFilters();renderBoard();toast("已重置本期标注");}
 };
 document.getElementById("printBtn").onclick=()=>window.print();
 
-/* ---------- utils ---------- */
+/* ========== utils ========== */
 function esc(s){return String(s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
 let toastT;
 function toast(msg){const t=document.getElementById("toast");t.textContent=msg;t.classList.add("show");clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove("show"),2200);}
 
-/* ---------- init ---------- */
-renderStats();renderFilters();renderBoard();
+/* ========== init ========== */
+if(!REG.length){
+  document.getElementById("board").innerHTML=`<div class="grid"><div class="empty">未加载到周报数据（all_weeks.js）。</div></div>`;
+}else{
+  selectWeek(REG.length-1);   // 默认最新期
+}
 </script>
 </body>
 </html>
