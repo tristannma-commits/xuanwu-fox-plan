@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>捉福蝶 · 集福册 —— 活动示意原型 v3（2540×1080）</title>
+<style>
+:root{
+  /* 参考 Monopoly GO 画册：木纹顶栏 + 黄绿日芒底 + 奶油羊皮纸 + 深棕描边 */
+  --wood:#9b5a2a; --wood2:#b8743a; --wood3:#6e3a16;
+  --grass:#c3d443; --grass2:#a6bf32; --grass3:#d9e66c;
+  --cream:#fff3d2; --cream2:#f6e3b4; --cream3:#e9cf93;
+  --gold:#f2b538; --gold2:#d68a17;
+  --o:#4a2a10;            /* 全局描边色：深棕 */
+  --navy:#22314e; --navy2:#121c30;
+  --green:#62cc3a; --green2:#3a9a22;
+  --blue:#2f95e6; --blue2:#1a62a8;
+  --orange:#ff9a2a; --orange2:#d66310;
+  --red:#ec3d2f; --red2:#a8231a;
+  --font:"HarmonyOS Sans SC","PingFang SC","Microsoft YaHei",sans-serif;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{background:#20180f;font-family:var(--font)}
+button{font-family:inherit;cursor:pointer;border:none}
+
+/* 卡通描边字 */
+.ol{color:#fff;font-weight:900;text-shadow:
+  -3px -3px 0 var(--o),3px -3px 0 var(--o),-3px 3px 0 var(--o),3px 3px 0 var(--o),
+  0 -3px 0 var(--o),0 3px 0 var(--o),-3px 0 0 var(--o),3px 0 0 var(--o),0 6px 0 var(--o)}
+.ol-s{color:#fff;font-weight:900;text-shadow:
+  -2px -2px 0 var(--o),2px -2px 0 var(--o),-2px 2px 0 var(--o),2px 2px 0 var(--o),0 -2px 0 var(--o),0 2px 0 var(--o),-2px 0 0 var(--o),2px 0 0 var(--o),0 4px 0 var(--o)}
+
+/* 评审工具栏（不属于游戏UI） */
+.devbar{position:sticky;top:0;z-index:50;display:flex;flex-wrap:wrap;gap:8px;align-items:center;padding:10px 20px;background:#17110a;border-bottom:1px solid #3a2a18;font-size:13px;color:#a8946f}
+.devbar b{color:#ffd56a;font-size:15px;margin-right:8px}
+.devbar button{background:#2a1f14;color:#e8d9bb;padding:6px 12px;border-radius:7px;font-size:13px;border:1px solid #4a3822}
+.devbar button.on{background:#f2b538;color:#3a2600;border-color:#f2b538}
+.devbar .sp{width:1px;height:20px;background:#4a3822;margin:0 6px}
+
+.wrap{position:relative;margin:16px auto 0}
+.stage{position:absolute;left:0;top:0;width:2540px;height:1080px;overflow:hidden;transform-origin:0 0;border-radius:24px;color:var(--o);
+  background:
+   repeating-conic-gradient(from 0deg at 62% 46%,rgba(255,255,255,.10) 0 7deg,transparent 7deg 14deg),
+   radial-gradient(1400px 900px at 62% 46%,var(--grass3),var(--grass) 45%,var(--grass2) 100%)}
+
+/* ===== 木纹顶栏 ===== */
+.wood{position:absolute;left:0;top:0;right:0;height:150px;z-index:3;
+  background:
+   repeating-linear-gradient(90deg,transparent 0 158px,rgba(60,28,8,.55) 158px 162px),
+   linear-gradient(180deg,var(--wood2),var(--wood) 55%,#8a4c20);
+  box-shadow:0 8px 0 var(--wood3),0 14px 0 rgba(0,0,0,.18)}
+.wood:before{content:"";position:absolute;left:0;right:0;top:0;height:10px;background:rgba(255,220,160,.25)}
+.wood .in{position:absolute;inset:0;display:flex;align-items:center;gap:26px;padding:0 50px}
+.title{font-size:84px;letter-spacing:6px;color:#ffd83a;font-weight:900;line-height:1;
+  text-shadow:-5px -5px 0 var(--o),5px -5px 0 var(--o),-5px 5px 0 var(--o),5px 5px 0 var(--o),0 -5px 0 var(--o),0 5px 0 var(--o),-5px 0 0 var(--o),5px 0 0 var(--o),0 10px 0 var(--o)}
+.title em{font-style:normal;color:#fff}
+.back{height:84px;padding:0 34px;border-radius:24px;font-size:34px;background:var(--orange);box-shadow:0 0 0 5px var(--o),0 9px 0 5px var(--o)}
+.x{margin-left:auto;width:88px;height:88px;border-radius:50%;font-size:46px;background:var(--red);box-shadow:inset 0 0 0 6px #fff,0 0 0 5px var(--o),0 8px 0 5px var(--o)}
+
+/* ===== 首页 ===== */
+.hero{position:absolute;left:60px;top:200px;width:760px;height:600px;border-radius:40px;background:var(--cream);
+  box-shadow:inset 0 0 0 10px var(--gold),inset 0 0 0 14px var(--gold2),0 0 0 6px var(--o),0 14px 0 6px var(--o)}
+.ribbon{position:absolute;left:50%;top:-34px;transform:translateX(-50%);padding:14px 56px;border-radius:20px;background:var(--orange);white-space:nowrap;font-size:42px;
+  box-shadow:inset 0 -8px 0 var(--orange2),0 0 0 5px var(--o),0 8px 0 5px var(--o)}
+.hero .sub{margin:64px 0 26px;text-align:center;font-size:30px;font-weight:900;color:#8a5a22}
+.prizes{display:flex;gap:22px;justify-content:center}
+.prize{width:206px;height:250px;border-radius:26px;background:linear-gradient(180deg,#a8662e,#7e4419);box-shadow:inset 0 6px 0 rgba(0,0,0,.25),0 0 0 4px var(--o);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px}
+.prize svg{width:150px;height:150px}
+.prize span{font-size:30px}
+.hero .meta{position:absolute;left:44px;right:44px;bottom:40px;display:flex;align-items:center;gap:18px}
+.hero .meta .t{font-size:26px;font-weight:900;color:#6b4318;white-space:nowrap}
+.pill{position:relative;flex:1;height:56px;border-radius:28px;background:var(--navy);box-shadow:inset 0 5px 0 var(--navy2),0 0 0 4px var(--o);overflow:hidden}
+.pill i{position:absolute;left:6px;top:6px;bottom:6px;border-radius:24px;background:linear-gradient(180deg,#8ee65a,var(--green) 50%,var(--green2))}
+.pill span{position:absolute;inset:0;display:grid;place-items:center;font-size:28px}
+.info{flex:none;width:56px;height:56px;border-radius:50%;background:var(--blue);font-size:32px;box-shadow:inset 0 0 0 4px #fff,0 0 0 4px var(--o)}
+
+.sets{position:absolute;left:880px;right:50px;top:230px;display:flex;justify-content:space-between}
+.set{width:300px;display:flex;flex-direction:column;align-items:center;cursor:pointer}
+.set:hover .bd{transform:translateY(-6px)}
+.bd{position:relative;width:280px;height:280px;border-radius:50%;transition:transform .15s;
+  background:radial-gradient(circle at 50% 40%,#fff 0,var(--tint) 70%);
+  box-shadow:inset 0 0 0 16px var(--c),inset 0 0 0 22px #fff,0 0 0 6px var(--o),0 12px 0 6px var(--o)}
+.bd svg{position:absolute;left:10px;top:-34px;width:260px;height:260px;filter:drop-shadow(0 6px 0 rgba(74,42,16,.35))}
+.bd .num{position:absolute;left:-6px;top:-6px;width:74px;height:74px;border-radius:50%;background:var(--c);display:grid;place-items:center;font-size:40px;box-shadow:inset 0 0 0 5px #fff,0 0 0 5px var(--o)}
+.set .nm{margin-top:-26px;position:relative;font-size:40px;white-space:nowrap}
+.set .pill{flex:none;width:210px;height:54px;margin-top:14px}
+.set .pill span{font-size:26px}
+.set.lock .bd{filter:grayscale(1) brightness(.92)}
+.set.lock .bd svg{opacity:.45}
+.lkc{position:absolute;inset:0;display:grid;place-items:center}
+.lkc svg{position:static!important;width:110px!important;height:110px!important;filter:none!important;opacity:1!important}
+.check{position:absolute;right:-10px;bottom:16px;width:86px;height:86px;border-radius:50%;background:var(--green);display:grid;place-items:center;box-shadow:inset 0 0 0 5px #fff,0 0 0 5px var(--o)}
+.check svg{position:static!important;width:50px!important;height:50px!important;filter:none!important}
+
+.dock{position:absolute;left:880px;right:50px;bottom:56px;display:flex;justify-content:space-between;gap:30px}
+.db{position:relative;flex:1;height:130px;border-radius:30px;font-size:38px;background:var(--blue);
+  box-shadow:inset 0 -10px 0 var(--blue2),inset 0 4px 0 rgba(255,255,255,.35),0 0 0 6px var(--o),0 10px 0 6px var(--o)}
+.db small{display:block;font-size:22px;margin-top:4px}
+.db.main{flex:1.4;background:var(--green);box-shadow:inset 0 -10px 0 var(--green2),inset 0 4px 0 rgba(255,255,255,.35),0 0 0 6px var(--o),0 10px 0 6px var(--o)}
+.badge{position:absolute;right:-16px;top:-18px;min-width:58px;height:58px;padding:0 12px;border-radius:29px;background:var(--red);display:grid;place-items:center;font-size:30px;box-shadow:inset 0 0 0 4px #fff,0 0 0 4px var(--o)}
+
+/* ===== 画集页 ===== */
+.setv{position:absolute;inset:0;display:none}
+.paper{position:absolute;left:250px;top:196px;width:2040px;height:850px;border-radius:44px;background:var(--cream);display:flex;
+  box-shadow:inset 0 0 0 10px var(--gold),inset 0 0 0 14px var(--gold2),0 0 0 6px var(--o),0 14px 0 6px var(--o)}
+.paper .ribbon{background:var(--c);box-shadow:inset 0 -8px 0 rgba(0,0,0,.2),0 0 0 5px var(--o),0 8px 0 5px var(--o)}
+.pl{width:1320px;padding:66px 50px 40px 60px}
+.pl .hd{display:flex;align-items:center;justify-content:space-between;margin-bottom:26px}
+.pl .hd .t{font-size:30px;font-weight:900;color:#8a5a22}
+.pl .hd .pill{flex:none;width:260px}
+.grid{display:grid;grid-template-columns:repeat(3,380px);gap:34px 22px;justify-content:center}
+.pr{flex:1;margin:40px 40px 40px 0;border-radius:32px;background:var(--cream2);box-shadow:inset 0 6px 0 rgba(120,70,20,.12);padding:40px;display:flex;flex-direction:column;align-items:center;text-align:center}
+.pr .bd{width:240px;height:240px}
+.pr .bd svg{left:10px;top:-24px;width:220px;height:220px}
+.pr h3{font-size:34px;margin:36px 0 16px}
+.rwbox{width:100%;display:flex;gap:16px;justify-content:center;margin-bottom:auto}
+.rwbox div{flex:1;border-radius:20px;padding:14px 8px;background:linear-gradient(180deg,#a8662e,#7e4419);box-shadow:inset 0 5px 0 rgba(0,0,0,.25),0 0 0 4px var(--o);font-size:22px}
+.rwbox div svg{display:block;width:80px;height:80px;margin:0 auto 6px}
+.btn{width:100%;height:96px;border-radius:28px;font-size:36px;background:var(--green);
+  box-shadow:inset 0 -10px 0 var(--green2),inset 0 4px 0 rgba(255,255,255,.35),0 0 0 6px var(--o),0 10px 0 6px var(--o)}
+.btn.b{background:var(--blue);box-shadow:inset 0 -10px 0 var(--blue2),inset 0 4px 0 rgba(255,255,255,.35),0 0 0 6px var(--o),0 10px 0 6px var(--o)}
+.btn.y{background:var(--orange);box-shadow:inset 0 -10px 0 var(--orange2),inset 0 4px 0 rgba(255,255,255,.35),0 0 0 6px var(--o),0 10px 0 6px var(--o)}
+.btn:disabled{background:#bdb3a0;box-shadow:inset 0 -10px 0 #958a76,0 0 0 6px var(--o),0 10px 0 6px var(--o);cursor:not-allowed}
+.pr .btn{margin-top:26px}
+.arr{position:absolute;top:540px;width:120px;height:120px;border-radius:50%;font-size:80px;line-height:1;background:var(--orange);padding-bottom:10px;
+  box-shadow:inset 0 -9px 0 var(--orange2),0 0 0 6px var(--o),0 9px 0 6px var(--o)}
+.arr.p{left:80px}.arr.n{right:80px}
+.arr:disabled{filter:grayscale(1);opacity:.5;cursor:default}
+
+/* ===== 贴纸卡（静态） ===== */
+.stk{position:relative;width:380px;height:206px;border-radius:26px;cursor:pointer;background:#fff;display:flex;align-items:center;gap:6px;padding:0 18px 0 10px;
+  box-shadow:0 0 0 5px var(--o),0 8px 0 5px var(--o)}
+.stk .im{flex:none;width:170px;height:170px;border-radius:20px;background:radial-gradient(circle,#fff,var(--t) 75%);display:grid;place-items:center}
+.stk .im svg{width:150px;height:150px}
+.stk .tx{flex:1;min-width:0;text-align:center}
+.stk .st{font-size:30px;letter-spacing:-2px;color:#ffc61a;text-shadow:-2px -2px 0 var(--o),2px -2px 0 var(--o),-2px 2px 0 var(--o),2px 2px 0 var(--o),0 3px 0 var(--o)}
+.stk .n{margin-top:8px;font-size:32px;font-weight:900;color:var(--o);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.stk .cnt{position:absolute;right:-16px;top:-18px;min-width:60px;height:60px;padding:0 10px;border-radius:30px;background:var(--red);display:grid;place-items:center;font-size:28px;z-index:2;box-shadow:inset 0 0 0 4px #fff,0 0 0 4px var(--o)}
+.stk .new{position:absolute;left:-14px;top:-18px;padding:4px 14px;border-radius:14px;background:var(--green);font-size:24px;z-index:2;box-shadow:0 0 0 4px var(--o)}
+.stk.s5{background:linear-gradient(180deg,#fff7d0,#ffe28a)}
+.stk.s5 .im{box-shadow:0 0 0 5px var(--gold)}
+.stk.miss{background:var(--cream3);box-shadow:inset 0 8px 0 rgba(110,60,20,.18),0 0 0 5px #b38b4e}
+.stk.miss .im{background:#dcbf82}
+.stk.miss .st{color:#cfae6c;text-shadow:none}
+.stk.miss .n{color:#9a7440}
+
+/* ===== 弹窗 ===== */
+.ov{position:absolute;inset:0;z-index:20;display:none;place-items:center;background:rgba(40,22,6,.6)}
+.ov.show{display:grid}
+.md{position:relative;border-radius:44px;background:var(--cream);padding:96px 64px 56px;
+  box-shadow:inset 0 0 0 10px var(--gold),inset 0 0 0 14px var(--gold2),0 0 0 6px var(--o),0 14px 0 6px var(--o)}
+.md .ribbon{background:var(--hc,var(--orange));box-shadow:inset 0 -8px 0 rgba(0,0,0,.2),0 0 0 5px var(--o),0 8px 0 5px var(--o)}
+.md .cl{position:absolute;right:-30px;top:-30px;width:92px;height:92px;border-radius:50%;font-size:48px;background:var(--red);box-shadow:inset 0 0 0 6px #fff,0 0 0 5px var(--o),0 8px 0 5px var(--o)}
+
+.dt{width:1260px;display:flex;gap:56px}
+.big{flex:none;width:440px;height:520px;border-radius:34px;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;box-shadow:0 0 0 6px var(--o),0 10px 0 6px var(--o)}
+.big .im{width:360px;height:360px;border-radius:28px;background:radial-gradient(circle,#fff,var(--t) 75%);display:grid;place-items:center}
+.big .im svg{width:320px;height:320px}
+.big .st{font-size:44px;color:#ffc61a;text-shadow:-3px -3px 0 var(--o),3px -3px 0 var(--o),-3px 3px 0 var(--o),3px 3px 0 var(--o),0 4px 0 var(--o)}
+.big.miss{background:var(--cream3);box-shadow:inset 0 8px 0 rgba(110,60,20,.18),0 0 0 6px #b38b4e}
+.big.miss .im{background:#dcbf82}
+.dt .inf{flex:1;display:flex;flex-direction:column}
+.tag{align-self:flex-start;padding:8px 20px;border-radius:14px;font-size:26px;box-shadow:0 0 0 4px var(--o)}
+.tS{background:var(--orange)}.tL{background:var(--blue)}.tE{background:#a35ee0}.tG{background:var(--green)}
+.dt h3{font-size:64px;margin:20px 0 6px}
+.dt .meta{font-size:26px;font-weight:900;color:#8a5a22}
+.copy{position:relative;margin:26px 0;padding:30px 34px;border-radius:26px;background:#fff;font-size:32px;line-height:1.7;font-weight:600;color:var(--o);min-height:200px;box-shadow:inset 0 5px 0 rgba(120,70,20,.12),0 0 0 4px var(--cream3)}
+.copy.hide span{filter:blur(10px)}
+.copy em{position:absolute;inset:0;display:grid;place-items:center;font-style:normal;font-size:30px}
+.dt .bt{margin-top:auto;display:flex;gap:30px}
+
+.req{width:880px;text-align:center}
+.req .ic{width:240px;height:240px;margin:-30px auto 20px;border-radius:50%;background:radial-gradient(circle,#fff,#d8f2c4 75%);display:grid;place-items:center;box-shadow:inset 0 0 0 14px var(--green),inset 0 0 0 20px #fff,0 0 0 6px var(--o)}
+.req .ic svg{width:180px;height:180px}
+.req h3{font-size:48px}
+.req p{font-size:28px;font-weight:600;color:#8a5a22;line-height:1.6;margin:16px 0 30px}
+.chs{display:flex;gap:24px;justify-content:center;margin-bottom:36px}
+.chs button{width:180px;height:130px;border-radius:26px;background:#fff;font-size:24px;font-weight:900;color:var(--o);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;box-shadow:0 0 0 4px var(--o),0 7px 0 4px var(--o)}
+.chs i{width:54px;height:54px;border-radius:16px;display:block;box-shadow:0 0 0 3px var(--o)}
+.req .btn{width:360px}
+
+.list{width:1080px}
+.row{display:flex;align-items:center;gap:22px;height:104px;padding:0 26px;border-radius:26px;background:#fff;margin-bottom:18px;font-size:30px;font-weight:900;color:var(--o);box-shadow:0 0 0 4px var(--cream3)}
+.row .av{flex:none;width:68px;height:68px;border-radius:50%;display:grid;place-items:center;font-size:30px;box-shadow:inset 0 0 0 4px #fff,0 0 0 4px var(--o)}
+.row .tx{flex:1;min-width:0}
+.row .tx small{display:block;font-size:21px;font-weight:600;color:#9a7440}
+.row .sb{width:180px;height:70px;border-radius:22px;font-size:28px;background:var(--green);box-shadow:inset 0 -7px 0 var(--green2),0 0 0 4px var(--o),0 6px 0 4px var(--o)}
+.row .sb.b{background:var(--blue);box-shadow:inset 0 -7px 0 var(--blue2),0 0 0 4px var(--o),0 6px 0 4px var(--o)}
+.row .sb.off{background:#cbbfa6;box-shadow:inset 0 -7px 0 #a3967c,0 0 0 4px var(--o)}
+.row.me{background:#ffe9a6;box-shadow:0 0 0 4px var(--gold2)}
+.rk{width:60px;text-align:center;font-size:44px}
+.tabs{display:flex;gap:14px;margin-bottom:26px}
+.tabs button{flex:1;height:68px;border-radius:22px;font-size:25px;font-weight:900;background:var(--cream2);color:#8a5a22;box-shadow:0 0 0 4px var(--cream3)}
+.tabs button.on{background:var(--orange);color:#fff;box-shadow:inset 0 -6px 0 var(--orange2),0 0 0 4px var(--o);
+  text-shadow:-2px -2px 0 var(--o),2px -2px 0 var(--o),-2px 2px 0 var(--o),2px 2px 0 var(--o),0 3px 0 var(--o)}
+
+.pk{width:1720px;text-align:center}
+.pk .cards{display:flex;gap:34px;justify-content:center;margin:20px 0 46px}
+.pk .cw{display:flex;flex-direction:column;align-items:center;gap:26px}
+.pk .lb{padding:8px 22px;border-radius:16px;font-size:26px;box-shadow:0 0 0 4px var(--o)}
+.pk .btn{width:380px}
+
+.cp{width:1060px;text-align:center}
+.cp .bd{margin:20px auto 0}
+.cp h3{font-size:56px;margin:40px 0 10px}
+.cp .sn{font-size:32px;font-weight:900;color:#8a5a22}.cp .sn b{font-size:56px;color:var(--red)}
+.cp .rwbox{max-width:620px;margin:30px auto 44px}
+.cp .bt{display:flex;gap:30px;justify-content:center}.cp .btn{width:340px}
+
+.sh{width:1560px;display:flex;gap:60px}
+.sh img{flex:none;width:450px;height:800px;border-radius:28px;box-shadow:0 0 0 6px var(--o)}
+.sh .so{flex:1;display:flex;flex-direction:column}
+.sh h3{font-size:50px}
+.sh p{font-size:26px;font-weight:600;color:#8a5a22;line-height:1.7;margin:16px 0 30px}
+.sh .chs{justify-content:flex-start}
+.sh .bt{margin-top:auto}
+
+.toast{position:absolute;left:50%;bottom:220px;transform:translateX(-50%);z-index:40;padding:22px 48px;border-radius:26px;background:var(--o);color:#ffe7b0;font-size:30px;font-weight:900;display:none;white-space:nowrap;box-shadow:0 0 0 5px var(--gold)}
+.toast.show{display:block}
+
+/* 标注 */
+body.anno [data-n]{outline:5px dashed #ff2d2d;outline-offset:10px}
+body.anno [data-n]::after{content:attr(data-n);position:absolute;left:10px;top:10px;z-index:30;width:52px;height:52px;border-radius:50%;background:#ff2d2d;color:#fff;font:900 28px/52px var(--font);text-align:center;text-shadow:none;box-shadow:0 0 0 4px #fff}
+.grid[data-n],.pr[data-n],.inf[data-n],.set[data-n]{position:relative}
+
+/* 下方说明 */
+.doc{max-width:1500px;margin:36px auto 80px;padding:0 24px;color:#e2d4b8;font-size:15px;line-height:1.85}
+.doc h2{font-size:22px;color:#ffd56a;margin:26px 0 10px}
+.doc .g{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.doc .c{background:#2a1f14;border:1px solid #4a3822;border-radius:14px;padding:16px 20px}
+.doc .c h3{font-size:16px;color:#fff;margin-bottom:6px}
+.doc b{color:#ffd56a}
+.doc ol,.doc ul{padding-left:20px}
+.doc table{width:100%;border-collapse:collapse}
+.doc td,.doc th{border-bottom:1px solid #4a3822;padding:6px 8px;text-align:left}
+.doc th{color:#a8946f;font-weight:600}
+.flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.flow span{background:#3a2a18;border:1px solid #5a4428;border-radius:8px;padding:6px 12px;color:#fff}
+.flow i{font-style:normal;color:#a8946f}
+.sw{display:flex;gap:10px;flex-wrap:wrap;margin-top:6px}
+.sw span{display:flex;align-items:center;gap:6px;font-size:13px}
+.sw span i{width:22px;height:22px;border-radius:6px;border:2px solid #4a2a10}
+</style>
+</head>
+<body>
+
+<div class="devbar">
+  <b>捉福蝶·集福册 v3</b>
+  <button data-go="home" class="on">福册首页</button>
+  <button data-go="set">画集页</button>
+  <button data-go="detail">贴纸详情</button>
+  <button data-go="pack">开福蝶包</button>
+  <button data-go="trade">交换</button>
+  <button data-go="request">求赠</button>
+  <button data-go="task">任务</button>
+  <button data-go="rank">排行榜</button>
+  <button data-go="complete">集齐</button>
+  <button data-go="share">分享图</button>
+  <span class="sp"></span>
+  <button id="annoBtn">显示标注</button>
+</div>
+
+<div class="wrap" id="wrap"><div class="stage" id="stage">
+
+  <div class="wood" data-n="1"><div class="in">
+    <button class="back ol-s" id="backBtn" style="display:none" onclick="showHome()">‹ 福册</button>
+    <div class="title">捉福蝶<em>·</em>集福册</div>
+    <button class="x ol-s" onclick="toast('关闭 → 返回游戏')">✕</button>
+  </div></div>
+
+  <!-- 首页 -->
+  <div id="home">
+    <div class="hero" data-n="2">
+      <div class="ribbon ol">集齐五册 · 赢终极大奖</div>
+      <div class="sub">完成全部 5 本画集即可获得</div>
+      <div class="prizes" id="prizes"></div>
+      <div class="meta"><span class="t">剩余时间：<span id="cd">--</span></span>
+        <div class="pill"><i id="totBar"></i><span class="ol-s" id="tot">0/45</span></div>
+        <button class="info ol-s" onclick="toast('集齐 5 本画集赢终极大奖')">i</button></div>
+    </div>
+    <div class="sets" id="sets"></div>
+    <div class="dock" data-n="4">
+      <button class="db main ol" onclick="openPack()">开福蝶包<small>每包 4 张</small><span class="badge" id="packN">0</span></button>
+      <button class="db ol" onclick="openTask()">任务<small>领福蝶包</small></button>
+      <button class="db ol" onclick="openTrade()">交换<small>送 / 求贴纸</small><span class="badge" id="reqN">0</span></button>
+      <button class="db ol" onclick="openRank()">排行榜<small>谁最快集齐</small></button>
+      <button class="db ol" onclick="openShare('album')">分享<small>我的福册</small></button>
+    </div>
+  </div>
+
+  <!-- 画集页 -->
+  <div class="setv" id="setv">
+    <div class="paper" id="paper">
+      <div class="ribbon ol" id="sName"></div>
+      <div class="pl">
+        <div class="hd"><span class="t" id="sPh"></span><div class="pill"><i id="sBar"></i><span class="ol-s" id="sPg"></span></div></div>
+        <div class="grid" id="grid" data-n="5"></div>
+      </div>
+      <div class="pr" data-n="6">
+        <div class="bd" id="sBd"></div>
+        <h3 class="ol">集齐 9 张领取</h3>
+        <div class="rwbox" id="sRw"></div>
+        <button class="btn b ol" onclick="askMissing()">求缺的贴纸</button>
+        <button class="btn ol" id="sShare" onclick="openShare('set')">分享画集</button>
+      </div>
+    </div>
+    <button class="arr p ol" id="prev" onclick="openSet(cur-1)">‹</button>
+    <button class="arr n ol" id="next" onclick="openSet(cur+1)">›</button>
+  </div>
+
+  <div class="ov" id="ov" onclick="if(event.target===this)closeOv()"><div id="ovc"></div></div>
+  <div class="toast" id="toast"></div>
+</div></div>
+
+<div class="doc">
+  <h2>页面流程</h2>
+  <div class="flow"><span>福册首页（5 本画集）</span><i>→ 点画集 →</i><span>画集页（3×3 贴纸）</span><i>→ 点贴纸 →</i><span>贴纸详情（图 + 文案）</span><i>→</i><span>求赠 / 赠送</span><i>→ 集齐 →</i><span>集齐弹窗（编号）</span><i>→</i><span>分享图</span></div>
+
+  <div class="g" style="margin-top:16px">
+    <div class="c"><h3>标注说明</h3><ol>
+      <li><b>木纹顶栏</b>：活动标题；画集页左侧为返回，右侧关闭。</li>
+      <li><b>终极大奖板</b>：集齐五册的奖励、剩余时间、总进度 x/45。</li>
+      <li><b>画集圆章</b>：5 本，彩色外环区分阶段；下方深蓝进度条 x/9；未开放=灰色+锁+开启日期；集齐=绿色对勾。</li>
+      <li><b>底部按钮</b>：开福蝶包（红点=可开包数）/ 任务 / 交换（红点=好友求赠数）/ 排行榜 / 分享。</li>
+      <li><b>贴纸格</b>：已得=白卡彩图，重复=右上 ×N，未得=凹陷的米色空位；星级=稀有度，★5 金卡。</li>
+      <li><b>画集侧栏</b>：集齐奖励、求缺的贴纸、分享画集。</li>
+    </ol></div>
+    <div class="c"><h3>核心规则（建议值，可调）</h3><ul>
+      <li>获得：完成任务 → 得福蝶包 → 每包 4 张随机贴纸。</li>
+      <li>交换：重复贴纸可<b>赠送</b>好友；缺的贴纸可<b>求赠</b>（分享到 QQ / 微信 / 群聊）。每日赠送 5 次、求赠 3 次。</li>
+      <li>★5 贴纸每阶 1 张，掉率最低，是推动好友间交换的关键卡。</li>
+      <li>集齐一本画集 → 奖励 + 全服<b>完成编号</b>（第 N 位集齐）→ 进入该画集排行榜。</li>
+      <li>集齐 5 本 → 终极大奖 + 福册分享图。</li>
+    </ul></div>
+    <div class="c"><h3>贴纸文案（点开贴纸显示）</h3>
+      <table><tr><th>标签</th><th>用途</th><th>未获得时</th></tr>
+      <tr><td>卖点</td><td>预热：时装 / 场景 / 玩法</td><td>可见</td></tr>
+      <tr><td>上线</td><td>预热：上线时间</td><td>可见</td></tr>
+      <tr><td>彩蛋</td><td>隐藏信息 / 社区话题</td><td>模糊，获得后揭晓</td></tr>
+      <tr><td>教学</td><td>开包 / 赠送 / 求赠说明</td><td>可见</td></tr></table>
+      <p style="margin-top:6px">一阶段（预热）9 张贴纸文案都写上线时间。文案 ≤40 字；贴纸图 1:1，<b>静态</b>。</p></div>
+    <div class="c"><h3>视觉规范（参考 Monopoly GO 画册）</h3><ul>
+      <li>结构色：木纹顶栏 / 黄绿日芒底 / 奶油羊皮纸面板 + 金边 / 深棕描边 #4A2A10 统一包边。</li>
+      <li>文字：标题与按钮用<b>白字 + 深棕粗描边 + 下投影</b>；正文用深棕。</li>
+      <li>按钮：绿=主操作，蓝=次操作，橙=标题丝带/翻页，红=关闭/红点。</li>
+      <li>进度：深蓝槽 + 绿色填充 + 白描边数字。</li></ul>
+      <div class="sw"><span><i style="background:#9b5a2a"></i>木纹</span><span><i style="background:#c3d443"></i>草地</span><span><i style="background:#fff3d2"></i>羊皮纸</span><span><i style="background:#f2b538"></i>金边</span><span><i style="background:#22314e"></i>进度槽</span><span><i style="background:#62cc3a"></i>主按钮</span><span><i style="background:#2f95e6"></i>次按钮</span><span><i style="background:#ff9a2a"></i>丝带</span><span><i style="background:#ec3d2f"></i>关闭/红点</span></div></div>
+    <div class="c" style="grid-column:span 2"><h3>待确认</h3><ul>
+      <li>5 阶开启日期（占位 10.13 / 10.20 / 10.27 / 11.03 / 11.10）、上线日（占位 10 月 20 日）；45 张贴纸名称、文案、美术图（当前为占位）</li>
+      <li>各阶奖励与终极大奖道具；任务内容与产包数量、星级掉率；分享渠道能力与二维码落地页</li>
+    </ul></div>
+  </div>
+</div>
+
+<script>
+/* ============ 配置：文案 / 日期 / 奖励都改这里 ============ */
+const CONFIG={launch:'10月20日',end:'2026-11-23T23:59:59+08:00',nick:'福蝶玩家'};
+const STAGES=[
+ {no:1,name:'破茧画集',phase:'第一阶段 · 预热',date:'10.13',c:'#2f95e6',tint:'#bfe3ff',hue:200,rw:[['头像框','frame'],['福蝶包×3','pack']]},
+ {no:2,name:'超凡画集',phase:'第二阶段',date:'10.20',c:'#ff7a1f',tint:'#ffd9a8',hue:28,rw:[['名片背景','card'],['福蝶包×4','pack']]},
+ {no:3,name:'璀璨画集',phase:'第三阶段',date:'10.27',c:'#3fae3a',tint:'#cdf0b0',hue:110,rw:[['头饰','crown'],['福蝶包×5','pack']]},
+ {no:4,name:'稀世画集',phase:'第四阶段',date:'11.03',c:'#9a52dc',tint:'#e6cdfb',hue:280,rw:[['翅膀挂件','wing'],['福蝶包×5','pack']]},
+ {no:5,name:'夜稀世画集',phase:'第五阶段 · 终章',date:'11.10',c:'#e8457f',tint:'#ffcfe0',hue:335,rw:[['限定时装','dress'],['称号','crown']]}
+];
+const GRAND=[['限定时装','dress'],['称号','crown'],['福蝶包×20','pack']];
+// [名称, 星级, 标签 S卖点/L上线/E彩蛋/G教学, 文案]；{L}=上线日期
+const STK=[
+ [['破茧',1,'L','{L}，福蝶破茧。新版本全服上线，预约即领头像框。'],['晨露',1,'S','限定时装「蝶梦」：裙摆会散落光蝶。{L}上线。'],['花间',2,'S','新场景「福蝶花园」，{L}开放。'],['振翅',2,'G','做任务得福蝶包，重复贴纸可以送给好友。{L}开启。'],['双生',3,'S','双人动作「比翼」，和好友一起解锁。{L}上线。'],['寻香',3,'E','在福蝶花园连点同一朵花 3 次……{L}见分晓。'],['流光',4,'S','限定翅膀「流光羽」，{L}上线。'],['福至',4,'L','{L} 00:00 开服，排行榜同步开启。'],['翠玉凤蝶',5,'E','最稀有的一张，问问好友有没有？{L}上线。']],
+ [['青空',1,'S','版本主题曲首曝，开服当天全曲解锁。'],['风信',1,'G','每日任务都能领福蝶包，记得每天来开包。'],['云阶',2,'S','新玩法「蝶舞云阶」：踩准节拍蝴蝶越多。'],['琉璃',2,'E','翅膀上的眼斑其实是一枚音符。'],['逐光',3,'G','缺哪张，就向好友求哪张。'],['天河',3,'S','限定坐骑「天河蝶舟」。'],['星屑',4,'E','凌晨开包会更幸运？这是谣言吗？'],['远航',4,'S','集齐奖励：名片背景「超凡天穹」。'],['天青琉璃',5,'E','只差它的人，在排行榜上永远差一名。']],
+ [['霞染',1,'S','时装「霞染千重」：每一步换一种晚霞色。'],['朱砂',1,'G','把求赠卡片发到群里，群友点一下就能送你。'],['金粉',2,'S','特效「金粉蝶影」：完美连击时触发。'],['绯羽',2,'E','绯羽蝶只在黄昏出现。'],['胭脂',3,'S','饰品「胭脂扣」，与霞染同穿有套装光效。'],['落樱',3,'G','每天可求赠 3 次，优先求高星贴纸。'],['灼灼',4,'S','排行榜前 100 名获得专属铭牌。'],['熔金',4,'E','和「金粉」放一起，翅膀纹路能拼成一个字。'],['霞光蝶冠',5,'S','集齐本册，解锁头饰「霞光蝶冠」。']],
+ [['紫晶',1,'S','限定场景「紫晶秘林」开放。'],['雾隐',1,'E','雾隐蝶会躲在好友的画集里。'],['幽兰',2,'S','动作「幽兰振翅」：双人同步翅膀相连。'],['镜花',2,'G','重复贴纸别囤着，送给需要的好友。'],['水月',3,'E','有镜花的好友，大概率缺水月。'],['琥珀',3,'S','收藏品「琥珀标本」，陈列在个人空间。'],['古卷',4,'E','五册集齐之时，夜色会点亮一只蝴蝶。'],['秘境',4,'S','完成编号全服唯一，越早集齐编号越小。'],['紫晶之王',5,'S','集齐获得翅膀挂件「紫晶」。']],
+ [['夜航',1,'S','终章：夜光时装系列开启。'],['萤火',1,'G','终章贴纸只在最后一周掉落，别错过。'],['极光',2,'S','特效「极光蝶群」：谢幕时触发。'],['月蚀',2,'E','活动最后一晚开包，可能有惊喜。'],['星门',3,'S','场景「夜光星门」。'],['霓虹',3,'E','霓虹蝶的颜色来自全服最爱的时装。'],['梦游',4,'G','集齐五册可生成福册分享图。'],['子夜',4,'S','终章冠军将以昵称命名一只蝴蝶。'],['夜光幻影',5,'E','最后一张，拼上它五册就齐了。']]
+].map(a=>a.map(([n,st,t,c])=>({n,st,t,c})));
+const TAGN={S:'卖点',L:'上线',E:'彩蛋',G:'教学'};
+const TASKS=[['每日登录',1,'福蝶包×1'],['完成 3 局对局',1,'福蝶包×1'],['分享活动给好友',1,'福蝶包×1'],['赠送好友 1 张贴纸',1,'福蝶包×1'],['邀请 1 位好友回归',2,'福蝶包×2']];
+const FRIENDS=[['小鹿呦呦','#ff8a5a'],['夜航星','#2f95e6'],['柚子不酸','#62cc3a'],['山海有灵','#9a52dc'],['南栀','#f2b538']];
+const RANKN=['蝶舞清欢','夜航星','小鹿呦呦','柚子不酸','山海有灵'];
+
+/* ============ 工具 ============ */
+const $=s=>document.querySelector(s);
+const K=(s,i)=>s+'-'+i;
+const L=t=>t.replace(/\{L\}/g,CONFIG.launch);
+function rng(a){return function(){a|=0;a=a+0x6D2B79F5|0;let t=Math.imul(a^a>>>15,1|a);t=t+Math.imul(t^t>>>7,61|t)^t;return((t^t>>>14)>>>0)/4294967296}}
+const hsl=(h,s,l)=>`hsl(${(h%360+360)%360},${s}%,${l}%)`;
+const pal=(s,i)=>{const h=STAGES[s].hue+(i-4)*12;return [hsl(h,85,60),hsl(h,70,32),hsl(h+25,100,88)]};
+let UID=0;
+/* 静态蝴蝶占位图（卡通粗描边）—— 正式版替换为美术贴纸 */
+function bfG(seed,c,sil){
+  const r=rng(seed*7919+13),id='g'+(UID++),f=v=>v.toFixed(1);
+  const ux=-(72+r()*18),uy=-(48+r()*36),ub=r()*26,lx=-(40+r()*24),ly=50+r()*22;
+  const up=`M-3,-6 C-14,${f(uy-26)} ${f(ux+12)},${f(uy-22)} ${f(ux)},${f(uy)} C${f(ux-8)},${f(uy+36)} ${f(-36-ub)},14 -3,4 Z`;
+  const lo=`M-3,4 C${f(lx-18)},6 ${f(lx-14)},${f(ly+6)} ${f(lx+12)},${f(ly)} C-14,${f(ly-6)} -6,30 -3,14 Z`;
+  if(sil){const w=`<path d="${up}"/><path d="${lo}"/>`;return `<g fill="rgba(110,65,20,.28)">${w}<g transform="scale(-1,1)">${w}</g><ellipse cx="0" cy="2" rx="6" ry="22"/></g>`}
+  const er=10+r()*6;
+  const det=`<circle cx="${f(ux*.55)}" cy="${f(uy*.5)}" r="${f(er)}" fill="#fff" stroke="#4a2a10" stroke-width="4"/><circle cx="${f(ux*.55)}" cy="${f(uy*.5)}" r="${f(er*.45)}" fill="${c[1]}"/><circle cx="${f(lx*.55)}" cy="${f(ly*.6)}" r="${f(er*.6)}" fill="${c[2]}" stroke="#4a2a10" stroke-width="3"/>`;
+  const w=`<path d="${up}" fill="url(#${id})" stroke="#4a2a10" stroke-width="6" stroke-linejoin="round"/><path d="${lo}" fill="url(#${id})" stroke="#4a2a10" stroke-width="6" stroke-linejoin="round"/>${det}`;
+  return `<defs><radialGradient id="${id}" cx="0" cy="0" r="100" gradientUnits="userSpaceOnUse"><stop offset=".15" stop-color="${c[2]}"/><stop offset=".6" stop-color="${c[0]}"/><stop offset="1" stop-color="${c[1]}"/></radialGradient></defs>
+   <g>${w}</g><g transform="scale(-1,1)">${w}</g><ellipse cx="0" cy="3" rx="7" ry="25" fill="#4a2a10"/><circle cx="0" cy="-22" r="8" fill="#4a2a10"/>
+   <path d="M-3,-27 Q-10,-46 -20,-56 M3,-27 Q10,-46 20,-56" stroke="#4a2a10" stroke-width="5" fill="none" stroke-linecap="round"/><circle cx="-20" cy="-56" r="5" fill="#4a2a10"/><circle cx="20" cy="-56" r="5" fill="#4a2a10"/>`;
+}
+const bf=(seed,c,sil)=>`<svg viewBox="-100 -100 200 200">${bfG(seed,c,sil)}</svg>`;
+const seedOf=(s,i)=>s*100+i*7+3, coverSeed=s=>900+s*37;
+const coverPal=s=>{const h=STAGES[s].hue;return [hsl(h,90,58),hsl(h,75,30),'#fff6b0']};
+/* 奖励图标（静态） */
+const ICON={
+ pack:`<svg viewBox="0 0 100 100"><rect x="18" y="12" width="64" height="78" rx="12" fill="#ec3d2f" stroke="#4a2a10" stroke-width="6"/><rect x="18" y="12" width="64" height="20" rx="10" fill="#ff7a5a" stroke="#4a2a10" stroke-width="6"/><circle cx="50" cy="60" r="16" fill="#ffd83a" stroke="#4a2a10" stroke-width="5"/><text x="50" y="68" text-anchor="middle" font-size="20" font-weight="900" fill="#4a2a10">福</text></svg>`,
+ crown:`<svg viewBox="0 0 100 100"><path d="M14 74 L20 30 L36 50 L50 22 L64 50 L80 30 L86 74 Z" fill="#ffd83a" stroke="#4a2a10" stroke-width="6" stroke-linejoin="round"/><rect x="14" y="70" width="72" height="14" rx="6" fill="#f2a01a" stroke="#4a2a10" stroke-width="6"/><circle cx="50" cy="56" r="7" fill="#ec3d2f" stroke="#4a2a10" stroke-width="4"/></svg>`,
+ dress:`<svg viewBox="0 0 100 100"><path d="M38 12 L62 12 L60 32 L80 86 L20 86 L40 32 Z" fill="#ff7ab0" stroke="#4a2a10" stroke-width="6" stroke-linejoin="round"/><path d="M40 32 L60 32" stroke="#4a2a10" stroke-width="6"/><circle cx="50" cy="56" r="6" fill="#fff"/><circle cx="38" cy="72" r="4" fill="#fff"/><circle cx="62" cy="72" r="4" fill="#fff"/></svg>`,
+ frame:`<svg viewBox="0 0 100 100"><circle cx="50" cy="50" r="36" fill="#bfe3ff" stroke="#4a2a10" stroke-width="6"/><circle cx="50" cy="50" r="36" fill="none" stroke="#ffd83a" stroke-width="8" stroke-dasharray="14 8"/><circle cx="50" cy="44" r="10" fill="#4a2a10"/><path d="M32 72 Q50 54 68 72" fill="#4a2a10"/></svg>`,
+ card:`<svg viewBox="0 0 100 100"><rect x="12" y="24" width="76" height="52" rx="10" fill="#7fd0ff" stroke="#4a2a10" stroke-width="6"/><circle cx="34" cy="50" r="10" fill="#fff" stroke="#4a2a10" stroke-width="4"/><rect x="50" y="42" width="28" height="6" rx="3" fill="#4a2a10"/><rect x="50" y="54" width="20" height="6" rx="3" fill="#4a2a10"/></svg>`,
+ wing:`<svg viewBox="-100 -100 200 200"><path d="M-6,-10 C-30,-80 -95,-70 -85,-20 C-80,10 -40,15 -6,6 Z M6,-10 C30,-80 95,-70 85,-20 C80,10 40,15 6,6 Z" fill="#c69bff" stroke="#4a2a10" stroke-width="10" stroke-linejoin="round"/><path d="M-6,6 C-50,15 -70,60 -40,70 C-20,75 -8,40 -6,20 Z M6,6 C50,15 70,60 40,70 C20,75 8,40 6,20 Z" fill="#9a52dc" stroke="#4a2a10" stroke-width="10" stroke-linejoin="round"/></svg>`
+};
+const lockSvg=`<svg viewBox="0 0 24 24"><rect x="4.5" y="10" width="15" height="11.5" rx="3" fill="#ffd83a" stroke="#4a2a10" stroke-width="1.6"/><path d="M8 10V7a4 4 0 0 1 8 0v3" stroke="#4a2a10" stroke-width="2.6" fill="none"/><circle cx="12" cy="15.5" r="1.8" fill="#4a2a10"/></svg>`;
+const checkSvg=`<svg viewBox="0 0 24 24"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="#fff" stroke-width="3.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>`;
+
+/* ============ 状态（模拟：活动进行中） ============ */
+const S={counts:{},unlocked:[1,1,1,0,0],done:{},packs:3,newIds:new Set(),tasks:[1,0,1,0,0]};
+['0-0','0-1','0-2','0-3','0-4','0-6','0-7','1-0','1-1','1-3','1-5','2-2'].forEach(k=>S.counts[k]=1);
+S.counts['0-1']=3;S.counts['0-3']=2;S.counts['1-0']=2;
+const own=s=>STK[s].filter((_,i)=>S.counts[K(s,i)]>0).length;
+const total=()=>STAGES.reduce((a,_,s)=>a+own(s),0);
+const dups=()=>{const a=[];STK.forEach((g,s)=>g.forEach((_,i)=>(S.counts[K(s,i)]||0)>1&&a.push([s,i])));return a};
+let cur=0,detail=null;
+const pct=(a,b)=>`calc(${a/b*100}% - ${a/b*12}px)`;
+
+/* ============ 渲染 ============ */
+function card(s,i,o){
+  o=o||{};const d=STK[s][i],n=S.counts[K(s,i)]||0,has=n>0;
+  return `<div class="stk ${has?'':'miss'} ${has&&d.st===5?'s5':''}" style="--t:${pal(s,i)[2]}" ${o.noclick?'':`onclick="openDetail(${s},${i})"`}>
+    <div class="im">${bf(seedOf(s,i),pal(s,i),!has)}</div>
+    <div class="tx"><div class="st">${'★'.repeat(d.st)}</div><div class="n">${d.n}</div></div>
+    ${!o.nocnt&&n>1?`<div class="cnt ol-s">×${n}</div>`:''}${!o.nonew&&S.newIds.has(K(s,i))?'<div class="new ol-s">NEW</div>':''}</div>`;
+}
+function badge(s,size){
+  const st=STAGES[s],lk=!S.unlocked[s];
+  return `<div class="bd" style="--c:${st.c};--tint:${st.tint}${size?`;width:${size}px;height:${size}px`:''}">${bf(coverSeed(s),coverPal(s))}
+    <div class="num ol-s">${st.no}</div>${lk?`<div class="lkc">${lockSvg}</div>`:''}${S.done[s]?`<div class="check">${checkSvg}</div>`:''}</div>`;
+}
+function renderHome(){
+  $('#prizes').innerHTML=GRAND.map(g=>`<div class="prize">${ICON[g[1]]}<span class="ol-s">${g[0]}</span></div>`).join('');
+  $('#sets').innerHTML=STAGES.map((st,s)=>{const o=own(s),lk=!S.unlocked[s];
+    return `<div class="set ${lk?'lock':''}" onclick="openSet(${s})" ${s===0?'data-n="3"':''}>${badge(s)}
+      <div class="nm ol">${st.name}</div>
+      <div class="pill">${lk?'':`<i style="width:${pct(o,9)}"></i>`}<span class="ol-s">${lk?st.date+' 开启':S.done[s]?'已集齐':o+'/9'}</span></div></div>`}).join('');
+  $('#packN').textContent=S.packs;$('#reqN').textContent=dups().length;
+  const t=total();$('#tot').textContent=t+'/45';$('#totBar').style.width=pct(t,45);
+}
+function renderSet(){
+  const st=STAGES[cur],o=own(cur);$('#paper').style.setProperty('--c',st.c);
+  $('#sName').textContent=st.name;$('#sPh').textContent=st.phase+' · 点击贴纸查看详情';
+  $('#sPg').textContent=o+' / 9';$('#sBar').style.width=pct(o,9);
+  $('#grid').innerHTML=STK[cur].map((_,i)=>card(cur,i)).join('');
+  $('#sBd').outerHTML=`<div class="bd" id="sBd" style="--c:${st.c};--tint:${st.tint}">${bf(coverSeed(cur),coverPal(cur))}${S.done[cur]?`<div class="check">${checkSvg}</div>`:''}</div>`;
+  $('#sRw').innerHTML=st.rw.map(r=>`<div>${ICON[r[1]]}<span class="ol-s">${r[0]}</span></div>`).join('');
+  $('#sShare').textContent=S.done[cur]?'分享画集':'分享（求助版）';
+  $('#prev').disabled=cur===0;$('#next').disabled=cur===4;
+}
+function showHome(){$('#home').style.display='';$('#setv').style.display='none';$('#backBtn').style.display='none';renderHome()}
+function openSet(s){if(s<0||s>4)return;if(!S.unlocked[s]){toast(`${STAGES[s].name} ${STAGES[s].date} 开启`);return}
+  cur=s;$('#home').style.display='none';$('#setv').style.display='block';$('#backBtn').style.display='';renderSet()}
+function refresh(){$('#setv').style.display==='block'?renderSet():renderHome()}
+
+/* ============ 弹窗 ============ */
+function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('show');clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove('show'),1600)}
+function md(cls,title,body,hc){$('#ovc').innerHTML=`<div class="md ${cls}" style="${hc?'--hc:'+hc:''}"><div class="ribbon ol">${title}</div><button class="cl ol-s" onclick="closeOv()">✕</button>${body}</div>`;$('#ov').classList.add('show')}
+function closeOv(){$('#ov').classList.remove('show');refresh()}
+
+function openDetail(s,i){
+  detail=[s,i];const d=STK[s][i],n=S.counts[K(s,i)]||0,hide=d.t==='E'&&!n;S.newIds.delete(K(s,i));
+  md('dt',STAGES[s].name,`<div class="big ${n?'':'miss'}" style="--t:${pal(s,i)[2]}"><div class="st">${'★'.repeat(d.st)}</div><div class="im">${bf(seedOf(s,i),pal(s,i),!n)}</div></div>
+   <div class="inf" data-n="7"><span class="tag t${d.t} ol-s">${TAGN[d.t]}</span><h3 class="ol">${d.n}</h3>
+   <div class="meta">${n?`已拥有 ×${n}`:'还没有这张'}</div>
+   <div class="copy ${hide?'hide':''}"><span>${L(d.c)}</span>${hide?'<em class="ol-s">获得后揭晓彩蛋</em>':''}</div>
+   <div class="bt">${n?`<button class="btn ol" ${n<2?'disabled':''} onclick="openGive(${s},${i})">${n<2?'没有重复的':'送给好友'}</button><button class="btn b ol" onclick="openShare('card')">分享这张</button>`
+     :`<button class="btn ol" onclick="openRequest(${s},${i})">向好友求赠</button>`}</div></div>`,STAGES[s].c);
+}
+function openRequest(s,i){
+  md('req','求赠贴纸',`<div class="ic">${bf(seedOf(s,i),pal(s,i))}</div>
+   <h3 class="ol">向好友请求「${STK[s][i].n}」</h3><p>缺少贴纸？发给好友，TA 有重复的就能送你！<br>每天可求赠 3 次。</p>
+   <div class="chs">${[['QQ好友','#2c9cf0'],['微信好友','#62cc3a'],['群聊','#ff9a2a']].map(c=>`<button onclick="toast('（模拟）已发送到${c[0]}')"><i style="background:${c[1]}"></i>${c[0]}</button>`).join('')}</div>
+   <button class="btn ol" onclick="closeOv()">明白了</button>`,'#62cc3a');
+}
+function askMissing(){const i=STK[cur].findIndex((_,i)=>!(S.counts[K(cur,i)]>0));i<0?toast('本画集已集齐'):openRequest(cur,i)}
+function openGive(s,i){
+  md('list',`送出「${STK[s][i].n}」`,FRIENDS.map((f,j)=>`<div class="row"><div class="av ol-s" style="background:${f[1]}">${f[0][0]}</div><div class="tx">${f[0]}<small>${j<2?'正在求这张':'没有这张'}</small></div><button class="sb ol-s" onclick="give(${s},${i},'${f[0]}')">赠送</button></div>`).join(''));
+}
+function give(s,i,f){const k=K(s,i);if((S.counts[k]||0)<2){toast('只能送出重复的贴纸');return}S.counts[k]--;if(!S.tasks[3])S.tasks[3]=1;toast(`已送给 ${f}`);closeOv()}
+function openTrade(){
+  const d=dups();
+  md('list','交换贴纸',`<div class="tabs"><button class="on">好友求赠（${d.length}）</button><button onclick="closeOv();openSet(0);askMissing()">我要求赠</button></div>
+   ${d.length?d.map(([s,i],j)=>{const f=FRIENDS[j%5];return `<div class="row"><div class="av ol-s" style="background:${f[1]}">${f[0][0]}</div><div class="tx">${f[0]} 想要「${STK[s][i].n}」<small>${STAGES[s].name} · 你有 ×${S.counts[K(s,i)]}</small></div><button class="sb ol-s" onclick="give(${s},${i},'${f[0]}')">赠送</button></div>`}).join('')
+     :'<div class="row"><div class="tx">暂时没有好友求赠</div></div>'}`,'#2f95e6');
+}
+function openTask(){
+  md('list','福蝶任务',TASKS.map((t,i)=>`<div class="row"><div style="width:76px">${ICON.pack}</div><div class="tx">${t[0]}<small>奖励 ${t[2]}</small></div>${S.tasks[i]===2?'<button class="sb off ol-s">已领取</button>':S.tasks[i]?`<button class="sb ol-s" onclick="claim(${i})">领取</button>`:`<button class="sb b ol-s" onclick="S.tasks[${i}]=1;openTask()">去完成</button>`}</div>`).join(''));
+}
+function claim(i){S.tasks[i]=2;S.packs+=TASKS[i][1];toast(`获得${TASKS[i][2]}`);openTask();renderHome()}
+const W=[40,28,18,10,4];
+function draw(){const pool=[];STK.forEach((g,s)=>S.unlocked[s]&&g.forEach((d,i)=>pool.push([s,i,W[d.st-1]])));let r=Math.random()*pool.reduce((a,p)=>a+p[2],0);for(const p of pool){r-=p[2];if(r<=0)return p}return pool[0]}
+function openPack(){
+  if(S.packs<=0){toast('没有福蝶包了，去做任务吧');return}
+  S.packs--;const got=[0,1,2,3].map(()=>{const [s,i]=draw(),k=K(s,i),isNew=!(S.counts[k]>0);S.counts[k]=(S.counts[k]||0)+1;if(isNew)S.newIds.add(k);return {s,i,isNew}});
+  md('pk','获得贴纸',`<div class="cards">${got.map(g=>`<div class="cw">${card(g.s,g.i,{noclick:1,nocnt:1,nonew:1})}<span class="lb ol-s" style="background:${g.isNew?'#62cc3a':'#b39a72'}">${g.isNew?'新贴纸！':'重复 · 可送好友'}</span></div>`).join('')}</div>
+   <button class="btn ol" onclick="afterPack()">收下</button>`,'#62cc3a');
+}
+function afterPack(){for(let s=0;s<5;s++)if(!S.done[s]&&own(s)===9){S.done[s]=100+Math.floor(Math.random()*900);openComplete(s);return}closeOv()}
+function openComplete(s){
+  const st=STAGES[s],sn=S.done[s]||128;S.done[s]=sn;
+  md('cp','画集集齐！',`${badge(s,300)}
+   <h3 class="ol">${st.name}</h3><div class="sn">你是全服第 <b>${sn}</b> 位集齐的玩家</div>
+   <div class="rwbox">${st.rw.map(r=>`<div>${ICON[r[1]]}<span class="ol-s">${r[0]}</span></div>`).join('')}</div>
+   <div class="bt"><button class="btn b ol" onclick="toast('奖励已领取');closeOv()">领取奖励</button><button class="btn ol" onclick="cur=${s};openShare('set')">分享画集</button></div>`,'#ec3d2f');
+}
+let rankTab=0;
+function openRank(){
+  const tabs=[...STAGES.map(s=>s.name.replace('画集','')),'总榜'];
+  md('list','福册排行榜',`<div class="tabs">${tabs.map((t,i)=>`<button class="${rankTab===i?'on':''}" onclick="rankTab=${i};openRank()">${t}</button>`).join('')}</div>
+   ${RANKN.map((n,j)=>`<div class="row"><div class="rk ol-s" style="color:${['#ffd83a','#e3e8ef','#ff9a5a','#fff','#fff'][j]}">${j+1}</div><div class="av ol-s" style="background:${hsl(j*60+rankTab*20,65,58)}">${n[0]}</div><div class="tx">${n}<small>${STAGES[Math.min(rankTab,4)].date} ${10+j}:${String(j*7+3).padStart(2,'0')} 集齐</small></div><div style="font-size:26px;color:#9a7440">No.${String(j+1).padStart(5,'0')}</div></div>`).join('')}
+   <div class="row me"><div class="rk">—</div><div class="av ol-s" style="background:#f2b538">我</div><div class="tx">${CONFIG.nick}<small>${rankTab<5?own(rankTab)+'/9':total()+'/45'} · 还未集齐</small></div></div>`,'#2f95e6');
+}
+
+/* ============ 分享图（750×1334，静态，与界面同色系） ============ */
+const F='font-family="PingFang SC,Microsoft YaHei,sans-serif" font-weight="900"',FN='font-family="PingFang SC,Microsoft YaHei,sans-serif" font-weight="600"';
+const OS='stroke="#4a2a10" stroke-width="8" paint-order="stroke" stroke-linejoin="round"';
+function qr(x,y,sz,seed){const r=rng(seed),N=21,m=sz/N;let g=`<rect x="${x-10}" y="${y-10}" width="${sz+20}" height="${sz+20}" rx="14" fill="#fff" stroke="#4a2a10" stroke-width="4"/>`;
+  for(let i=0;i<N;i++)for(let j=0;j<N;j++){if((i<7&&j<7)||(i<7&&j>13)||(i>13&&j<7))continue;if(r()>.5)g+=`<rect x="${(x+i*m).toFixed(1)}" y="${(y+j*m).toFixed(1)}" width="${m.toFixed(1)}" height="${m.toFixed(1)}" fill="#222"/>`}
+  [[0,0],[14,0],[0,14]].forEach(([i,j])=>g+=`<rect x="${x+i*m}" y="${y+j*m}" width="${7*m}" height="${7*m}" fill="#222"/><rect x="${x+(i+1)*m}" y="${y+(j+1)*m}" width="${5*m}" height="${5*m}" fill="#fff"/><rect x="${x+(i+2)*m}" y="${y+(j+2)*m}" width="${3*m}" height="${3*m}" fill="#222"/>`);return g}
+function pBase(title){let g=`<defs><radialGradient id="gr" cx=".5" cy=".55" r=".7"><stop offset="0" stop-color="#d9e66c"/><stop offset="1" stop-color="#a6bf32"/></radialGradient></defs><rect width="750" height="1334" fill="url(#gr)"/>
+  <rect width="750" height="150" fill="#9b5a2a"/>`;for(let x=120;x<750;x+=124)g+=`<rect x="${x}" y="0" width="4" height="150" fill="#5a2c10" opacity=".5"/>`;
+  g+=`<rect y="150" width="750" height="10" fill="#6e3a16"/><text x="375" y="102" text-anchor="middle" font-size="64" fill="#ffd83a" ${F} ${OS.replace('8','12')}>捉福蝶·集福册</text>`;
+  if(title)g+=`<rect x="70" y="200" width="610" height="860" rx="38" fill="#fff3d2" stroke="#4a2a10" stroke-width="6"/><rect x="80" y="210" width="590" height="840" rx="30" fill="none" stroke="#f2b538" stroke-width="8"/>
+   <rect x="205" y="176" width="340" height="74" rx="18" fill="${title[1]}" stroke="#4a2a10" stroke-width="6"/><text x="375" y="228" text-anchor="middle" font-size="40" fill="#fff" ${F} ${OS}>${title[0]}</text>`;
+  return g}
+function pc(s,i,x,y,w,h){const d=STK[s][i],has=S.counts[K(s,i)]>0,c=pal(s,i);
+  return `<rect x="${x}" y="${y}" width="${w}" height="${h}" rx="20" fill="${has?(d.st===5?'#ffe9a0':'#fff'):'#e9cf93'}" stroke="${has?'#4a2a10':'#b38b4e'}" stroke-width="5"/>
+   <text x="${x+w/2}" y="${y+36}" text-anchor="middle" font-size="24" fill="${has?'#ffc61a':'#cfae6c'}" ${has?OS.replace('8','5'):''}>${'★'.repeat(d.st)}</text>
+   <g transform="translate(${x+w/2},${y+h*.5}) scale(.48)">${bfG(seedOf(s,i),c,!has)}</g>
+   <text x="${x+w/2}" y="${y+h-16}" text-anchor="middle" font-size="24" fill="${has?'#4a2a10':'#9a7440'}" ${F}>${d.n}</text>`}
+function foot(seed,line1,line2){return `<rect x="40" y="1092" width="670" height="214" rx="32" fill="#fff3d2" stroke="#4a2a10" stroke-width="6"/>
+  <text x="76" y="1166" font-size="40" fill="#fff" ${F} ${OS}>${line1}</text><text x="76" y="1216" font-size="24" fill="#8a5a22" ${FN}>${line2}</text>
+  <text x="76" y="1262" font-size="22" fill="#8a5a22" ${FN}>${CONFIG.launch} 全服上线 · 扫码一起集福册</text>${qr(566,1134,120,seed)}`}
+function posterSet(s){const st=STAGES[s],o=own(s),done=S.done[s];
+  let g=pBase([st.name,st.c]);
+  g+=`<rect x="235" y="278" width="280" height="50" rx="25" fill="#22314e" stroke="#4a2a10" stroke-width="4"/><rect x="241" y="284" width="${Math.max(0,268*o/9)}" height="38" rx="19" fill="#62cc3a"/><text x="375" y="314" text-anchor="middle" font-size="28" fill="#fff" ${F} ${OS.replace('8','5')}>${o} / 9</text>`;
+  STK[s].forEach((_,i)=>g+=pc(s,i,104+(i%3)*186,350+Math.floor(i/3)*230,170,210));
+  g+=foot(s+7,done?`第 ${done} 位集齐！`:`还差 ${9-o} 张，帮帮我！`,done?`No.${String(done).padStart(5,'0')} · ${CONFIG.nick}`:`${CONFIG.nick} 正在集「${st.name}」`);
+  return g}
+function posterAlbum(){
+  let g=pBase(['我的福册','#ff9a2a']);
+  STAGES.forEach((st,s)=>{const y=280+s*150,o=own(s),lk=!S.unlocked[s];
+    g+=`<circle cx="170" cy="${y+60}" r="58" fill="${lk?'#bdb3a0':st.c}" stroke="#4a2a10" stroke-width="6"/><circle cx="170" cy="${y+60}" r="44" fill="${lk?'#e6e0d4':st.tint}" stroke="#fff" stroke-width="5"/>
+     <g transform="translate(170,${y+56}) scale(.4)" opacity="${lk?.4:1}">${bfG(coverSeed(s),coverPal(s))}</g>
+     <text x="252" y="${y+50}" font-size="34" fill="#fff" ${F} ${OS}>${st.name}</text>
+     <rect x="252" y="${y+70}" width="330" height="40" rx="20" fill="#22314e" stroke="#4a2a10" stroke-width="4"/>${o?`<rect x="257" y="${y+75}" width="${320*o/9}" height="30" rx="15" fill="#62cc3a"/>`:''}
+     <text x="417" y="${y+99}" text-anchor="middle" font-size="22" fill="#fff" ${F} ${OS.replace('8','4')}>${S.done[s]?'已集齐':lk?st.date+' 开启':o+'/9'}</text>`});
+  g+=foot(99,`已收集 ${total()} / 45`,`${CONFIG.nick} 的福册 · 集齐五册赢终极大奖`);
+  return g}
+function posterCard(){const [s,i]=detail||[0,0],d=STK[s][i],st=STAGES[s],has=S.counts[K(s,i)]>0;
+  const lines=[];let t=L(d.c);while(t.length){let k=13;if('，。？！、」'.includes(t[k]||''))k++;lines.push(t.slice(0,k));t=t.slice(k)}
+  let g=pBase([st.name,st.c]);
+  g+=`<rect x="175" y="286" width="400" height="430" rx="34" fill="#fff" stroke="#4a2a10" stroke-width="6"/>
+   <text x="375" y="350" text-anchor="middle" font-size="44" fill="#ffc61a" ${OS}>${'★'.repeat(d.st)}</text>
+   <rect x="205" y="372" width="340" height="320" rx="26" fill="${pal(s,i)[2]}"/><g transform="translate(375,532) scale(1.4)">${bfG(seedOf(s,i),pal(s,i))}</g>
+   <text x="375" y="790" text-anchor="middle" font-size="54" fill="#fff" ${F} ${OS}>${d.n}</text>`;
+  lines.forEach((l,j)=>g+=`<text x="375" y="${860+j*52}" text-anchor="middle" font-size="34" fill="#4a2a10" ${FN}>${l}</text>`);
+  g+=foot(s*9+i,has?'我抽到了这张！':'我在找这张，你有吗？',`${st.name} · ${CONFIG.nick}`);return g}
+let shareType='set';
+function openShare(t){
+  shareType=t;const g=t==='set'?posterSet(cur):t==='album'?posterAlbum():posterCard();
+  const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="750" height="1334" viewBox="0 0 750 1334">${g}</svg>`;
+  md('sh','生成分享图',`<img id="pimg" src="data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}">
+   <div class="so"><h3 class="ol">${t==='set'?'画集分享图':t==='album'?'福册分享图':'贴纸分享图'}</h3>
+   <p>${t==='set'?'集齐后显示「第 N 位集齐」+ 完成编号；未集齐时为求助版，引导好友送贴纸。':t==='album'?'展示五本画集进度，集齐五册显示终极大奖。':'单张贴纸 + 文案 + 上线时间，用于预热传播与求赠。'}<br>尺寸 750×1334，含二维码。</p>
+   <div class="tabs">${[['set','画集'],['album','福册'],['card','单张贴纸']].map(x=>`<button class="${t===x[0]?'on':''}" onclick="openShare('${x[0]}')">${x[1]}</button>`).join('')}</div>
+   <div class="chs">${[['QQ好友','#2c9cf0'],['微信','#62cc3a'],['朋友圈','#5a8ff0'],['小红书','#ec3d2f']].map(c=>`<button onclick="toast('（模拟）分享到${c[0]}')"><i style="background:${c[1]}"></i>${c[0]}</button>`).join('')}</div>
+   <div class="bt"><button class="btn ol" onclick="savePoster()">保存图片</button></div></div>`);
+}
+function savePoster(){const img=new Image();img.onload=()=>{const c=document.createElement('canvas');c.width=750;c.height=1334;c.getContext('2d').drawImage(img,0,0);
+  c.toBlob(b=>{const a=document.createElement('a');a.href=URL.createObjectURL(b);a.download=`捉福蝶_${shareType}_分享图.png`;a.click();toast('已保存')})};img.src=$('#pimg').src}
+
+/* ============ 初始化 ============ */
+function tick(){const ms=new Date(CONFIG.end)-new Date();if(ms<0){$('#cd').textContent='已结束';return}
+  const d=Math.floor(ms/864e5),h=Math.floor(ms%864e5/36e5);$('#cd').textContent=`${d}天 ${h}小时`}
+function fit(){const w=Math.min(innerWidth-40,2540),k=w/2540;$('#stage').style.transform=`scale(${k})`;$('#wrap').style.width=w+'px';$('#wrap').style.height=1080*k+'px'}
+document.querySelectorAll('[data-go]').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('[data-go]').forEach(x=>x.classList.remove('on'));b.classList.add('on');$('#ov').classList.remove('show');
+  const g=b.dataset.go;
+  if(g==='home')showHome();
+  if(g==='set')openSet(0);
+  if(g==='detail'){openSet(0);openDetail(0,5)}
+  if(g==='pack'){showHome();if(!S.packs)S.packs=1;openPack()}
+  if(g==='trade'){showHome();openTrade()}
+  if(g==='request'){openSet(0);openRequest(0,8)}
+  if(g==='task'){showHome();openTask()}
+  if(g==='rank'){showHome();openRank()}
+  if(g==='complete'){showHome();openComplete(0)}
+  if(g==='share'){openSet(0);openShare('set')}
+  scrollTo({top:0});
+});
+$('#annoBtn').onclick=e=>{document.body.classList.toggle('anno');e.target.classList.toggle('on')};
+addEventListener('resize',fit);
+showHome();fit();tick();setInterval(tick,60000);
+</script>
+</body>
+</html>
