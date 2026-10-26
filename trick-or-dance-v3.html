@@ -1,0 +1,753 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>不给糖就跳舞 · 7关实机体验 v3</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+body{background:#17102A;font-family:-apple-system,"PingFang SC","Microsoft YaHei",sans-serif;
+  color:#EDE8F5;overflow:hidden;width:100vw;height:100vh;display:flex;align-items:center;justify-content:center}
+#stage{width:2540px;height:1080px;transform-origin:center center;position:relative;flex:none}
+.app{width:100%;height:100%;padding:26px 44px 30px;display:flex;flex-direction:column;
+  background:#1B1130;position:relative;overflow:hidden}
+.app::before{content:'';position:absolute;inset:0;
+  background:radial-gradient(900px 420px at 18% 8%,rgba(255,138,46,.13),transparent 60%),
+             radial-gradient(760px 380px at 86% 92%,rgba(126,84,214,.16),transparent 62%)}
+.hud{height:86px;display:flex;align-items:center;gap:26px;flex:none;position:relative;z-index:2}
+.logo{font-size:30px;font-weight:800;letter-spacing:1px;
+  background:linear-gradient(92deg,#FFB85C,#FF7A3D 48%,#C77BFF);
+  -webkit-background-clip:text;background-clip:text;color:transparent;white-space:nowrap}
+.sub{font-size:14px;color:#9C92B8;white-space:nowrap}
+.pill{height:54px;border-radius:14px;background:rgba(255,255,255,.055);
+  border:1.5px solid rgba(255,255,255,.1);display:flex;align-items:center;gap:11px;padding:0 20px;flex:none}
+.pill .k{font-size:13px;color:#9C92B8;white-space:nowrap}
+.pill .v{font-size:25px;font-weight:800;color:#fff;font-variant-numeric:tabular-nums}
+.pill .v em{font-size:15px;font-weight:600;color:#9C92B8;font-style:normal}
+.ebar{width:300px;height:13px;border-radius:7px;background:rgba(0,0,0,.42);overflow:hidden}
+.ebar i{display:block;height:100%;width:30%;border-radius:7px;
+  background:linear-gradient(90deg,#FFD089,#FF8A2E);transition:width .18s}
+.jars span{font-size:28px;margin-right:3px;transition:.2s}
+.jars span.dead{filter:grayscale(1);opacity:.26}
+.grow{flex:1}
+.btn{height:54px;padding:0 24px;border-radius:14px;cursor:pointer;flex:none;
+  background:rgba(255,255,255,.07);border:1.5px solid rgba(255,255,255,.13);
+  display:flex;align-items:center;gap:9px;font-size:16px;font-weight:700;color:#EDE8F5;user-select:none;transition:.14s}
+.btn:hover{background:rgba(255,255,255,.13)}
+.btn.on{background:linear-gradient(135deg,#FF8A2E,#E0552B);border-color:#FFB369;color:#fff}
+
+.nav{height:60px;display:flex;align-items:center;gap:10px;flex:none;margin-top:14px;position:relative;z-index:2}
+.lv{height:48px;min-width:112px;padding:0 16px;border-radius:12px;cursor:pointer;flex:none;
+  background:rgba(255,255,255,.05);border:1.5px solid rgba(255,255,255,.1);
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px;user-select:none;transition:.14s}
+.lv:hover{background:rgba(255,255,255,.1)}
+.lv .n{font-size:15px;font-weight:800;color:#fff;white-space:nowrap}
+.lv .t{font-size:11px;color:#9C92B8;white-space:nowrap}
+.lv.on{background:linear-gradient(135deg,rgba(255,138,46,.3),rgba(199,123,255,.26));border-color:#FFB369}
+.lv.on .t{color:#FFD9AE}
+
+.info{height:42px;display:flex;align-items:center;gap:14px;flex:none;margin-top:10px;
+  font-size:14px;color:#B7ADCC;position:relative;z-index:2;overflow:hidden}
+.info b{color:#FFCE8A;font-weight:700}
+.tag{height:28px;padding:0 12px;border-radius:8px;background:rgba(255,255,255,.07);
+  display:flex;align-items:center;font-size:13px;flex:none;white-space:nowrap}
+
+.board{flex:1;min-height:0;position:relative;border-radius:20px;overflow:hidden;margin-top:12px;
+  background:linear-gradient(180deg,#241640,#2E1A4D 46%,#241539);
+  border:2px solid rgba(255,255,255,.1);z-index:2}
+.house{position:absolute;left:0;top:0;bottom:0;width:150px;
+  background:linear-gradient(90deg,rgba(255,138,46,.3),rgba(255,138,46,.05));
+  border-right:2px dashed rgba(255,190,120,.42);display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:6px;z-index:3;pointer-events:none}
+.house .ic{font-size:52px}
+.house .tx{font-size:14px;color:#FFD9AE;font-weight:700}
+.cell{position:absolute;border-radius:11px;background:rgba(255,255,255,.028);
+  border:1.5px solid rgba(255,255,255,.055);cursor:pointer;transition:.1s;z-index:1}
+.cell.alt{background:rgba(255,255,255,.055)}
+.cell:hover{border-color:rgba(255,255,255,.16)}
+.cell.hl{background:rgba(120,230,160,.2);border-color:#78E6A0}
+.cell.bad{background:rgba(255,90,90,.2);border-color:#FF5A5A}
+.cell.lock{background:rgba(0,0,0,.4);border-color:rgba(255,255,255,.04);cursor:not-allowed}
+.cell.lock::after{content:'🚧';position:absolute;inset:0;display:flex;align-items:center;
+  justify-content:center;font-size:38px;opacity:.5}
+.lane{position:absolute;left:150px;right:0;height:2px;background:rgba(255,255,255,.05);z-index:0}
+
+.pl{position:absolute;display:flex;align-items:center;justify-content:center;z-index:5;
+  pointer-events:none;transition:transform .1s}
+.pl .em{font-size:62px;filter:drop-shadow(0 4px 10px rgba(0,0,0,.55))}
+.pl .hp{position:absolute;bottom:-3px;left:14%;width:72%;height:6px;border-radius:3px;background:rgba(0,0,0,.6)}
+.pl .hp i{display:block;height:100%;border-radius:3px;background:#7BE495;transition:width .14s}
+.pl.hurt .hp i{background:#FFC24B}
+.pl.low .hp i{background:#FF6161}
+.pl.buff::after{content:'';position:absolute;inset:-7px;border-radius:14px;
+  border:2.5px solid #FFD089;animation:bp 1.3s ease-in-out infinite}
+@keyframes bp{0%,100%{opacity:.35;transform:scale(.96)}50%{opacity:.95;transform:scale(1.04)}}
+.pl .lk{position:absolute;top:-14px;font-size:17px;color:#FFD089}
+
+.en{position:absolute;display:flex;align-items:center;justify-content:center;z-index:6;pointer-events:none}
+.en .em{font-size:56px;filter:drop-shadow(0 4px 9px rgba(0,0,0,.6))}
+.en .hp{position:absolute;top:-10px;left:10%;width:80%;height:6px;border-radius:3px;background:rgba(0,0,0,.6)}
+.en .hp i{display:block;height:100%;border-radius:3px;background:#FF6B6B;transition:width .1s}
+.en .sh{position:absolute;top:-19px;left:10%;width:80%;height:5px;border-radius:3px;background:rgba(0,0,0,.6)}
+.en .sh i{display:block;height:100%;border-radius:3px;background:#7FD4FF;transition:width .1s}
+.en.fz{filter:brightness(1.5) saturate(.3) hue-rotate(170deg)}
+.en.fz::after{content:'❄';position:absolute;font-size:34px;color:#A8E4FF;top:-6px}
+.en.fly{animation:fl 1.5s ease-in-out infinite}
+@keyframes fl{0%,100%{transform:translateY(-6px)}50%{transform:translateY(6px)}}
+.en.aura::before{content:'';position:absolute;inset:-16px;border-radius:50%;
+  border:2px dashed rgba(255,214,110,.5);animation:sp 2.4s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+
+.pj{position:absolute;z-index:7;pointer-events:none;font-size:26px}
+.fx{position:absolute;z-index:9;pointer-events:none;font-size:40px;animation:fx .5s ease-out forwards}
+@keyframes fx{0%{opacity:1;transform:scale(.5)}100%{opacity:0;transform:scale(2.1) translateY(-26px)}}
+.dmg{position:absolute;z-index:10;pointer-events:none;font-size:22px;font-weight:800;
+  color:#FFE3A0;text-shadow:0 2px 5px rgba(0,0,0,.8);animation:dm .7s ease-out forwards}
+@keyframes dm{0%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(-40px)}}
+
+.rack{height:132px;display:flex;align-items:center;gap:14px;flex:none;margin-top:14px;position:relative;z-index:2}
+.cd{width:168px;height:132px;border-radius:17px;cursor:pointer;position:relative;overflow:hidden;flex:none;
+  background:linear-gradient(165deg,rgba(255,255,255,.1),rgba(255,255,255,.03));
+  border:2.5px solid rgba(255,255,255,.13);display:flex;flex-direction:column;
+  align-items:center;justify-content:center;gap:3px;user-select:none;transition:.13s}
+.cd:hover{border-color:rgba(255,255,255,.3);transform:translateY(-3px)}
+.cd .ic{font-size:46px;line-height:1}
+.cd .nm{font-size:14px;font-weight:700;color:#fff;white-space:nowrap}
+.cd .ds{font-size:11px;color:#9C92B8;white-space:nowrap}
+.cd .cs{font-size:17px;font-weight:800;color:#FFCE8A}
+.cd.on{border-color:#78E6A0;background:linear-gradient(165deg,rgba(120,230,160,.3),rgba(120,230,160,.08))}
+.cd.no{opacity:.4}
+.cd .cover{position:absolute;left:0;right:0;bottom:0;background:rgba(0,0,0,.72);
+  display:flex;align-items:center;justify-content:center;font-size:30px;font-weight:800;color:#fff;transition:height .1s}
+.cd.air::after{content:'对空';position:absolute;top:6px;right:6px;font-size:10px;padding:2px 6px;
+  border-radius:5px;background:rgba(127,212,255,.3);color:#BFE9FF}
+.cd.pk{width:186px;border-color:rgba(255,190,120,.4);
+  background:linear-gradient(165deg,rgba(255,138,46,.22),rgba(255,138,46,.05))}
+.cd.pk.rdy{animation:pg 1.5s ease-in-out infinite}
+@keyframes pg{0%,100%{box-shadow:0 0 0 0 rgba(255,183,90,.5)}50%{box-shadow:0 0 0 13px rgba(255,183,90,0)}}
+
+.toast{position:absolute;left:50%;top:34%;transform:translateX(-50%);z-index:60;
+  padding:16px 34px;border-radius:15px;background:rgba(20,10,34,.94);
+  border:2px solid rgba(255,190,120,.5);font-size:21px;font-weight:700;color:#FFE3A0;
+  white-space:nowrap;pointer-events:none;opacity:0;transition:.22s}
+.toast.on{opacity:1;top:30%}
+.tip{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);z-index:58;
+  padding:26px 48px;border-radius:19px;background:rgba(20,10,34,.95);
+  border:2.5px solid rgba(199,123,255,.6);text-align:center;pointer-events:none;opacity:0;transition:.26s}
+.tip.on{opacity:1}
+.tip .t1{font-size:27px;font-weight:800;color:#fff;margin-bottom:7px;white-space:nowrap}
+.tip .t2{font-size:17px;color:#C9BFE0;white-space:nowrap}
+
+.over{position:absolute;inset:0;z-index:70;background:rgba(14,8,24,.9);
+  display:none;align-items:center;justify-content:center}
+.over.on{display:flex}
+.panel{width:720px;padding:46px;border-radius:26px;text-align:center;
+  background:linear-gradient(160deg,#2B1A47,#1E1233);border:2.5px solid rgba(255,190,120,.4)}
+.panel .oi{font-size:84px;margin-bottom:12px}
+.panel .ot{font-size:38px;font-weight:800;color:#fff;margin-bottom:14px}
+.panel .od{font-size:17px;color:#C9BFE0;line-height:1.75;margin-bottom:26px}
+.panel .od b{color:#FFCE8A}
+.stars{display:flex;justify-content:center;gap:16px;margin-bottom:26px}
+.stars div{width:124px;padding:14px 0;border-radius:14px;background:rgba(255,255,255,.055)}
+.stars .s1{font-size:34px}
+.stars .s2{font-size:12px;color:#9C92B8;margin-top:4px}
+.stars div.dead{opacity:.3}
+.ob{display:inline-flex;gap:14px}
+.ob div{height:56px;padding:0 32px;border-radius:14px;cursor:pointer;
+  display:flex;align-items:center;font-size:18px;font-weight:700;user-select:none;transition:.14s}
+.ob .p{background:linear-gradient(135deg,#FF8A2E,#E0552B);color:#fff}
+.ob .s{background:rgba(255,255,255,.1);color:#EDE8F5;border:1.5px solid rgba(255,255,255,.16)}
+.ob div:hover{transform:translateY(-2px)}
+</style>
+</head>
+<body>
+<div id="stage"><div class="app">
+
+  <div class="hud">
+    <div>
+      <div class="logo">不给糖就跳舞</div>
+      <div class="sub">QQ炫舞手游 · 万圣节小应用 · v3 配表实机体验</div>
+    </div>
+    <div class="pill">
+      <div class="k">能量</div>
+      <div class="v" id="enum">60</div>
+      <div class="ebar"><i id="efill"></i></div>
+    </div>
+    <div class="pill"><div class="k">糖罐</div><div class="jars" id="jars"></div></div>
+    <div class="pill"><div class="k">波次</div><div class="v" id="wv">1 <em>/ 3</em></div></div>
+    <div class="pill"><div class="k">同屏</div><div class="v" id="cnt">0 <em>只</em></div></div>
+    <div class="pill"><div class="k">用时</div><div class="v" id="tm">0 <em>s</em></div></div>
+    <div class="grow"></div>
+    <div class="btn" id="ease" title="把每关第1波首刷延后4秒，缓解开局拥挤">🛡 开局缓冲 关</div>
+    <div class="btn" id="spd">⏩ 1x</div>
+    <div class="btn" id="rst">↻ 重开本关</div>
+  </div>
+
+  <div class="nav" id="nav"></div>
+  <div class="info" id="info"></div>
+
+  <div class="board" id="board">
+    <div class="house"><div class="ic">🏠</div><div class="tx">糖果屋</div></div>
+    <div class="toast" id="toast"></div>
+    <div class="tip" id="tip"><div class="t1"></div><div class="t2"></div></div>
+    <div class="over" id="over">
+      <div class="panel">
+        <div class="oi" id="oi">🎉</div>
+        <div class="ot" id="ot">派对守住了</div>
+        <div class="od" id="od"></div>
+        <div class="stars" id="stars"></div>
+        <div class="ob">
+          <div class="p" id="obNext">进入下一关</div>
+          <div class="s" id="obAgain">再来一次</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="rack" id="rack"></div>
+</div></div>
+
+<script>
+/* ============================================================
+   数值全部来自 不给糖就跳舞_7关与无尽时长榜_策划配表_v3.xlsx
+   植物数值 / 僵尸数值 / 7关总表 / 正式关波次 / 全局参数
+   ============================================================ */
+var FPS=60, ROWS=3, COLS=8;
+var G_JARS=3, G_EMAX=200, G_EGEN=0.3, G_WAVEBONUS=20;
+var PK_DMG=180, PK_CD=40;
+
+var PLANTS={
+ morning:{nm:'摇滚牵牛花',ic:'🌺',ds:'地面单体',      cost:25,cd:3, hp:120,dmg:9, itv:0.8667,tgt:'ground',hit:1},
+ diamond:{nm:'钻石树',    ic:'💎',ds:'阻挡 不攻击',   cost:20,cd:6, hp:360,dmg:0, itv:0,     tgt:'block', hit:0},
+ smallc: {nm:'小体玉米',  ic:'🌽',ds:'地空单体',      cost:40,cd:5, hp:130,dmg:11,itv:1.0333,tgt:'both',  hit:1,air:1},
+ horn:   {nm:'闪耀喇叭',  ic:'📢',ds:'范围3 减速击退',cost:55,cd:10,hp:150,dmg:16,itv:1.5833,tgt:'ground',hit:3,aoe:1,slow:1},
+ mint:   {nm:'冷笑话薄荷',ic:'🌿',ds:'笑声冻结3',     cost:45,cd:10,hp:100,dmg:5, itv:1.5,   tgt:'ground',hit:1,freeze:1},
+ bell:   {nm:'和声铃兰',  ic:'🔔',ds:'邻位攻速+20%',  cost:35,cd:12,hp:110,dmg:0, itv:0,     tgt:'buff',  hit:0,buff:1},
+ bigc:   {nm:'大体玉米',  ic:'🌾',ds:'穿透3 地空',    cost:60,cd:8, hp:140,dmg:14,itv:1.8,   tgt:'both',  hit:3,pierce:1,air:1},
+ candy:  {nm:'返场糖果',  ic:'🍬',ds:'治疗100',       cost:30,cd:30,hp:0,  dmg:0, itv:0,     tgt:'heal',  hit:0,heal:1}
+};
+var ENEMIES={
+ pumpkin:{nm:'南瓜小兵',ic:'🎃',hp:70, sh:0, spd:0.18,bite:14,bitv:0.5667,fly:0},
+ jar:    {nm:'糖罐战士',ic:'🍯',hp:230,sh:0, spd:0.12,bite:22,bitv:0.6667,fly:0},
+ bat:    {nm:'飞常白',  ic:'🦇',hp:55, sh:0, spd:0.24,bite:0, bitv:0,     fly:1},
+ assass: {nm:'滑步刺客',ic:'🥿',hp:60, sh:0, spd:0.30,bite:10,bitv:0.75,  fly:0},
+ tank:   {nm:'厚里坦克',ic:'🛡️',hp:140,sh:60,spd:0.14,bite:16,bitv:0.8,   fly:0},
+ star:   {nm:'星动小怪',ic:'⭐',hp:95, sh:0, spd:0.16,bite:12,bitv:0.8,   fly:0,aura:1}
+};
+/* 波次生成：路线循环按配表顺序分配行号 */
+function mk(list,itv,lead,route){
+  var out=[],seq=[],d=lead;
+  list.forEach(function(g){ for(var i=0;i<g[1];i++) seq.push(g[0]) });
+  var rt=route.split(',').map(Number);
+  seq.forEach(function(t,i){ out.push({d:+(d).toFixed(2),t:t,r:rt[i%rt.length]-1}); d+=itv });
+  return out;
+}
+var LEVELS=[
+{n:1,th:'开场热身',day:'第1天',e:60,pk:0,lo:60,hi:85,
+ slots:['morning','diamond'],
+ note:'单路开场，提示种摇滚牵牛花；第2波引入钻石树，再拓展三路',
+ w:[mk([['pumpkin',2]],2.4,4,'2,2'),
+    mk([['pumpkin',4]],2.2,3,'1,3,1,3'),
+    mk([['pumpkin',6]],1.8,3,'1,2,3')]},
+{n:2,th:'舞台试音',day:'第1天',e:90,pk:0,lo:85,hi:115,
+ slots:['morning','diamond','smallc'],
+ note:'先地面后空中；飞行到来前 8 秒提示使用小体玉米',
+ w:[mk([['pumpkin',3]],2,4,'1,2,3'),
+    mk([['bat',2],['pumpkin',2]],2.3,8,'2,3,1,2'),
+    mk([['pumpkin',4],['bat',3]],1.8,3,'1,2,3'),
+    mk([['pumpkin',4],['bat',4]],1.7,3,'3,2,1')]},
+{n:3,th:'冷笑话专场',day:'第2天',e:110,pk:1,lo:100,hi:135,
+ slots:['morning','diamond','smallc','horn','mint'],
+ note:'首波体验闪耀喇叭；第二波引入滑步刺客与冷笑话薄荷；巨大南瓜 40 秒就绪',
+ w:[mk([['pumpkin',5],['jar',1]],1.8,4,'1,2,3'),
+    mk([['assass',2],['pumpkin',3]],2,6,'2,3,1'),
+    mk([['pumpkin',5],['assass',2],['bat',2]],1.7,3,'1,2,3'),
+    mk([['pumpkin',5],['jar',2],['assass',2],['bat',2]],1.5,3,'3,2,1')]},
+{n:4,th:'厚盾派对',day:'第3天',e:100,pk:1,lo:100,hi:135,
+ slots:['morning','diamond','smallc','horn','mint','bigc'],
+ note:'厚里坦克护盾＋大体玉米登场；第3波同路 3 只飞常白展示穿透',
+ w:[mk([['tank',1],['pumpkin',4]],2,5,'2,1,3'),
+    mk([['pumpkin',4],['jar',2],['tank',1]],1.9,3,'1,2,3'),
+    mk([['pumpkin',4],['bat',3],['tank',2]],1.7,3,'1,2,3,1,2,2,2,3,1'),
+    mk([['pumpkin',5],['jar',2],['tank',2],['assass',2]],1.5,3,'2,3,1')]},
+{n:5,th:'邻位合奏',day:'第4天',e:120,pk:1,lo:110,hi:145,
+ slots:['morning','diamond','smallc','horn','bell','bigc'],
+ blk:[[1,2]],
+ note:'和声铃兰邻位搭配；此关不带冷笑话薄荷，封中路第 3 列',
+ w:[mk([['pumpkin',5],['bat',2]],1.8,4,'1,2,3'),
+    mk([['pumpkin',5],['jar',2],['assass',2]],1.7,3,'3,2,1'),
+    mk([['pumpkin',4],['bat',3],['tank',2]],1.6,3,'1,3,2'),
+    mk([['pumpkin',5],['bat',3],['jar',2],['assass',2]],1.5,3,'2,1,3')]},
+{n:6,th:'舞团乱入',day:'第5天',e:120,pk:1,lo:115,hi:155,
+ slots:['morning','diamond','smallc','horn','mint','candy'],
+ note:'星动小怪＋返场糖果；第一波出现受损植物时提示「再唱一首」',
+ w:[mk([['star',1],['pumpkin',4]],2,5,'2,2,1,3,2'),
+    mk([['pumpkin',3],['bat',4]],1.8,3,'1,2,3'),
+    mk([['star',1],['pumpkin',4],['assass',2]],1.6,3,'2,2,1,3'),
+    mk([['bat',4],['jar',2],['tank',1]],1.8,3,'3,1,2'),
+    mk([['star',1],['pumpkin',4],['bat',4],['assass',2]],1.5,3,'2,1,3')]},
+{n:7,th:'万圣谢幕',day:'第6天',e:150,pk:1,lo:125,hi:170,
+ slots:['morning','diamond','smallc','horn','bigc','candy'],
+ note:'固定 6 卡综合谢幕；双对空覆盖＋返场糖果救场',
+ w:[mk([['pumpkin',6],['jar',2]],1.7,4,'1,2,3'),
+    mk([['bat',5],['pumpkin',4]],1.6,3,'3,2,1'),
+    mk([['tank',2],['jar',2],['pumpkin',4]],1.8,3,'1,2,3'),
+    mk([['star',1],['assass',3],['pumpkin',5],['bat',2]],1.5,3,'2,2,1,3'),
+    mk([['pumpkin',6],['bat',4],['jar',2],['tank',2],['star',1]],1.4,3,'3,2,1')]}
+];
+var CUR=0, G, cells=[], EASE=0;
+/* 开局缓冲：把第1波首刷整体延后 4 秒。
+   仿真发现 L3 在配表原值（能量110 / 首刷4s）下通关率 0/10，
+   仅把首刷延后到 8s 即可 100% 通关且时长 116s 仍在目标 100-135s 内。 */
+function waveOf(L,i){
+  var w=L.w[i];
+  if(!EASE||i!==0)return w;
+  return w.map(function(x){return {d:x.d+4,t:x.t,r:x.r}});
+}
+var board=document.getElementById('board');
+var HOUSE=150, BW=0, BH=0, CW=0, CH=0;
+
+function measure(){
+  BW=board.clientWidth; BH=board.clientHeight;
+  CW=(BW-HOUSE)/COLS; CH=BH/ROWS;
+}
+function fit(){
+  var s=Math.min(window.innerWidth/2540, window.innerHeight/1080);
+  document.getElementById('stage').style.transform='scale('+s+')';
+}
+window.addEventListener('resize',function(){fit();});
+fit();
+
+function buildNav(){
+  var n=document.getElementById('nav'); n.innerHTML='';
+  LEVELS.forEach(function(L,i){
+    var d=document.createElement('div');
+    d.className='lv'+(i===CUR?' on':'');
+    d.innerHTML='<div class="n">第 '+L.n+' 关</div><div class="t">'+L.th+'</div>';
+    d.onclick=function(){ CUR=i; buildNav(); reset() };
+    n.appendChild(d);
+  });
+}
+function buildInfo(){
+  var L=LEVELS[CUR];
+  var tot=L.w.reduce(function(a,w){return a+w.length},0);
+  var h='<div class="tag">'+L.day+' 开放</div>'+
+    '<div class="tag">'+L.w.length+' 波 · 共 '+tot+' 只</div>'+
+    '<div class="tag">起始能量 '+L.e+'</div>'+
+    '<div class="tag">目标 '+L.lo+'-'+L.hi+'s</div>'+
+    (L.pk?'<div class="tag">🎃 巨大南瓜可用</div>':'')+
+    (L.blk?'<div class="tag">🚧 中路第3列禁种</div>':'')+
+    (L.n===3?'<div class="tag" style="background:rgba(255,90,90,.22);color:#FFB5B5">'+
+      '⚠ 仿真 0/10 通关 · 建议开「开局缓冲」</div>':'')+
+    '<span style="margin-left:6px">'+L.note+'</span>';
+  document.getElementById('info').innerHTML=h;
+}
+function reset(){
+  measure();
+  var L=LEVELS[CUR];
+  G={e:L.e,jars:G_JARS,wave:0,wi:0,wt:0,tick:0,speed:1,run:true,
+     towers:[],enemies:[],projs:[],sel:null,cds:{},pkCd:0,
+     peak:0,lanePeak:[0,0,0],tipped:{},healSel:null};
+  Object.keys(PLANTS).forEach(function(k){G.cds[k]=0});
+  document.getElementById('over').classList.remove('on');
+  board.querySelectorAll('.pl,.en,.pj,.fx,.dmg').forEach(function(e){e.remove()});
+  buildInfo(); buildGrid(); buildRack(); render();
+}
+function buildGrid(){
+  var L=LEVELS[CUR];
+  board.querySelectorAll('.cell,.lane').forEach(function(e){e.remove()});
+  cells=[];
+  for(var r=1;r<ROWS;r++){
+    var ln=document.createElement('div');
+    ln.className='lane'; ln.style.top=(r*CH)+'px';
+    board.appendChild(ln);
+  }
+  var blk=(L.blk||[]).map(function(x){return x[0]+','+x[1]});
+  for(var r=0;r<ROWS;r++)for(var c=0;c<COLS;c++){
+    var d=document.createElement('div');
+    var locked=blk.indexOf(r+','+c)>=0;
+    d.className='cell'+(((r+c)%2)?' alt':'')+(locked?' lock':'');
+    d.style.left=(HOUSE+c*CW+4)+'px'; d.style.top=(r*CH+4)+'px';
+    d.style.width=(CW-8)+'px'; d.style.height=(CH-8)+'px';
+    d.dataset.r=r; d.dataset.c=c; d.dataset.lock=locked?'1':'';
+    d.onclick=function(){ place(+this.dataset.r,+this.dataset.c,this.dataset.lock) };
+    d.onmouseenter=function(){
+      if(G.sel===null)return;
+      if(this.dataset.lock){this.classList.add('bad');return}
+      var r=+this.dataset.r,c=+this.dataset.c;
+      var taken=G.towers.some(function(t){return t.r===r&&t.c===c});
+      this.classList.add(taken?'bad':'hl');
+    };
+    d.onmouseleave=function(){this.classList.remove('hl');this.classList.remove('bad')};
+    board.appendChild(d); cells.push(d);
+  }
+}
+function buildRack(){
+  var L=LEVELS[CUR], k=document.getElementById('rack'); k.innerHTML='';
+  L.slots.forEach(function(id,i){
+    var u=PLANTS[id];
+    var d=document.createElement('div');
+    d.className='cd'+(u.air?' air':''); d.dataset.id=id;
+    d.innerHTML='<div class="ic">'+u.ic+'</div><div class="nm">'+u.nm+'</div>'+
+      '<div class="ds">'+u.ds+'</div><div class="cs">♪ '+u.cost+'</div>'+
+      '<div class="cover" style="height:0"></div>';
+    d.onclick=function(){
+      var x=this.dataset.id;
+      G.sel=(G.sel===x)?null:x; render();
+    };
+    k.appendChild(d);
+  });
+  if(L.pk){
+    var p=document.createElement('div');
+    p.className='cd pk'; p.id='pkcard';
+    p.innerHTML='<div class="ic">🎃</div><div class="nm">巨大南瓜</div>'+
+      '<div class="ds">全屏 '+PK_DMG+' 伤害</div><div class="cs" id="pktx">充能中</div>'+
+      '<div class="cover" id="pkcv" style="height:100%"></div>';
+    p.onclick=usePumpkin;
+    k.appendChild(p);
+  }
+}
+function toast(s){
+  var t=document.getElementById('toast');
+  t.textContent=s; t.classList.add('on');
+  clearTimeout(t._t); t._t=setTimeout(function(){t.classList.remove('on')},1500);
+}
+function tip(a,b){
+  var t=document.getElementById('tip');
+  t.querySelector('.t1').textContent=a;
+  t.querySelector('.t2').textContent=b;
+  t.classList.add('on');
+  clearTimeout(t._t); t._t=setTimeout(function(){t.classList.remove('on')},2600);
+}
+function place(r,c,locked){
+  if(!G.run||G.sel===null)return;
+  if(locked){toast('这一格被路障占住了');return}
+  var id=G.sel, u=PLANTS[id];
+  if(u.heal){
+    var hurt=G.towers.filter(function(t){return t.r===r&&t.c===c&&t.hp<t.u.hp&&t.healed<200});
+    if(!hurt.length){toast('点一株受损的植物来治疗');return}
+    if(G.e<u.cost){toast('能量不够啦');return}
+    if(G.cds[id]>0){toast(u.nm+' 还在冷却');return}
+    var t=hurt[0];
+    var amt=Math.min(100, t.u.hp-t.hp, 200-t.healed);
+    t.hp+=amt; t.healed+=amt;
+    G.e-=u.cost; G.cds[id]=u.cd*FPS; G.sel=null;
+    fx(HOUSE+c*CW+CW/2, r*CH+CH/2, '💖');
+    dmgText(HOUSE+c*CW+CW/2, r*CH+CH/2-20, '+'+amt, '#7BE495');
+    render(); return;
+  }
+  if(G.cds[id]>0){toast(u.nm+' 还在冷却');return}
+  if(G.e<u.cost){toast('能量不够啦，稍等一下 ♪');return}
+  if(G.towers.some(function(t){return t.r===r&&t.c===c})){toast('这个格子已经有植物了');return}
+  G.e-=u.cost; G.cds[id]=u.cd*FPS; G.sel=null;
+  var t={id:id,u:u,r:r,c:c,hp:u.hp,healed:0,timer:0,fT:0,fFirst:1,shots:0,el:null};
+  var el=document.createElement('div');
+  el.className='pl';
+  el.style.width=CW+'px'; el.style.height=CH+'px';
+  el.style.left=(HOUSE+c*CW)+'px'; el.style.top=(r*CH)+'px';
+  el.innerHTML='<div class="em">'+u.ic+'</div><div class="hp"><i style="width:100%"></i></div>';
+  board.appendChild(el); t.el=el;
+  G.towers.push(t);
+  fx(HOUSE+c*CW+CW/2, r*CH+CH/2, '✨');
+  render();
+}
+function usePumpkin(){
+  if(!G.run)return;
+  if(G.pkCd<PK_CD*FPS){toast('巨大南瓜还在充能');return}
+  G.pkCd=0;
+  var n=G.enemies.length;
+  G.enemies.forEach(function(e){
+    var d=PK_DMG;
+    if(e.sh>0){var a=Math.min(e.sh,d);e.sh-=a;d-=a}
+    e.hp-=d;
+    fx(HOUSE+e.x*CW, e.r*CH+CH/2, '💥');
+  });
+  for(var i=G.enemies.length-1;i>=0;i--) if(G.enemies[i].hp<=0) kill(i);
+  toast(n?('🎃 巨大南瓜！波及 '+n+' 只'):'🎃 场上很干净～');
+  render();
+}
+function fx(x,y,s){
+  var d=document.createElement('div');
+  d.className='fx'; d.textContent=s;
+  d.style.left=(x-20)+'px'; d.style.top=(y-20)+'px';
+  board.appendChild(d); setTimeout(function(){d.remove()},520);
+}
+function dmgText(x,y,s,col){
+  var d=document.createElement('div');
+  d.className='dmg'; d.textContent=s;
+  if(col)d.style.color=col;
+  d.style.left=x+'px'; d.style.top=y+'px';
+  board.appendChild(d); setTimeout(function(){d.remove()},720);
+}
+function spawn(t,r){
+  var cfg=ENEMIES[t];
+  var e={cfg:cfg,hp:cfg.hp,sh:cfg.sh,r:r,x:COLS,bt:0,slow:0,fz:0,el:null};
+  var el=document.createElement('div');
+  el.className='en'+(cfg.fly?' fly':'')+(cfg.aura?' aura':'');
+  el.style.width=CW+'px'; el.style.height=CH+'px';
+  el.style.top=(r*CH)+'px';
+  el.innerHTML='<div class="em">'+cfg.ic+'</div>'+
+    '<div class="hp"><i style="width:100%"></i></div>'+
+    (cfg.sh?'<div class="sh"><i style="width:100%"></i></div>':'');
+  board.appendChild(el); e.el=el;
+  G.enemies.push(e);
+  if(cfg.fly&&!G.tipped.bat){G.tipped.bat=1;
+    tip('飞常白来了！','它会飞过植物、不停下啃咬 — 只有 🌽 小体玉米 / 🌾 大体玉米 打得到');}
+  if(cfg.tank||t==='tank'){if(!G.tipped.tank){G.tipped.tank=1;
+    tip('厚里坦克带盾','护盾让直线攻击伤害减半 — 📢 闪耀喇叭和 🎃 巨大南瓜不受减伤');}}
+  if(t==='assass'&&!G.tipped.as){G.tipped.as=1;
+    tip('滑步刺客速度很快','血薄但移速 0.3 格/秒 — 用 🌿 冷笑话薄荷冻住，或 💎 钻石树挡一下');}
+  if(t==='star'&&!G.tipped.st){G.tipped.st=1;
+    tip('星动小怪在加速队友','它身边 1.5 格内的地面敌人移速 +15% — 优先点掉它');}
+}
+function kill(i){
+  var e=G.enemies[i];
+  fx(HOUSE+e.x*CW, e.r*CH+CH/2, '💫');
+  e.el.remove(); G.enemies.splice(i,1);
+}
+function step(){
+  if(!G.run)return;
+  G.tick++;
+  if(G.tick % Math.round(G_EGEN*FPS)===0 && G.e<G_EMAX) G.e=Math.min(G_EMAX,G.e+1);
+  Object.keys(G.cds).forEach(function(k){ if(G.cds[k]>0)G.cds[k]-- });
+  if(G.pkCd<PK_CD*FPS)G.pkCd++;
+
+  var L=LEVELS[CUR], w=waveOf(L,G.wave);
+  if(w){
+    G.wt++;
+    while(G.wi<w.length && G.wt>=w[G.wi].d*FPS){ spawn(w[G.wi].t, w[G.wi].r); G.wi++ }
+    if(G.wi>=w.length && G.enemies.length===0){
+      if(G.wave<L.w.length-1){
+        G.wave++; G.wi=0; G.wt=0;
+        G.e=Math.min(G_EMAX,G.e+G_WAVEBONUS);
+        toast('第 '+(G.wave+1)+' 波来啦！能量 +'+G_WAVEBONUS);
+      } else return win();
+    }
+  }
+  if(G.enemies.length>G.peak)G.peak=G.enemies.length;
+  var lc=[0,0,0]; G.enemies.forEach(function(e){lc[e.r]++});
+  lc.forEach(function(v,i){ if(v>G.lanePeak[i])G.lanePeak[i]=v });
+
+  var aura=G.enemies.filter(function(e){return e.cfg.aura}).map(function(e){return {r:e.r,x:e.x}});
+  var buffed={};
+  G.towers.forEach(function(t){
+    if(t.id!=='bell')return;
+    G.towers.forEach(function(o){
+      if(['morning','smallc','horn','bigc'].indexOf(o.id)>=0 &&
+         Math.abs(o.r-t.r)+Math.abs(o.c-t.c)===1) buffed[o.r+','+o.c]=1;
+    });
+  });
+  G.towers.forEach(function(t){
+    t.el.classList.toggle('buff', !!buffed[t.r+','+t.c]);
+  });
+
+  for(var i=G.enemies.length-1;i>=0;i--){
+    var e=G.enemies[i];
+    if(e.fz>0){ e.fz--; e.el.classList.add('fz');
+      if(e.fz===0)e.el.classList.remove('fz');
+      paintEnemy(e); continue }
+    var bl=null;
+    if(!e.cfg.fly) for(var j=0;j<G.towers.length;j++){
+      var t=G.towers[j];
+      if(t.r!==e.r)continue;
+      if(e.x<=t.c+0.92 && e.x>=t.c-0.04){bl=t;break}
+    }
+    if(bl && e.cfg.bite>0){
+      e.bt++;
+      if(e.bt>=e.cfg.bitv*FPS){
+        e.bt=0; bl.hp-=e.cfg.bite;
+        dmgText(HOUSE+bl.c*CW+CW*0.3, bl.r*CH+CH*0.3, '-'+e.cfg.bite, '#FF9A9A');
+        if(bl.hp<=0){ bl.el.remove(); G.towers.splice(G.towers.indexOf(bl),1);
+          fx(HOUSE+bl.c*CW+CW/2, bl.r*CH+CH/2, '💔');
+          if(LEVELS[CUR].slots.indexOf('candy')>=0 && !G.tipped.heal){G.tipped.heal=1;
+            tip('植物被啃掉了','带了 🍬 返场糖果时，点受损的植物可以回 100 生命');}
+        }
+      }
+    } else {
+      var sp=e.cfg.spd/FPS;
+      if(e.slow>0){ sp*=0.75; e.slow-- }
+      if(!e.cfg.fly && aura.some(function(a){return a.r===e.r && Math.abs(a.x-e.x)<1.5})) sp*=1.15;
+      e.x-=sp;
+    }
+    if(e.x<-0.1){
+      e.el.remove(); G.enemies.splice(i,1);
+      G.jars--;
+      fx(70, e.r*CH+CH/2, '😱');
+      toast('糖罐被抢走 1 个！');
+      if(G.jars<=0) return lose();
+      continue;
+    }
+    paintEnemy(e);
+  }
+
+  G.towers.forEach(function(t){
+    var u=t.u;
+    if(u.freeze){
+      t.fT++;
+      var need=(t.fFirst?8:12)*FPS;
+      if(t.fT>=need){
+        t.fT=0; t.fFirst=0;
+        var cand=G.enemies.filter(function(e){
+          return e.r===t.r && !e.cfg.fly && e.x>=t.c && e.fz===0;
+        }).sort(function(a,b){return a.x-b.x}).slice(0,3);
+        if(cand.length){
+          fx(HOUSE+t.c*CW+CW/2, t.r*CH+CH*0.2, '😂');
+          cand.forEach(function(e){ e.fz=1*FPS });
+          if(!G.tipped.fz){G.tipped.fz=1;
+            tip('冷到停拍！','冷笑话薄荷每 12 秒笑一次，冻住同路前方最多 3 个地面敌人 1 秒');}
+        }
+      }
+    }
+    if(!u.itv)return;
+    var itv=u.itv*FPS;
+    if(buffed[t.r+','+t.c]) itv/=1.2;
+    t.timer++;
+    if(t.timer<itv)return;
+    var cand=G.enemies.filter(function(e){
+      if(e.r!==t.r)return false;
+      if(e.x<t.c)return false;
+      if(u.tgt==='ground'&&e.cfg.fly)return false;
+      return true;
+    });
+    if(!cand.length)return;
+    t.timer=0; t.shots++;
+    if(u.tgt==='both'){
+      var air=cand.filter(function(e){return e.cfg.fly});
+      cand = air.length?air:cand.filter(function(e){return !e.cfg.fly});
+    }
+    cand.sort(function(a,b){return a.x-b.x});
+    var n=1, mults=[1];
+    if(u.pierce){ n=3; mults=[1,0.8,0.6] }
+    else if(u.aoe){
+      var tgt=cand[0];
+      cand=cand.filter(function(e){return Math.abs(e.x-tgt.x)<=0.6});
+      n=3; mults=[1,1,1];
+    }
+    var pjx=HOUSE+t.c*CW+CW*0.7;
+    shoot(pjx, t.r, u);
+    for(var k=0;k<Math.min(n,cand.length);k++){
+      var e=cand[k];
+      var dmg=u.dmg*mults[k];
+      if(e.sh>0 && !u.aoe) dmg*=0.5;
+      if(e.sh>0){ var a=Math.min(e.sh,dmg); e.sh-=a; dmg-=a }
+      e.hp-=dmg;
+      if(u.slow) e.slow=1.2*FPS;
+      if(u.slow && t.shots%3===0) e.x=Math.min(COLS-0.2, e.x+0.35);
+      dmgText(HOUSE+e.x*CW+CW*0.4, e.r*CH+CH*0.2, '-'+Math.round(dmg));
+      if(e.hp<=0) kill(G.enemies.indexOf(e));
+    }
+  });
+
+  for(var q=G.projs.length-1;q>=0;q--){
+    var p=G.projs[q];
+    p.x+=0.09;
+    p.el.style.left=(HOUSE+p.x*CW)+'px';
+    if(p.x>COLS+0.3){ p.el.remove(); G.projs.splice(q,1) }
+  }
+  render();
+}
+function shoot(px,r,u){
+  var d=document.createElement('div');
+  d.className='pj';
+  d.textContent = u.pierce?'🌟' : (u.aoe?'🎵' : (u.air?'🌽':'🎶'));
+  d.style.left=px+'px'; d.style.top=(r*CH+CH*0.34)+'px';
+  board.appendChild(d);
+  G.projs.push({x:(px-HOUSE)/CW,el:d});
+  setTimeout(function(){ if(d.parentNode)d.remove() },900);
+}
+function paintEnemy(e){
+  e.el.style.left=(HOUSE+e.x*CW-CW*0.1)+'px';
+  e.el.querySelector('.hp i').style.width=Math.max(0,e.hp/e.cfg.hp*100)+'%';
+  if(e.cfg.sh){
+    var s=e.el.querySelector('.sh i');
+    if(s)s.style.width=Math.max(0,e.sh/e.cfg.sh*100)+'%';
+  }
+}
+function render(){
+  var L=LEVELS[CUR];
+  document.getElementById('enum').textContent=Math.floor(G.e);
+  document.getElementById('efill').style.width=Math.min(100,G.e/G_EMAX*100)+'%';
+  var h=''; for(var i=0;i<G_JARS;i++) h+='<span class="'+(i<G.jars?'':'dead')+'">🍬</span>';
+  document.getElementById('jars').innerHTML=h;
+  document.getElementById('wv').innerHTML=(G.wave+1)+' <em>/ '+L.w.length+'</em>';
+  document.getElementById('cnt').innerHTML=G.enemies.length+' <em>只</em>';
+  document.getElementById('tm').innerHTML=Math.floor(G.tick/FPS)+' <em>s</em>';
+
+  G.towers.forEach(function(t){
+    var p=t.hp/t.u.hp;
+    t.el.querySelector('.hp i').style.width=Math.max(0,p*100)+'%';
+    t.el.classList.toggle('hurt',p<0.6);
+    t.el.classList.toggle('low',p<0.3);
+  });
+  var r=document.getElementById('rack').children;
+  L.slots.forEach(function(id,i){
+    var u=PLANTS[id], el=r[i];
+    el.classList.toggle('on', G.sel===id);
+    el.classList.toggle('no', G.e<u.cost);
+    var cv=el.querySelector('.cover');
+    cv.style.height = G.cds[id]>0 ? (G.cds[id]/(u.cd*FPS)*100)+'%' : '0';
+    cv.textContent = G.cds[id]>0 ? Math.ceil(G.cds[id]/FPS) : '';
+  });
+  if(L.pk){
+    var rdy=G.pkCd>=PK_CD*FPS;
+    document.getElementById('pkcv').style.height=(rdy?0:(1-G.pkCd/(PK_CD*FPS))*100)+'%';
+    document.getElementById('pkcard').classList.toggle('rdy',rdy);
+    document.getElementById('pktx').textContent=rdy?'已就绪':Math.ceil((PK_CD*FPS-G.pkCd)/FPS)+'s';
+  }
+}
+function starsOf(){
+  var mx=Math.max.apply(null,G.lanePeak);
+  return [
+    {ok:true, ic:'🏅', tx:'通关'},
+    {ok:G.jars===G_JARS, ic:'🍬', tx:'糖罐全保'},
+    {ok:mx<=4, ic:'🎼', tx:'单行不超4只'}
+  ];
+}
+function endPanel(wonFlag){
+  var L=LEVELS[CUR];
+  G.run=false;
+  var sec=Math.floor(G.tick/FPS);
+  var o=document.getElementById('over'); o.classList.add('on');
+  document.getElementById('oi').textContent=wonFlag?'🎉':'🍬';
+  document.getElementById('ot').textContent=wonFlag?'派对守住了':'糖罐被抢光了';
+  var inRange = sec>=L.lo && sec<=L.hi;
+  document.getElementById('od').innerHTML = wonFlag
+    ? ('用时 <b>'+sec+'s</b>（目标 '+L.lo+'-'+L.hi+'s '+(inRange?'✓ 达标':'✗ 偏'+(sec<L.lo?'快':'慢'))+'）'+
+       '<br>同屏峰值 <b>'+G.peak+'</b> 只　·　单行最挤 <b>'+Math.max.apply(null,G.lanePeak)+'</b> 只'+
+       '　·　剩余糖罐 <b>'+G.jars+'/'+G_JARS+'</b>'+
+       '<br>各行峰值：上 '+G.lanePeak[0]+' ／ 中 '+G.lanePeak[1]+' ／ 下 '+G.lanePeak[2])
+    : ('<b>不扣次数、不扣奖励</b>，直接再来一次就好～<br>撑到第 <b>'+(G.wave+1)+'</b> 波　·　用时 '+sec+'s'+
+       '<br>同屏峰值 '+G.peak+' 只　·　单行最挤 '+Math.max.apply(null,G.lanePeak)+' 只');
+  var st=starsOf();
+  document.getElementById('stars').innerHTML = st.map(function(s){
+    return '<div class="'+(wonFlag&&s.ok?'':'dead')+'"><div class="s1">'+s.ic+'</div><div class="s2">'+s.tx+'</div></div>';
+  }).join('');
+  document.getElementById('obNext').style.display = (CUR<LEVELS.length-1)?'flex':'none';
+}
+function win(){ endPanel(true) }
+function lose(){ endPanel(false) }
+document.getElementById('obAgain').onclick=reset;
+document.getElementById('obNext').onclick=function(){
+  if(CUR<LEVELS.length-1){ CUR++; buildNav(); reset() }
+};
+document.getElementById('rst').onclick=reset;
+document.getElementById('ease').onclick=function(){
+  EASE=EASE?0:1;
+  this.textContent='🛡 开局缓冲 '+(EASE?'开':'关');
+  this.classList.toggle('on',!!EASE);
+  toast(EASE?'第1波首刷延后 4 秒，已重开本关':'已恢复配表原值，已重开本关');
+  reset();
+};
+document.getElementById('spd').onclick=function(){
+  G.speed = G.speed===1?2:(G.speed===2?3:1);
+  this.textContent='⏩ '+G.speed+'x';
+  this.classList.toggle('on',G.speed>1);
+};
+buildNav(); reset();
+setInterval(function(){
+  var k=G.speed||1;
+  for(var i=0;i<k;i++) step();
+}, 1000/FPS);
+</script>
+</body>
+</html>
